@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="js/linkTo.js"></script>
+    <script src="js/headerScroll.js"></script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <title>Manchester United 2019/2020 Home Kit</title>
+    <script src="js/functions.js"></script>
+
+  </head>
+  <body>
+
+    <header id="header">
+        <!-- logo? -->
+        <div class="header-menu ">
+
+
+          <div class="header-row-1">
+            <img class="nav-main-logo-img" src="img/logoSmall.png" alt="Logo" onclick="pointTo('index.html')"/>
+            <div class="header-row-2">
+              <input type="text" placeholder="Search here...">
+              <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
+
+            </div>
+
+            <nav class="nav-row-1">
+              <div class="nav-main-item">
+                <section class="profile-cart">
+                  <a href="profile.html"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                  <a href="cart.html" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                </section>
+              </div>
+
+            </nav>
+          </div>
+
+
+          <!-- search bar -->
+
+
+          <div class="header-row-3">
+            <nav class="nav-row-3">
+              <a href="catalog.html" class="nav-main-item">Catalog</a>
+              <a href="news.html" class="nav-main-item">News</a>
+
+              <a href="about.html" class="nav-main-item">About</a>
+            </nav>
+          </div>
+        </div>
+
+    </header>
+	<!-- content -->
+	<div class="main-content container product">
+		<!-- detailed product -->
+      <section class="product-left">
+
+        <div class="product-img">
+          <div class="image-file image-1">
+            <img class="image-preview" src="img/item_1_0.png" alt="image 1">
+          </div>
+
+
+          <div class="dot-row">
+            <span class="image-dot dot-1 image-dot-active" onClick="showImageMU(1)"></span>
+            <span class="image-dot dot-2" onClick="showImageMU(2)"></span>
+            <span class="image-dot dot-3" onClick="showImageMU(3)"></span>
+          </div>
+        </div>
+
+        <article class="product-info">
+          <h3>Manchester United 2019/2020 Home Kit</h3>
+          <p class="price">$109.99</p>
+          <p>The New Manchester United 2019/2020 Home Kit. A black adidas logo is located on the right side and a homage to the Treble winning 1998-1999 season crest is located on the right. The two sleeves feature the time of the two clutch goals scored against Barcelona in the Champion's League Final in 1999, 90'+1 and 90'+3. Located on the lower left is a message that mentions the fact that Manchester United obtained the Treble in 1999. Lastly, on the inside, the winning finals dates are featured.</p>
+        </article>
+
+
+
+        <fieldset class="product-review">
+          <legend>Product Reviews</legend>
+          <div class="review-item">
+            <div class="review-top-info">
+              <p class="review-username">Ronaldinho1980</p>
+              <p class="review-date">June 16, 2019</p>
+            </div>
+            <div class="review-description">
+              <p>Great product, great design and build quality is top-notch. Highly recommend this product to all fans out there!</p>
+            </div>
+          </div>
+
+          <div class="review-item">
+            <div class="review-top-info">
+              <p class="review-username">Beckham1975</p>
+              <p class="review-date">June 10, 2019</p>
+            </div>
+            <div class="review-description">
+              <p>Great product, great design and build quality is top-notch. Highly recommend this product to all fans out there!</p>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="review-top-info">
+              <p class="review-username">CR7</p>
+              <p class="review-date">June 10, 2019</p>
+            </div>
+            <div class="review-description">
+              <p>Great product, great design and build quality is top-notch. Highly recommend this product to all fans out there!</p>
+            </div>
+          </div>
+          <div class="review-write">
+            <textarea placeholder="Write a review..."></textarea>
+              <form>
+                <button>Submit Review</button>
+              </form>
+          </div>
+
+
+        </fieldset>
+        <!-- end left -->
+     </section>
+
+      <section class="product-right">
+        <p>Size:</p>
+        <select>
+          <option value="extra-small">XS</option>
+          <option value="small">S</option>
+          <option value="medium">M</option>
+          <option value="large">L</option>
+          <option value="extra-large">XL</option>
+        </select>
+        <p>Quantity:</p>
+        <input type="number" name="quantity" min="1" max="99" value="1">
+        <div class="add-to-cart-button">
+          <button type="button" onclick="pointTo('cart.html')">Add to Cart</button>
+        </div>
+      </section>
+
+
+
+	</div>
+  <footer>
+    <nav>
+      <a href="https://github.com/Sanada-Yukimura/IAT339-D101-P02">GitHub</a>
+      <a href="Style_Guide/styleGuide.html">Style Guide</a>
+      <a href="citations.html">Citations</a>
+    </nav>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="js/linkTo.js"></script>
+    <script src="js/headerScroll.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <title>Shipping</title>
+
+
+<!--     form code implemeted with help from https://www.w3schools.com/html/html_forms.asp -->
+  </head>
+  <body>
+    <header id="header">
+        <!-- logo? -->
+        <div class="header-menu ">
+
+
+          <div class="header-row-1">
+            <img class="nav-main-logo-img" src="img/logoSmall.png" alt="Logo" onclick="pointTo('index.html')"/>
+            <div class="header-row-2">
+              <input type="text" placeholder="Search here...">
+              <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
+
+            </div>
+
+            <nav class="nav-row-1">
+              <div class="nav-main-item">
+                <section class="profile-cart">
+                  <a href="profile.html"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                  <a href="cart.html" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                </section>
+              </div>
+
+            </nav>
+          </div>
+
+
+          <!-- search bar -->
+
+
+          <div class="header-row-3">
+            <nav class="nav-row-3">
+              <a href="catalog.html" class="nav-main-item">Catalog</a>
+              <a href="news.html" class="nav-main-item">News</a>
+
+              <a href="about.html" class="nav-main-item">About</a>
+            </nav>
+          </div>
+        </div>
+
+    </header>
+	<!-- content -->
+	<main class="main-content container">
+    <div class="shipping shipping-box">
+      <h3>Shipping Info</h3>
+
+      <form action="payment.html" method="POST">
+        <ul>
+          <li><label for="firstname"> First name: </label>
+          <input type="text" name="firstname" placeholder="First Name" id="firstname"></li>
+          <li>⠀</li>
+          <li><label for="lastname">Last name:</label>
+          <input type="text" name="lastname" placeholder="Last Name" id="lastname"></li>
+        </ul>
+        <h4>Enter a new address: </h4>
+        <ul>
+
+          <li><label>Shipping address:</label>
+          <li><input type="text" name="street" placeholder="Address" size="20"></li>
+          <li>⠀</li>
+          <li><input type="text" name="city" placeholder="City">
+          <input type="text" name="province" placeholder="Province"></li>
+          <li>⠀</li>
+          <li><input type="text" name="postal" placeholder="Zip Code">
+          <input type="text" name="country" placeholder="Country">
+          </li>
+        </ul>
+          <input type="submit" value="Submit" >
+      </form>
+      <form action="payment.html" method="POST">
+      <h4>Or pick an existing address: </h4>
+      <div class="address-radio">
+        <div>
+          <input type="radio" name="test" checked>
+            <address>
+              <span>303 Browning Lane</span>
+              <span>Horseheads New York NY</span>
+              <span>14845</span>
+            </address>
+          </div>
+          <div>
+        <input type="radio" name="test" >
+          <address>
+            <span>〒604-8091</span>
+            <span>Kyoto Japan Nakagyo Ward</span>
+            <span>御池下ル下本能寺前町522</span>
+          </address>
+        </div>
+        <div>
+      <input type="radio" name="test" >
+        <address>
+          <span>Sir Matt Busby Way</span>
+          <span>Stretford Manchester</span>
+          <span>M16 0RA United Kingdom</span>
+        </address>
+        </div>
+      </div>
+      </form>
+
+    <form action="payment.html" method="POST">
+      <input type="submit" value="Submit" >
+    </form>
+
+
+    </div>
+	</main>
+
+  <footer>
+    <nav>
+      <a href="https://github.com/Sanada-Yukimura/IAT339-D101-P02">GitHub</a>
+      <a href="Style_Guide/styleGuide.html">Style Guide</a>
+      <a href="citations.html">Citations</a>
+    </nav>
+  </footer>
+
+  </body>
+</html>

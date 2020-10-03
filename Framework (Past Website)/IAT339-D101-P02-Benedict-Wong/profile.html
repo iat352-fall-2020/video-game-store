@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="js/linkTo.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/headerScroll.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <title>Profile</title>
+
+<!--
+  fake address from:
+
+  fakepersongenerator.com (n.d.). Random Address Generator. Retrieved from https://www.fakepersongenerator.com/Random/generate_address
+ -->
+  </head>
+  <body>
+
+    <header id="header">
+        <!-- logo? -->
+        <div class="header-menu ">
+
+
+          <div class="header-row-1">
+            <img class="nav-main-logo-img" src="img/logoSmall.png" alt="Logo" onclick="pointTo('index.html')"/>
+            <div class="header-row-2">
+              <input type="text" placeholder="Search here...">
+              <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
+
+            </div>
+
+            <nav class="nav-row-1">
+              <div class="nav-main-item">
+                <section class="profile-cart">
+                  <a href="profile.html"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                  <a href="cart.html" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                </section>
+              </div>
+
+            </nav>
+          </div>
+
+
+          <!-- search bar -->
+
+
+          <div class="header-row-3">
+            <nav class="nav-row-3">
+              <a href="catalog.html" class="nav-main-item">Catalog</a>
+              <a href="news.html" class="nav-main-item">News</a>
+
+              <a href="about.html" class="nav-main-item">About</a>
+            </nav>
+          </div>
+        </div>
+
+    </header>
+	<!-- content -->
+	<main class="main-content container profile">
+		<!-- profile information -->
+
+
+
+    <div class="profile-right">
+
+		<!-- order list -->
+      <div class="profile-item profile-info" id="profile-info">
+        <h3 id="account-settings">Account Settings</h3>
+
+
+		<!-- security -->
+		<section class="content-item profile-security">
+      <h3>Security Info</h3>
+
+      <div class="change-password">
+        <h4>Change Password:</h4>
+        <ul>
+          <li>
+            <fieldset>
+              <legend>Current Password: </legend>
+              <input type="password" id="curr-pass">
+              <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset>
+              <legend>New Password: </legend>
+              <input type="password" id="new-pass" >
+              <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
+            </fieldset>
+          </li><li>
+            <fieldset>
+              <legend>Retype Password: </legend>
+              <input type="password" id="retype-pass">
+              <img src="img/eye-icon.png" onclick="eye(3)" alt="show/hide retype-password"/>
+            </fieldset>
+          </li>
+
+      </ul>
+      <div class="clear-float">
+        <p class="passwordUpdate">Your password has been changed!</p>
+        <button onclick="updatePrefs(1)">Save Changes</button>
+      </div>
+
+      </div>
+
+		</section>
+
+		<!-- notification -->
+		<section class="content-item profile-notification">
+      <h3>Notifications</h3>
+        <ul>
+          <li><input type="checkbox" name="newsletter" value="sub-newsletter" checked> Subscribe to our newsletter.</li>
+          <li><input type="checkbox" name="admin-email" value="admin-email" checked> Receive e-mails from admins.</li>
+          <li><input type="checkbox" name="profile-pub" value="profile-public"> Allow other users to see my profile.</li>
+          <li><p class="updateMessage">Your notification preferences have been updated!</p></li>
+          <li><button onclick="updatePrefs(2)">Update</button></li>
+        </ul>
+		</section>
+
+		<!-- billing information -->
+		<div class="content-item profile-billing">
+      <h3>Billing info</h3>
+      <section class="address-radio">
+        <div>
+          <input type="radio" name="address" checked>
+            <address>
+              <span>303 Browning Lane</span>
+              <span>Horseheads New York NY</span>
+              <span>14845</span>
+            </address>
+            </div>
+            <div>
+        <input type="radio" name="address" >
+          <address>
+            <span>〒604-8091</span>
+            <span>Kyoto Japan Nakagyo Ward</span>
+            <span>御池下ル下本能寺前町522</span>
+          </address>
+          </div>
+          <div>
+      <input type="radio" name="address" >
+        <address>
+          <span>Sir Matt Busby Way</span>
+          <span>Stretford Manchester</span>
+          <span>M16 0RA United Kingdom</span>
+        </address>
+      </div>
+
+    </section>
+		</div>
+	</div>
+</div>
+</main>
+<footer>
+  <nav>
+    <a href="https://github.com/Sanada-Yukimura/IAT339-D101-P02">GitHub</a>
+    <a href="Style_Guide/styleGuide.html">Style Guide</a>
+    <a href="citations.html">Citations</a>
+  </nav>
+</footer>
+
+
+  </body>
+</html>

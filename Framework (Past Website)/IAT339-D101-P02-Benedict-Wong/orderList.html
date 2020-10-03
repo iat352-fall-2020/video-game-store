@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="js/linkTo.js"></script>
+    <script src="js/headerScroll.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <title>Order List</title>
+
+  </head>
+  <body>
+
+    <header id="header">
+        <!-- logo? -->
+        <div class="header-menu ">
+
+
+          <div class="header-row-1">
+            <img class="nav-main-logo-img" src="img/logoSmall.png" alt="Logo" onclick="pointTo('index.html')"/>
+            <div class="header-row-2">
+              <input type="text" placeholder="Search here...">
+              <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
+
+            </div>
+
+            <nav class="nav-row-1">
+              <div class="nav-main-item">
+                <section class="profile-cart">
+                  <a href="profile.html"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                  <a href="cart.html" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                </section>
+              </div>
+
+            </nav>
+          </div>
+
+
+          <!-- search bar -->
+
+
+          <div class="header-row-3">
+            <nav class="nav-row-3">
+              <a href="catalog.html" class="nav-main-item">Catalog</a>
+              <a href="news.html" class="nav-main-item">News</a>
+
+              <a href="about.html" class="nav-main-item">About</a>
+            </nav>
+          </div>
+        </div>
+
+    </header>
+	<!-- content -->
+	<main class="main-content container">
+    <div class="main-content container order-list-container">
+      <h3 id="title">Your Order List</h3>
+
+      <!-- shopping cart list -->
+        <div class="order-list">
+
+          <div class="cart-card-left cart-box">
+            <div class="cart-item">
+              <img src="img/item_1_0.png" alt="Manchester United 2019/20 Home Kit"/>
+                <p>Manchester United 2019/2020 Home Kit</p>
+                <p class="price">$109.99</p>
+            </div>
+            <div class="cart-item">
+              <img src="img/item_2_0.png" alt="Tottenham Hotspurs 2019/19 Third Kit"/>
+                <p>Tottenham Hotspurs 2018/2019 Third Kit</p>
+                <p class="price">$109.99</p>
+            </div>
+            <div class="cart-item">
+              <img src="img/item_5.png" alt="Manchester United 2018/19 Home Kit"/>
+                <p>Manchester United 2018/2019 Third Kit</p>
+                <p class="price">$109.99</p>
+            </div>
+            <div class="cart-item">
+              <img src="img/item_8.png" alt="Manchester United 1999/2000 Home Kit"/>
+                <p>Manchester United 1998/1999 Home Kit</p>
+                <p class="price">$159.99</p>
+            </div>
+
+          </div>
+          <div class="return-to-home">
+            <a href="index.html" class="button">Return home</a>
+          </div>
+      </div>
+    </div>
+	</main>
+  <footer>
+    <nav>
+      <a href="https://github.com/Sanada-Yukimura/IAT339-D101-P02">GitHub</a>
+      <a href="Style_Guide/styleGuide.html">Style Guide</a>
+      <a href="citations.html">Citations</a>
+    </nav>
+  </footer>
+
+
+  </body>
+</html>

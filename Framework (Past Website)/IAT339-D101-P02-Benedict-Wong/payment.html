@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="js/linkTo.js"></script>
+    <script src="js/headerScroll.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <title>Payment</title>
+
+    <!--     form code retrieved from https://www.w3schools.com/html/html_forms.asp
+ -->
+  </head>
+  <body>
+
+    <header id="header">
+        <!-- logo? -->
+        <div class="header-menu ">
+
+
+          <div class="header-row-1">
+            <img class="nav-main-logo-img" src="img/logoSmall.png" alt="Logo" onclick="pointTo('index.html')"/>
+            <div class="header-row-2">
+              <input type="text" placeholder="Search here...">
+              <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
+
+            </div>
+
+            <nav class="nav-row-1">
+              <div class="nav-main-item">
+                <section class="profile-cart">
+                  <a href="profile.html"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                  <a href="cart.html" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                </section>
+              </div>
+
+            </nav>
+          </div>
+
+
+          <!-- search bar -->
+
+
+          <div class="header-row-3">
+            <nav class="nav-row-3">
+              <a href="catalog.html" class="nav-main-item">Catalog</a>
+              <a href="news.html" class="nav-main-item">News</a>
+
+              <a href="about.html" class="nav-main-item">About</a>
+            </nav>
+          </div>
+        </div>
+
+    </header>
+	<!-- content -->
+	<main class="main-content container">
+    <section class="shipping payment-box">
+      <h3>Payment Info</h3>
+      <!-- POST removes the form data from the url. -->
+      <form action="confirmation.html" class="payment-form" method="POST">
+        <ul>
+          <li>Select payment method:</li>
+          <li><input type="radio" name="paymentmethod" value="creditcard" checked>Credit Card</li>
+          <li><input type="radio" name="paymentmethod" value="other">Other online payment systems</li>
+        </ul>
+        <ul>
+          <li>Payment information:</li>
+          <li><input type="text" name="cardnumber" placeholder="Card Number" size="18"><input type="text" name="monthYear" placeholder="MM/YY" size="6"></li>
+          <li><input type="text" name="nameoncard" placeholder="Name on Card"></li>
+          <li><input type="text" name="securitynumber" placeholder="SN" size="4"></li>
+        </ul>
+
+        <ul>
+
+        <li>Billing Address:</li>
+        <li><input type="text" name="street" placeholder="Address 1" size="20"></li>
+        <li><input type="text" name="city" placeholder="City" size="25"> <input type="text" name="province" placeholder="Province" size="20"></li>
+        <li><input type="text" name="postal" placeholder="Zip Code" size ="10"> <input type="text" name="country" placeholder="Country" size="18"></li>
+
+        </ul>
+        <div class="submit-button">
+        <input type="submit" value="Submit">
+      </div>
+      </form>
+    </section>
+	</main>
+
+  <footer>
+    <nav>
+      <a href="https://github.com/Sanada-Yukimura/IAT339-D101-P02">GitHub</a>
+      <a href="Style_Guide/styleGuide.html">Style Guide</a>
+      <a href="citations.html">Citations</a>
+    </nav>
+  </footer>
+
+  </body>
+</html>
