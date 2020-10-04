@@ -31,7 +31,7 @@
             <nav class="nav-row-1">
               <div class="nav-main-item">
                 <section class="profile-cart">
-                  <a href="profile.html"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                  <a href="profile.php"><img src="img/profile_icon.png" alt="profile-icon"></a>
                   <a href="cart.html" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
                 </section>
               </div>
@@ -45,10 +45,10 @@
 
           <div class="header-row-3">
             <nav class="nav-row-3">
-              <a href="catalog.html" class="nav-main-item">Catalog</a>
-              <a href="catalog.html" class="nav-main-item">Catalog</a>
-              <a href="news.html" class="nav-main-item">News</a>
-              <a href="about.html" class="nav-main-item">About</a>
+              <a href="catalog.html" class="nav-main-item">Playstation</a>
+              <a href="catalog.html" class="nav-main-item">Xbox</a>
+              <a href="news.html" class="nav-main-item">Nintendo</a>
+              <a href="about.html" class="nav-main-item">Deals</a>
             </nav>
           </div>
         </div>
@@ -56,7 +56,7 @@
     </header>
 	<!-- content -->
 	<main class="main-content container container-home">
-    <img src="img/banner.png" class="index-banner" alt="banner">
+    <!-- <img src="img/banner.png" class="index-banner" alt="banner"> -->
 		<!-- club -->
     <h3>Shop By Club</h3>
 		<section class="content-item section-club">
