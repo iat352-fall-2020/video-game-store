@@ -21,7 +21,7 @@
 
 
           <div class="header-row-1">
-            <img class="nav-main-logo-img" src="img/logoSmall.png" alt="Logo" onclick="pointTo('index.html')"/>
+            <img class="nav-main-logo-img" src="" alt="Logo" onclick="pointTo('index.html')"/>
             <div class="header-row-2">
               <input type="text" placeholder="Search here...">
               <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
@@ -47,8 +47,8 @@
             <nav class="nav-row-3">
               <a href="catalog.html" class="nav-main-item">Playstation</a>
               <a href="catalog.html" class="nav-main-item">Xbox</a>
-              <a href="news.html" class="nav-main-item">Nintendo</a>
-              <a href="about.html" class="nav-main-item">Deals</a>
+              <a href="" class="nav-main-item">Nintendo</a>
+              <a href="" class="nav-main-item">Deals</a>
             </nav>
           </div>
         </div>
@@ -86,7 +86,7 @@
 
   <footer>
     <nav>
-      <a href="https://github.com/Sanada-Yukimura/IAT339-D101-P02">GitHub</a>
+      <a href="https://github.com/iat352-fall-2020/video-game-store">GitHub</a>
       <a href="Style_Guide/styleGuide.html">Style Guide</a>
       <a href="citations.html">Citations</a>
     </nav>

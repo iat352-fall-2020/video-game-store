@@ -109,9 +109,9 @@
 
 }
 .nav-row-3 a:hover{
-
+  
   text-decoration: underline;
-  transition: text-decoration 2s ease-in;
+  transition: text-decoration 5s ease-in;
 }
 
 .nav-row-3 a{
