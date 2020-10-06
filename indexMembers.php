@@ -54,11 +54,30 @@
         </div>
 
     </header>
+
 	<!-- content -->
 	<main class="main-content container container-home">
     <!-- <img src="img/banner.png" class="index-banner" alt="banner"> -->
 		<!-- club -->
+
+
     <h3>New Releases</h3>
+		<section class="content-item section-club">
+      <!-- placeholder image from: https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png -->
+      <!-- <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div> -->
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>PS5</p></a></div>
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series S</p></a></div>
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series X</p></a></div>
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Demon's Souls</p></a></div>
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png"alt="game"/><p>Gran Turismo 7</p></a></div>
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Marvel's Spider-man: Miles Morales</p></a></div>
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>FIFA 21</p></a></div>
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Cyberpunk 2077</p></a></div>
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>NBA 2K21</p></a></div>
+      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div>
+		</section>
+
+    <h3>Your Viewed Items</h3>
 		<section class="content-item section-club">
       <!-- placeholder image from: https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png -->
       <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>PS5</p></a></div>
@@ -71,9 +90,10 @@
       <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Cyberpunk 2077</p></a></div>
       <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>NBA 2K21</p></a></div>
       <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Godfall</p></a></div>
+
 
 		</section>
+
 	</main>
 
   <footer>
