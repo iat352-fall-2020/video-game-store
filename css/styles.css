@@ -93,9 +93,9 @@ a, a:visited{
   border-left: 0.5em solid #541D81;
 }
 
-.catalog-list{
+/* .catalog-list{
 
-}
+} */
 
 
 .catalog-list .item{
@@ -252,9 +252,9 @@ a, a:visited{
   overflow: auto;
 }
 
-.cart-info-right{
+/* .cart-info-right{
 
-}
+} */
 
 
 
@@ -685,9 +685,9 @@ summary{
   .profile-left{
     flex:20%;
   }
-  .catalog-filter{
-    height:15em;
-  }
+  /* .catalog-filter{
+     height:15em; 
+  } */
 
 }
 
@@ -761,12 +761,12 @@ summary{
 }
 
 @media(max-width:61em){
-  .catalog-filter{
+  /* .catalog-filter{
     height:15em;
-  }
-  .product-right{
+  } */
+  /* .product-right{
 
-  }
+  } */
 
 }
 
