@@ -99,7 +99,6 @@
   <footer>
     <nav>
       <a href="https://github.com/iat352-fall-2020/video-game-store">GitHub</a>
-      <a href="Style_Guide/styleGuide.html">Style Guide</a>
       <a href="citations.html">Citations</a>
     </nav>
   </footer>
