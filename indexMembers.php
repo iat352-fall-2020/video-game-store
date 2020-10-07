@@ -45,10 +45,10 @@
 
           <div class="header-row-3">
             <nav class="nav-row-3">
-              <a href="catalog.html" class="nav-main-item">Playstation</a>
-              <a href="catalog.html" class="nav-main-item">Xbox</a>
-              <a href="" class="nav-main-item">Nintendo</a>
-              <a href="" class="nav-main-item">Deals</a>
+              <a href="catalog.php" class="nav-main-item">Playstation</a>
+              <a href="catalog.php" class="nav-main-item">Xbox</a>
+              <a href="catalog.php" class="nav-main-item">Nintendo</a>
+              <a href="catalog.php" class="nav-main-item">Deals</a>
             </nav>
           </div>
         </div>
@@ -65,31 +65,31 @@
 		<section class="content-item section-club">
       <!-- placeholder image from: https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png -->
       <!-- <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div> -->
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>PS5</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series S</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series X</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Demon's Souls</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png"alt="game"/><p>Gran Turismo 7</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Marvel's Spider-man: Miles Morales</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>FIFA 21</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Cyberpunk 2077</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>NBA 2K21</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>PS5</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series S</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series X</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Demon's Souls</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png"alt="game"/><p>Gran Turismo 7</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Marvel's Spider-man: Miles Morales</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>FIFA 21</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Cyberpunk 2077</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>NBA 2K21</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div>
 		</section>
 
     <h3>Your Viewed Items</h3>
 		<section class="content-item section-club">
       <!-- placeholder image from: https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png -->
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>PS5</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series S</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series X</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Demon's Souls</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png"alt="game"/><p>Gran Turismo 7</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Marvel's Spider-man: Miles Morales</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>FIFA 21</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Cyberpunk 2077</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>NBA 2K21</p></a></div>
-      <div class="club" onclick="pointTo(catalog.html)"><a href="catalog.html"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>PS5</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series S</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series X</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Demon's Souls</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png"alt="game"/><p>Gran Turismo 7</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Marvel's Spider-man: Miles Morales</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>FIFA 21</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Cyberpunk 2077</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>NBA 2K21</p></a></div>
+      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div>
 
 
 		</section>
