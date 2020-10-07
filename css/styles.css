@@ -1,6 +1,5 @@
 /*
 	Open Sans from https://fonts.google.com/specimen/Open+Sans?selection.family=Open+Sans
-
 	Roboto from https://fonts.google.com/specimen/Roboto?selection.family=Roboto
 */
 
@@ -8,7 +7,7 @@
 
 header{
   padding-top: 0.3em;
-  background-color: rgb(37, 51, 65);
+  background-color: #2c2c2c;
   position: fixed;
   width:100%;
   font-family: 'Open Sans', sans-serif;
@@ -94,9 +93,9 @@ a, a:visited{
   border-left: 0.5em solid #541D81;
 }
 
-/* .catalog-list{
+.catalog-list{
 
-} */
+}
 
 
 .catalog-list .item{
@@ -253,9 +252,9 @@ a, a:visited{
   overflow: auto;
 }
 
-/* .cart-info-right{
+.cart-info-right{
 
-} */
+}
 
 
 
@@ -765,9 +764,9 @@ summary{
   .catalog-filter{
     height:15em;
   }
-  /* .product-right{
+  .product-right{
 
-  } */
+  }
 
 }
 
