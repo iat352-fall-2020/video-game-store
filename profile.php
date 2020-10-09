@@ -87,15 +87,13 @@
             <li>
               <fieldset>
                 <legend>Username:</legend>
-                <input type="password" id="register-username" name = "username">
-                <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
+                <input type="text" id="register-username" name = "username">
               </fieldset>
             </li>
             <li>
               <fieldset>
                 <legend>Password: </legend>
                 <input type="password" id="register-password" name = "passcode">
-                <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
               </fieldset>
             </li>
             <!-- <li>
@@ -155,15 +153,13 @@
           <li>
             <fieldset>
               <legend>Username:</legend>
-              <input type="password" id="login-username" name = "username">
-              <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
+              <input type="text" id="login-username" name = "username">
             </fieldset>
           </li>
           <li>
             <fieldset>
               <legend>Password: </legend>
               <input type="password" id="login-password" name = "passcode">
-              <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
             </fieldset>
           </li>
         </ul>
