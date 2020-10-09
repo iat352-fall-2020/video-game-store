@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/normalize.css">
     <title>Home</title>
+
+    <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
   </head>
   <body>
 
@@ -24,7 +26,7 @@
             <img class="nav-main-logo-img" src="" alt="Logo" onclick="pointTo('indexMembers.php')"/>
             <div class="header-row-2">
               <input type="text" placeholder="Search here...">
-              <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
+              <img onclick="pointTo('catalog.php')" src="img/search-icon.png" alt="search-icon"/>
 
             </div>
 
@@ -32,7 +34,7 @@
               <div class="nav-main-item">
                 <section class="profile-cart">
                   <a href="profile.php"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                  <a href="cart.html" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                  <a href="" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
                 </section>
               </div>
 
@@ -99,7 +101,7 @@
   <footer>
     <nav>
       <a href="https://github.com/iat352-fall-2020/video-game-store">GitHub</a>
-      <a href="citations.html">Citations</a>
+      <!-- <a href="citations.html">Citations</a> -->
     </nav>
   </footer>
   </body>

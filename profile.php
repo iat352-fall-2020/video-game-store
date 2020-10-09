@@ -5,6 +5,7 @@
     <script src="js/linkTo.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/headerScroll.js"></script>
+    <script src="js/showHide.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
@@ -14,11 +15,9 @@
 
     <title>Profile</title>
 
-<!--
-  fake address from:
 
-  fakepersongenerator.com (n.d.). Random Address Generator. Retrieved from https://www.fakepersongenerator.com/Random/generate_address
- -->
+
+ <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
   </head>
   <body>
 
@@ -28,18 +27,18 @@
 
 
           <div class="header-row-1">
-            <img class="nav-main-logo-img" src="img/logoSmall.png" alt="Logo" onclick="pointTo('index.html')"/>
+            <img class="nav-main-logo-img" src="img/Logo.png" alt="Logo" onclick="pointTo('index.php')"/>
             <div class="header-row-2">
               <input type="text" placeholder="Search here...">
-              <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
+              <img onclick="pointTo('catalog.php')" src="img/search-icon.png" alt="search-icon"/>
 
             </div>
 
             <nav class="nav-row-1">
               <div class="nav-main-item">
                 <section class="profile-cart">
-                  <a href="profile.html"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                  <a href="cart.html" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                  <a href="profile.php"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                  <a href="" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
                 </section>
               </div>
 
@@ -52,10 +51,10 @@
 
           <div class="header-row-3">
             <nav class="nav-row-3">
-              <a href="catalog.html" class="nav-main-item">Catalog</a>
-              <a href="news.html" class="nav-main-item">News</a>
-
-              <a href="about.html" class="nav-main-item">About</a>
+              <a href="catalog.php" class="nav-main-item">Playstation</a>
+              <a href="catalog.php" class="nav-main-item">Xbox</a>
+              <a href="catalog.php" class="nav-main-item">Nintendo</a>
+              <a href="catalog.php" class="nav-main-item">Deals</a>
             </nav>
           </div>
         </div>
@@ -71,11 +70,15 @@
 
 		<!-- order list -->
       <div class="profile-item profile-info" id="profile-info">
-        <h3 id="account-settings">Account Settings</h3>
+        <section class="profile-top-swap">
+          <button onclick="showHide('profile-register-block')" class="profile-swap-button">Sign Up</button>
+          <button onclick="showHide('profile-login-block')" class="profile-swap-button">Log in</button>
+        </section>
 
     <!-- security -->
-    <form action = "" method="POST">
-      <section class="content-item profile-security">
+
+      <section class="content-item profile-security" id="profile-register-block">
+        <form action = "" method="POST">
         <h3>Register Here</h3>
         <div class="change-password">
 
@@ -95,38 +98,59 @@
                 <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
               </fieldset>
             </li>
+            <!-- <li>
+              <fieldset>
+                <legend>Confirm Password: </legend>
+                <input type="password" id="register-password" name = "confirm-passcode">
+                <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
+              </fieldset>
+            </li> -->
           </ul>
 
         <input type = "submit" name="submit_btn" id = "submit" value = "Save"/>
 
         </div>
+      </form>
 
+      <?php
+        if(isset($_POST['submit_btn'])) {
+         $username = $_POST['username'];
+         $password = $_POST['passcode'];
+         // $reconfirm = $_POST['confirm-passcode'];
+         // if($password == $reconfirm){
+           $text = $username . "\n" . $password . "\n";
+           //$text = $username . ":" . $password;
+           $fp = fopen('details.txt', 'w');
+
+             if(fwrite($fp, $text))  {
+
+                 echo '<p>Username and Password Saved</p>';
+             }
+         fclose ($fp);
+         }
+         // else{
+         //   echo "The Passwords do not match";
+         // }
+
+
+
+
+
+       // }
+
+
+
+     ?>
       </section>
-    </form>
-
-     <?php
-       if(isset($_POST['submit_btn'])) {
-        $username = $_POST['username'];
-        $password = $_POST['passcode'];
-        $text = $username . "\n" . $password . "\n";
-        //$text = $username . ":" . $password;
-        $fp = fopen('details.txt', 'a+');
-          if(fwrite($fp, $text))  {
-              echo 'Username and Password Saved';
-          }
-      fclose ($fp);
-
-      }
 
 
 
-    ?>
-    <br/>
-    <h3>Login Here</h3>
-    <div class="change-password">
-      <form action = "" method="POST">
-        <section class="content-item profile-security">
 
+
+        <section class="content-item profile-security"id="profile-login-block">
+          <form action = "" method="POST">
+          <h3>Login Here</h3>
+          <div class="change-password">
         <ul>
           <li>
             <fieldset>
@@ -147,28 +171,32 @@
       <input type = "submit" name="submit_btn2" id = "submit" value = "Save"/>
 
     </div>
-
-  </section>
 </form>
+<?php
+if(file_exists("details.txt")){
 
- <?php
- if(file_exists("details.txt")){
+  if(isset($_POST['submit_btn2'])) {
+   $username = $_POST['username'];
+   $password = $_POST['passcode'];
+   $openTextFile = file_get_contents("details.txt");
 
-   if(isset($_POST['submit_btn2'])) {
-    $username = $_POST['username'];
-    $password = $_POST['passcode'];
-    $openTextFile = file_get_contents("details.txt");
+   $accountArray = explode("\n", $openTextFile);
+   if($username == $accountArray[0] && $password == $accountArray[1]){
+     echo '<p>Logged in!</p>';
 
-    $accountArray = explode("\n", $openTextFile);
-    if($username == $accountArray[0] && $password == $accountArray[1]){
-      echo 'Logged in!';
-
-    }
- }
+   }
+   else{
+     echo '<p>Login Failed!</p>';
+   }
+}
 }
 
 
 ?>
+  </section>
+
+
+
 
 		<!-- notification -->
 		<!-- <section class="content-item profile-notification">
@@ -218,9 +246,8 @@
 </main>
 <footer>
   <nav>
-    <a href="https://github.com/Sanada-Yukimura/IAT339-D101-P02">GitHub</a>
-    <a href="Style_Guide/styleGuide.html">Style Guide</a>
-    <a href="citations.html">Citations</a>
+    <a href="https://github.com/iat352-fall-2020/video-game-store">GitHub</a>
+    <!-- <a href="citations.html">Citations</a> -->
   </nav>
 </footer>
 

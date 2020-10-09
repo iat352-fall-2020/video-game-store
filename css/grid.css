@@ -410,6 +410,26 @@ div#MU9800{
   height:30em;
 }
 
+.profile-top-swap{
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1 1 auto;
+  height: 3em;
+
+}
+.profile-swap-button{
+
+  flex: 1 1 50%;
+}
+
+#profile-register-block{
+  display: block;
+}
+#profile-login-block{
+  display: none;
+}
+
+
 .answer {
   padding-bottom: 2.5rem;
 }

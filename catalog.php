@@ -19,9 +19,12 @@
 
   </head>
   <body>
-  <?php 
+  <?php
   //This will be the catalog's database code to be filled in
   ?>
+
+<!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
+
 
     <header id="header">
         <!-- logo? -->
@@ -29,18 +32,18 @@
 
 
           <div class="header-row-1">
-            <img class="nav-main-logo-img" src="img/logoSmall.png" alt="Logo" onclick="pointTo('index.html')"/>
+            <img class="nav-main-logo-img" src="img/Logo.png" alt="Logo" onclick="pointTo('index.php')"/>
             <div class="header-row-2">
               <input type="text" placeholder="Search here...">
-              <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
+              <img onclick="pointTo('catalog.php')" src="img/search-icon.png" alt="search-icon"/>
 
             </div>
 
             <nav class="nav-row-1">
               <div class="nav-main-item">
                 <section class="profile-cart">
-                  <a href="profile.html"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                  <a href="cart.html" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                  <a href="profile.php"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                  <a href="" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
                 </section>
               </div>
 
@@ -53,10 +56,10 @@
 
           <div class="header-row-3">
             <nav class="nav-row-3">
-              <a href="catalog.html" class="nav-main-item">Catalog</a>
-              <a href="news.html" class="nav-main-item">News</a>
-
-              <a href="about.html" class="nav-main-item">About</a>
+              <a href="catalog.php" class="nav-main-item">Playstation</a>
+              <a href="catalog.php" class="nav-main-item">Xbox</a>
+              <a href="catalog.php" class="nav-main-item">Nintendo</a>
+              <a href="catalog.php" class="nav-main-item">Deals</a>
             </nav>
           </div>
         </div>
@@ -140,36 +143,35 @@
     </div>
     <!-- catalog list -->
     <div class="content-item catalog-list">
-      <div onclick="pointTo('detailedProductMU.html')" class="item " id= "MU1920"><img src="img/Games/Cyberpunk_2077_box_art.jpg" alt="Cyberpunk 2077"/><p class="item_name">Cyberpunk 2077</p><p>Standard Edition</p><p class="price">$79.99</p>
-      <noscript><a href="detailedProductMU.html" class="noscript-a">More info</a></noscript>
+      <div onclick="pointTo('')" class="item " id= "MU1920"><img src="img/Games/Cyberpunk_2077_box_art.jpg" alt="Cyberpunk 2077"/><p class="item_name">Cyberpunk 2077</p><p>Standard Edition</p><p class="price">$79.99</p>
+      <noscript><a href="" class="noscript-a">More info</a></noscript>
 
       </div>
-      <div onclick="pointTo('detailedProductTH.html')" class="item " id= "TH1819"><img src="img/Games/phasmaphobia.jpg" alt="Phasmophobia"/><p class="item_name">Phasmophobia</p><p></p>
+      <div onclick="pointTo('')" class="item " id= "TH1819"><img src="img/Games/phasmaphobia.jpg" alt="Phasmophobia"/><p class="item_name">Phasmophobia</p><p></p>
       <p class="price">$14.99</p>
-      <noscript><a href="detailedProductMU.html" class="noscript-a">More info</a></noscript>
+      <noscript><a href="" class="noscript-a">More info</a></noscript>
       </div>
-      <div onclick="pointTo('detailedProductMU.html')" class="item" id= "MC1819"><img src="img/Games/bg3.jpg" alt="Baldur's Gate 3"/><p class="item_name">Baldur's Gate 3</p><p></p>
+      <div onclick="pointTo('')" class="item" id= "MC1819"><img src="img/Games/bg3.jpg" alt="Baldur's Gate 3"/><p class="item_name">Baldur's Gate 3</p><p></p>
       <p class="price">$79.99</p>
-      <noscript><a href="detailedProductMU.html" class="noscript-a">More info</a></noscript>
+      <noscript><a href="" class="noscript-a">More info</a></noscript>
       </div>
-      <div onclick="pointTo('detailedProductMU.html')" class="item " id= "A1718"><img src="img/Games/squadron.jpg" alt="STAR WARS™: Squadrons"/><p class="item_name">STAR WARS™: Squadrons</p><p></p>
-      <p class="price">$79.99</p><noscript><a href="detailedProductMU.html" class="noscript-a">More info</a></noscript></div>
-      <div onclick="pointTo('detailedProductMU.html')" class="item " id= "MU1819"><img src="img/Games/spelunky2.jpg" alt="Spelunky 2"/><p class="item_name">Spelunky 2</p><p></p>
-      <p class="price">$19.99</p><noscript><a href="detailedProductMU.html" class="noscript-a">More info</a></noscript></div>
-      <div onclick="pointTo('detailedProductTH.html')" class="item " id= "C1819"><img src="img/Games/hades.jpg" alt="Hades"/><p class="item_name">Hades</p><p></p>
-      <p class="price">$19.99</p><noscript><a href="detailedProductMU.html" class="noscript-a">More info</a></noscript></div>
-      <div onclick="pointTo('detailedProductTH.html')" class="item " id= "E1819"><img src="img/Games/iceborne.jpeg" alt="Monster Hunter World: Iceborne"/><p class="item_name">Monster Hunter World: Iceborne</p><p></p>
-      <p class="price">$79.99</p><noscript><a href="detailedProductMU.html" class="noscript-a">More info</a></noscript></div>
-      <div onclick="pointTo('detailedProductMU.html')" class="item " id= "MU9800"><img src="img/Games/ror2.jpg" alt="Risk of Rain 2"/><p class="item_name">Risk of Rain 2</p><p></p>
-      <p class="price">$19.99</p><noscript><a href="detailedProductMU.html" class="noscript-a">More info</a></noscript></div>
+      <div onclick="pointTo('')" class="item " id= "A1718"><img src="img/Games/squadron.jpg" alt="STAR WARS™: Squadrons"/><p class="item_name">STAR WARS™: Squadrons</p><p></p>
+      <p class="price">$79.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
+      <div onclick="pointTo('')" class="item " id= "MU1819"><img src="img/Games/spelunky2.jpg" alt="Spelunky 2"/><p class="item_name">Spelunky 2</p><p></p>
+      <p class="price">$19.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
+      <div onclick="pointTo('')" class="item " id= "C1819"><img src="img/Games/hades.jpg" alt="Hades"/><p class="item_name">Hades</p><p></p>
+      <p class="price">$19.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
+      <div onclick="pointTo('')" class="item " id= "E1819"><img src="img/Games/iceborne.jpeg" alt="Monster Hunter World: Iceborne"/><p class="item_name">Monster Hunter World: Iceborne</p><p></p>
+      <p class="price">$79.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
+      <div onclick="pointTo('')" class="item " id= "MU9800"><img src="img/Games/ror2.jpg" alt="Risk of Rain 2"/><p class="item_name">Risk of Rain 2</p><p></p>
+      <p class="price">$19.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
     </div>
 
 	</main>
   <footer>
     <nav>
-      <a href="https://github.com/Sanada-Yukimura/IAT339-D101-P02">GitHub</a>
-      <a href="Style_Guide/styleGuide.html">Style Guide</a>
-      <a href="citations.html">Citations</a>
+      <a href="https://github.com/iat352-fall-2020/video-game-store">GitHub</a>
+      <!-- <a href="citations.html">Citations</a> -->
     </nav>
   </footer>
   </body>
