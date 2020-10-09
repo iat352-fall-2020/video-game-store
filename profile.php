@@ -76,22 +76,22 @@
     <!-- security -->
     <form action = "" method="POST">
       <section class="content-item profile-security">
-        <h3>Register Now</h3>
-
+        <h3>Register Here</h3>
         <div class="change-password">
-          <h4>Enter a Username and Password:</h4>
+
+
           <ul>
             <li>
               <fieldset>
                 <legend>Username:</legend>
-                <input type="password" id="curr-pass" name = "username">
+                <input type="password" id="register-username" name = "username">
                 <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
               </fieldset>
             </li>
             <li>
               <fieldset>
                 <legend>Password: </legend>
-                <input type="password" id="new-pass" name = "passcode">
+                <input type="password" id="register-password" name = "passcode">
                 <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
               </fieldset>
             </li>
@@ -105,22 +105,73 @@
     </form>
 
      <?php
+       if(isset($_POST['submit_btn'])) {
+        $username = $_POST['username'];
+        $password = $_POST['passcode'];
+        $text = $username . "\n" . $password . "\n";
+        //$text = $username . ":" . $password;
+        $fp = fopen('details.txt', 'a+');
+          if(fwrite($fp, $text))  {
+              echo 'Username and Password Saved';
+          }
+      fclose ($fp);
 
-     if(isset($_POST['submit_btn'])) {
-      $username = $_POST['username'];
-      $password = $_POST['passcode'];
-      $text = "Username: " . $username . "\n" . "Password: " . $password . "\n";
-      //$text = $username . ":" . $password;
-      $fp = fopen('details.txt', 'a+');
-        if(fwrite($fp, $text))  {
-            echo 'Username and Password Saved';
-        }
-    fclose ($fp);    
-    }
+      }
+
+
+
     ?>
+    <br/>
+    <h3>Login Here</h3>
+    <div class="change-password">
+      <form action = "" method="POST">
+        <section class="content-item profile-security">
+
+        <ul>
+          <li>
+            <fieldset>
+              <legend>Username:</legend>
+              <input type="password" id="login-username" name = "username">
+              <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset>
+              <legend>Password: </legend>
+              <input type="password" id="login-password" name = "passcode">
+              <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
+            </fieldset>
+          </li>
+        </ul>
+
+      <input type = "submit" name="submit_btn2" id = "submit" value = "Save"/>
+
+    </div>
+
+  </section>
+</form>
+
+ <?php
+ if(file_exists("details.txt")){
+
+   if(isset($_POST['submit_btn2'])) {
+    $username = $_POST['username'];
+    $password = $_POST['passcode'];
+    $openTextFile = file_get_contents("details.txt");
+
+    $accountArray = explode("\n", $openTextFile);
+    if($username == $accountArray[0] && $password == $accountArray[1]){
+      echo 'Logged in!';
+
+    }
+ }
+}
+
+
+?>
 
 		<!-- notification -->
-		<section class="content-item profile-notification">
+		<!-- <section class="content-item profile-notification">
       <h3>Notifications</h3>
         <ul>
           <li><input type="checkbox" name="newsletter" value="sub-newsletter" checked> Subscribe to our newsletter.</li>
@@ -129,10 +180,10 @@
           <li><p class="updateMessage">Your notification preferences have been updated!</p></li>
           <li><button onclick="updatePrefs(2)">Update</button></li>
         </ul>
-		</section>
+		</section> -->
 
 		<!-- billing information -->
-		<div class="content-item profile-billing">
+		<!-- <div class="content-item profile-billing">
       <h3>Billing info</h3>
       <section class="address-radio">
         <div>
@@ -163,7 +214,7 @@
     </section>
 		</div>
 	</div>
-</div>
+</div> -->
 </main>
 <footer>
   <nav>
