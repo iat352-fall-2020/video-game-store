@@ -73,44 +73,51 @@
       <div class="profile-item profile-info" id="profile-info">
         <h3 id="account-settings">Account Settings</h3>
 
+    <!-- security -->
+    <form action = "" method="POST">
+      <section class="content-item profile-security">
+        <h3>Register Now</h3>
 
-		<!-- security -->
-		<section class="content-item profile-security">
-      <h3>Register Now</h3>
+        <div class="change-password">
+          <h4>Enter a Username and Password:</h4>
+          <ul>
+            <li>
+              <fieldset>
+                <legend>Username:</legend>
+                <input type="password" id="curr-pass" name = "username">
+                <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
+              </fieldset>
+            </li>
+            <li>
+              <fieldset>
+                <legend>Password: </legend>
+                <input type="password" id="new-pass" name = "passcode">
+                <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
+              </fieldset>
+            </li>
+          </ul>
 
-      <div class="change-password">
-        <h4>Enter your e-mail:</h4>
-        <ul>
-          <li>
-            <fieldset>
-              <legend>Enter your e-mail:</legend>
-              <input type="password" id="curr-pass">
-              <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
-            </fieldset>
-          </li>
-          <li>
-            <fieldset>
-              <legend>Enter a Password: </legend>
-              <input type="password" id="new-pass" >
-              <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
-            </fieldset>
-          </li><li>
-            <fieldset>
-              <legend>Retype Password: </legend>
-              <input type="password" id="retype-pass">
-              <img src="img/eye-icon.png" onclick="eye(3)" alt="show/hide retype-password"/>
-            </fieldset>
-          </li>
+        <input type = "submit" name="submit_btn" id = "submit" value = "Save"/>
 
-      </ul>
-      <div class="clear-float">
-        <p class="passwordUpdate">Your password has been changed!</p>
-        <button onclick="updatePrefs(1)">Save Changes</button>
-      </div>
+        </div>
 
-      </div>
+      </section>
+    </form>
 
-		</section>
+     <?php
+
+     if(isset($_POST['submit_btn'])) {
+      $username = $_POST['username'];
+      $password = $_POST['passcode'];
+      $text = "Username: " . $username . "\n" . "Password: " . $password . "\n";
+      //$text = $username . ":" . $password;
+      $fp = fopen('details.txt', 'a+');
+        if(fwrite($fp, $text))  {
+            echo 'Username and Password Saved';
+        }
+    fclose ($fp);    
+    }
+    ?>
 
 		<!-- notification -->
 		<section class="content-item profile-notification">
