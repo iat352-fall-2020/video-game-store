@@ -21,7 +21,7 @@
 
 
           <div class="header-row-1">
-            <img class="nav-main-logo-img" src="" alt="Logo" onclick="pointTo('index.html')"/>
+            <img class="nav-main-logo-img" src="img/Logo.png" alt="Logo" onclick="pointTo('index.php')"/>
             <div class="header-row-2">
               <input type="text" placeholder="Search here...">
               <img onclick="pointTo('catalog.html')" src="img/search-icon.png" alt="search-icon"/>
