@@ -169,6 +169,7 @@
     </div>
 </form>
 <?php
+// check if text file exists before allowing login
 if(file_exists("details.txt")){
 
   if(isset($_POST['submit_btn2'])) {
@@ -177,6 +178,8 @@ if(file_exists("details.txt")){
    $openTextFile = file_get_contents("details.txt");
 
    $accountArray = explode("\n", $openTextFile);
+
+   // check if username and password match the ones in the textfile
    if($username == $accountArray[0] && $password == $accountArray[1]){
      echo '<p>Logged in!</p>';
 
