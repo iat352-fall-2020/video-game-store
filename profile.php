@@ -20,6 +20,48 @@
  <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
   </head>
   <body>
+    <?php
+    // checks if submit button is pressed and parses inputs
+    if(isset($_POST['submit_btn'])) {
+     $username = $_POST['username'];
+     $password = $_POST['passcode'];
+     // $reconfirm = $_POST['confirm-passcode'];
+     // if($password == $reconfirm){
+       $text = $username . "\n" . $password . "\n";
+       //$text = $username . ":" . $password;
+       $fp = fopen('details.txt', 'w');
+
+         if(fwrite($fp, $text))  {
+            // if the write to text is sucessful, save registersuccess with following string for output
+             $registersuccess = '<p>Username and Password Saved, navigate to login tab to login</p>';
+         }
+     fclose ($fp);
+     }
+
+
+
+    // check if text file exists before allowing login
+    if(file_exists("details.txt")){
+    // checks if submit button is pressed and parses inputs
+      if(isset($_POST['submit_btn2'])) {
+       $username = $_POST['username'];
+       $password = $_POST['passcode'];
+       $openTextFile = file_get_contents("details.txt");
+
+       $accountArray = explode("\n", $openTextFile);
+
+       // check if username and password match the ones in the textfile
+       if($username == $accountArray[0] && $password == $accountArray[1]){
+         header("Location: indexMembers.php");
+       }
+       else{
+         $loginfailure =  '<p>Login Failed!</p>';
+       }
+    }
+    }
+
+
+    ?>
 
     <header id="header">
         <!-- logo? -->
@@ -110,37 +152,23 @@
         </div>
       </form>
 
+
       <?php
+      // if register is sucessful and if registersuccess var is not empty print username and password saved.
+      // this code here bypasses the issue where echo is hidden in header of page
 
-      // checks if submit button is pressed and parses inputs
-        if(isset($_POST['submit_btn'])) {
-         $username = $_POST['username'];
-         $password = $_POST['passcode'];
-         // $reconfirm = $_POST['confirm-passcode'];
-         // if($password == $reconfirm){
-           $text = $username . "\n" . $password . "\n";
-           //$text = $username . ":" . $password;
-           $fp = fopen('details.txt', 'w');
+        if(!empty($registersuccess)){
+          echo '<hr>';
+          echo '<p>'. $registersuccess . '</p>';
+        }
+        // if login is unsucessful and if loginfailure var is not empty print login failure
 
-             if(fwrite($fp, $text))  {
-                // if the write to text is sucessful, echo a success message to the user
-                 echo '<p>Username and Password Saved</p>';
-             }
-         fclose ($fp);
-         }
-         // else{
-         //   echo "The Passwords do not match";
-         // }
+      ?>
 
 
 
 
 
-       // }
-
-
-
-     ?>
       </section>
 
 
@@ -166,37 +194,18 @@
           </li>
         </ul>
 
-      <input type = "submit" name="submit_btn2" id = "submit" value = "Save"/>
+      <input type = "submit" name="submit_btn2" id = "submit" value = "Login"/>
 
     </div>
 </form>
 <?php
-// check if text file exists before allowing login
-if(file_exists("details.txt")){
-// checks if submit button is pressed and parses inputs
-  if(isset($_POST['submit_btn2'])) {
-   $username = $_POST['username'];
-   $password = $_POST['passcode'];
-   $openTextFile = file_get_contents("details.txt");
 
-   $accountArray = explode("\n", $openTextFile);
-
-   // check if username and password match the ones in the textfile
-   if($username == $accountArray[0] && $password == $accountArray[1]){
-     echo '<p>Logged in!</p>';
-
-   }
-   else{
-     echo '<p>Login Failed!</p>';
-   }
+if(!empty($loginfailure)){
+  echo '<hr>';
+  echo '<p>'. $loginfailure . '</p>';
 }
-}
-
-
 ?>
   </section>
-
-
 
 
 		<!-- notification -->
