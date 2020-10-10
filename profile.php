@@ -111,6 +111,8 @@
       </form>
 
       <?php
+
+      // checks if submit button is pressed and parses inputs
         if(isset($_POST['submit_btn'])) {
          $username = $_POST['username'];
          $password = $_POST['passcode'];
@@ -121,7 +123,7 @@
            $fp = fopen('details.txt', 'w');
 
              if(fwrite($fp, $text))  {
-
+                // if the write to text is sucessful, echo a success message to the user
                  echo '<p>Username and Password Saved</p>';
              }
          fclose ($fp);
@@ -171,7 +173,7 @@
 <?php
 // check if text file exists before allowing login
 if(file_exists("details.txt")){
-
+// checks if submit button is pressed and parses inputs
   if(isset($_POST['submit_btn2'])) {
    $username = $_POST['username'];
    $password = $_POST['passcode'];
