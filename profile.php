@@ -25,9 +25,11 @@
     if(isset($_POST['submit_btn'])) {
      $username = $_POST['username'];
      $password = $_POST['passcode'];
+     $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
+
      // $reconfirm = $_POST['confirm-passcode'];
      // if($password == $reconfirm){
-       $text = $username . "\n" . $password . "\n";
+       $text = $username . "\n" . $encryptedPassword . "\n";
        //$text = $username . ":" . $password;
        $fp = fopen('details.txt', 'w');
 
@@ -46,12 +48,13 @@
       if(isset($_POST['submit_btn2'])) {
        $username = $_POST['username'];
        $password = $_POST['passcode'];
+
        $openTextFile = file_get_contents("details.txt");
 
        $accountArray = explode("\n", $openTextFile);
 
        // check if username and password match the ones in the textfile
-       if($username == $accountArray[0] && $password == $accountArray[1]){
+       if($username == $accountArray[0] && password_verify($password, $accountArray[1] )){
          header("Location: indexMembers.php");
        }
        else{
