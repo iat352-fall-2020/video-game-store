@@ -22,23 +22,7 @@
   <body>
     <?php
     // checks if submit button is pressed and parses inputs
-    if(isset($_POST['submit_btn'])) {
-     $username = $_POST['username'];
-     $password = $_POST['passcode'];
-     $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-     // $reconfirm = $_POST['confirm-passcode'];
-     // if($password == $reconfirm){
-       $text = $username . "\n" . $encryptedPassword . "\n";
-       //$text = $username . ":" . $password;
-       $fp = fopen('details.txt', 'w');
-
-         if(fwrite($fp, $text))  {
-            // if the write to text is sucessful, save registersuccess with following string for output
-             $registersuccess = '<p>Username and Password Saved, navigate to login tab to login</p>';
-         }
-     fclose ($fp);
-     }
 
 
 
@@ -53,7 +37,7 @@
 
        $accountArray = explode("\n", $openTextFile);
 
-       // check if username and password match the ones in the textfile
+       // check if username and password match the ones in the textfile (hashed password)
        if($username == $accountArray[0] && password_verify($password, $accountArray[1] )){
          header("Location: indexMembers.php");
        }
@@ -115,100 +99,57 @@
 
 		<!-- order list -->
       <div class="profile-item profile-info" id="profile-info">
-        <section class="profile-top-swap">
-          <button onclick="showHide('profile-register-block')" class="profile-swap-button">Sign Up</button>
-          <button onclick="showHide('profile-login-block')" class="profile-swap-button">Log in</button>
-        </section>
+
 
     <!-- security -->
 
+    <section class="content-item profile-security"id="profile-login-block">
+
+</section>
+
       <section class="content-item profile-security" id="profile-register-block">
         <form action = "" method="POST">
-        <h3>Register Here</h3>
+        <h3>Sign in with e-mail</h3>
         <div class="change-password">
+      <ul>
+        <li>
+          <fieldset>
+            <legend>E-mail:</legend>
+            <input type="text" id="login-username" name = "username">
+          </fieldset>
+        </li>
+        <li>
+          <fieldset>
+            <legend>Password: </legend>
+            <input type="password" id="login-password" name = "passcode">
+          </fieldset>
+        </li>
+      </ul>
 
+    <input type = "submit" name="submit_btn2" id = "submit" value = "Login"/>
 
-          <ul>
-            <li>
-              <fieldset>
-                <legend>Username:</legend>
-                <input type="text" id="register-username" name = "username">
-              </fieldset>
-            </li>
-            <li>
-              <fieldset>
-                <legend>Password: </legend>
-                <input type="password" id="register-password" name = "passcode">
-              </fieldset>
-            </li>
-            <!-- <li>
-              <fieldset>
-                <legend>Confirm Password: </legend>
-                <input type="password" id="register-password" name = "confirm-passcode">
-                <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
-              </fieldset>
-            </li> -->
-          </ul>
+  </div>
+  </form>
+  <?php
 
-        <input type = "submit" name="submit_btn" id = "submit" value = "Save"/>
-
-        </div>
-      </form>
-
-
-      <?php
-      // if register is sucessful and if registersuccess var is not empty print username and password saved.
-      // this code here bypasses the issue where echo is hidden in header of page
-
-        if(!empty($registersuccess)){
-          echo '<hr>';
-          echo '<p>'. $registersuccess . '</p>';
-        }
-        // if login is unsucessful and if loginfailure var is not empty print login failure
-
-      ?>
-
-
-
-
-
-      </section>
-
-
-
-
-
-        <section class="content-item profile-security"id="profile-login-block">
-          <form action = "" method="POST">
-          <h3>Login Here</h3>
-          <div class="change-password">
-        <ul>
-          <li>
-            <fieldset>
-              <legend>Username:</legend>
-              <input type="text" id="login-username" name = "username">
-            </fieldset>
-          </li>
-          <li>
-            <fieldset>
-              <legend>Password: </legend>
-              <input type="password" id="login-password" name = "passcode">
-            </fieldset>
-          </li>
-        </ul>
-
-      <input type = "submit" name="submit_btn2" id = "submit" value = "Login"/>
-
-    </div>
-</form>
-<?php
-
-if(!empty($loginfailure)){
+  if(!empty($loginfailure)){
   echo '<hr>';
   echo '<p>'. $loginfailure . '</p>';
-}
-?>
+  }
+  ?>
   </section>
+
+  <section>
+
+    <p>Don't have an account yet? <a href="register.php">Sign up now!</a></p>
+
+  </section>
+
+
+
+
+
+
 
 
 		<!-- notification -->
