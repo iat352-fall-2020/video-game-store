@@ -33,6 +33,12 @@
      $username = $_POST['username'];
      $password = $_POST['password'];
      $confirmpassword = $_POST['confirmPassword'];
+
+     $checkUsername = "SELECT email FROM database WHERE email="$username"";
+    if(!empty($checkUsername)){
+      $error = "<p>Error: E-mail is already registered in the system!</p>";
+    }
+
      if($password == $confirmpassword){
       $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
       $text = $username . "\n" . $encryptedPassword . "\n";
@@ -47,7 +53,7 @@
     }
 
     else{
-      $registerFailure =  '<p>Your Password does not match!</p>';
+      $error =  '<p>Your Password does not match!</p>';
 
     }
 
@@ -160,8 +166,8 @@
       // if register is sucessful and if registersuccess var is not empty print username and password saved.
       // this code here bypasses the issue where echo is hidden in header of page
 
-        if(!empty($registerFailure)){
-          echo($registerFailure);
+        if(!empty($error)){
+          echo($error);
         }
         // if login is unsucessful and if loginfailure var is not empty print login failure
 
