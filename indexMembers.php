@@ -17,13 +17,13 @@
   </head>
   <body>
 
-    <header id="header">
+  <header id="header">
         <!-- logo? -->
         <div class="header-menu ">
 
 
           <div class="header-row-1">
-            <img class="nav-main-logo-img" src="" alt="Logo" onclick="pointTo('indexMembers.php')"/>
+            <img class="nav-main-logo-img" src="img/Logo.png" alt="Logo" onclick="pointTo('indexMembers.php')"/>
             <div class="header-row-2">
               <input type="text" placeholder="Search here...">
               <img onclick="pointTo('catalog.php')" src="img/search-icon.png" alt="search-icon"/>
@@ -33,8 +33,18 @@
             <nav class="nav-row-1">
               <div class="nav-main-item">
                 <section class="profile-cart">
-                  <a href="profile.php"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                  <a href="" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                  <ul class="button-menu">
+                    <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                      <ul class="dropdownmain">
+                        <li class="dropdownitem"><a href="profile.php">Profile</a></li>
+                        <li class="dropdownitem"><a href="profile.php">Settings</a></li>
+                      </ul>
+                      
+                    </li>
+                    
+                  </ul>
+                  <a href="checkout.php" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+
                 </section>
               </div>
 
@@ -47,10 +57,12 @@
 
           <div class="header-row-3">
             <nav class="nav-row-3">
-              <a href="catalog.php" class="nav-main-item">Playstation</a>
-              <a href="catalog.php" class="nav-main-item">Xbox</a>
+              <a href="catalog.php" class="nav-main-item">Browse Store</a>
+              <!-- <a href="locations.php#" class="nav-main-item">Locations</a>  -->
+              <a href="about.php" class="nav-main-item">About Us</a>
+              <!-- <a href="catalog.php" class="nav-main-item">Xbox</a>
               <a href="catalog.php" class="nav-main-item">Nintendo</a>
-              <a href="catalog.php" class="nav-main-item">Deals</a>
+              <a href="catalog.php" class="nav-main-item">Deals</a> -->
             </nav>
           </div>
         </div>

@@ -26,7 +26,7 @@
 <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
 
 
-    <header id="header">
+  <header id="header">
         <!-- logo? -->
         <div class="header-menu ">
 
@@ -42,8 +42,18 @@
             <nav class="nav-row-1">
               <div class="nav-main-item">
                 <section class="profile-cart">
-                  <a href="profile.php"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                  <a href="" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                  <ul class="button-menu">
+                    <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                      <ul class="dropdownmain">
+                        <li class="dropdownitem"><a href="profile.php">Profile</a></li>
+                        <li class="dropdownitem"><a href="profile.php">Settings</a></li>
+                      </ul>
+                      
+                    </li>
+                    
+                  </ul>
+                  <a href="checkout.php" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+
                 </section>
               </div>
 
@@ -56,10 +66,12 @@
 
           <div class="header-row-3">
             <nav class="nav-row-3">
-              <a href="catalog.php" class="nav-main-item">Playstation</a>
-              <a href="catalog.php" class="nav-main-item">Xbox</a>
+              <a href="catalog.php" class="nav-main-item">Browse Store</a>
+              <!-- <a href="locations.php#" class="nav-main-item">Locations</a>  -->
+              <a href="about.php" class="nav-main-item">About Us</a>
+              <!-- <a href="catalog.php" class="nav-main-item">Xbox</a>
               <a href="catalog.php" class="nav-main-item">Nintendo</a>
-              <a href="catalog.php" class="nav-main-item">Deals</a>
+              <a href="catalog.php" class="nav-main-item">Deals</a> -->
             </nav>
           </div>
         </div>
@@ -143,8 +155,8 @@
     </div>
     <!-- catalog list -->
     <div class="content-item catalog-list">
-      <div onclick="pointTo('')" class="item " id= "MU1920"><img src="img/Games/Cyberpunk_2077_box_art.jpg" alt="Cyberpunk 2077"/><p class="item_name">Cyberpunk 2077</p><p>Standard Edition</p><p class="price">$79.99</p>
-      <noscript><a href="" class="noscript-a">More info</a></noscript>
+      <div onclick="pointTo('')" class="item " id= "MU1920"><a href="detailedproduct.php"><img src="img/Games/Cyberpunk_2077_box_art.jpg" alt="Cyberpunk 2077"/><p class="item_name">Cyberpunk 2077</p><p>Standard Edition</p><p class="price">$79.99</p></a>
+      <noscript><a href="detailedproduct.php" class="noscript-a">More info</a></noscript>
 
       </div>
       <div onclick="pointTo('')" class="item " id= "TH1819"><img src="img/Games/phasmaphobia.jpg" alt="Phasmophobia"/><p class="item_name">Phasmophobia</p><p></p>

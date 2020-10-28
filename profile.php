@@ -1,56 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Inspiration and code implemented with help from w3schools and stack overflow. -->
     <meta charset="utf-8" />
     <script src="js/linkTo.js"></script>
-    <script src="js/functions.js"></script>
     <script src="js/headerScroll.js"></script>
-    <script src="js/showHide.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/normalize.css">
+    <title>Home</title>
 
-    <title>Profile</title>
-
-
-
- <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
+    <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
   </head>
   <body>
-    <?php
-    // checks if submit button is pressed and parses inputs
 
-
-
-
-    // check if text file exists before allowing login
-    if(file_exists("details.txt")){
-    // checks if submit button is pressed and parses inputs
-      if(isset($_POST['submit_btn2'])) {
-       $username = $_POST['username'];
-       $password = $_POST['passcode'];
-
-       $openTextFile = file_get_contents("details.txt");
-
-       $accountArray = explode("\n", $openTextFile);
-
-       // check if username and password match the ones in the textfile (hashed password)
-       if($username == $accountArray[0] && password_verify($password, $accountArray[1] )){
-         header("Location: indexMembers.php");
-       }
-       else{
-         $loginfailure =  '<p>Login Failed!</p>';
-       }
-    }
-    }
-
-
-    ?>
-
-<header id="header">
+  <header id="header">
         <!-- logo? -->
         <div class="header-menu ">
 
@@ -111,61 +78,49 @@
 
 		<!-- order list -->
       <div class="profile-item profile-info" id="profile-info">
+        <h3 id="account-settings">Account Settings</h3>
 
 
-    <!-- security -->
+		<!-- security -->
+		<section class="content-item profile-security">
+      <h3>Security Info</h3>
 
-    <section class="content-item profile-security"id="profile-login-block">
+      <div class="change-password">
+        <h4>Change Password:</h4>
+        <ul>
+          <li>
+            <fieldset>
+              <legend>Current Password: </legend>
+              <input type="password" id="curr-pass">
+              <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
+            </fieldset>
+          </li>
+          <li>
+            <fieldset>
+              <legend>New Password: </legend>
+              <input type="password" id="new-pass" >
+              <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
+            </fieldset>
+          </li><li>
+            <fieldset>
+              <legend>Retype Password: </legend>
+              <input type="password" id="retype-pass">
+              <img src="img/eye-icon.png" onclick="eye(3)" alt="show/hide retype-password"/>
+            </fieldset>
+          </li>
 
-</section>
-
-      <section class="content-item profile-security" id="profile-register-block">
-        <form action = "" method="POST">
-        <h3>Sign in with e-mail</h3>
-        <div class="change-password">
-      <ul>
-        <li>
-          <fieldset>
-            <legend>E-mail:</legend>
-            <input type="text" id="login-username" name = "username">
-          </fieldset>
-        </li>
-        <li>
-          <fieldset>
-            <legend>Password: </legend>
-            <input type="password" id="login-password" name = "passcode">
-          </fieldset>
-        </li>
       </ul>
+      <div class="clear-float">
+        <p class="passwordUpdate">Your password has been changed!</p>
+        <button onclick="updatePrefs(1)">Save Changes</button>
+      </div>
 
-    <input type = "submit" name="submit_btn2" id = "submit" value = "Login"/>
+      </div>
 
-  </div>
-  </form>
-  <?php
-
-  if(!empty($loginfailure)){
-  echo '<hr>';
-  echo '<p>'. $loginfailure . '</p>';
-  }
-  ?>
-  </section>
-
-  <section>
-
-    <p>Don't have an account yet? <a href="register.php">Sign up now!</a></p>
-
-  </section>
-
-
-
-
-
-
-
+		</section>
 
 		<!-- notification -->
-		<!-- <section class="content-item profile-notification">
+		<section class="content-item profile-notification">
       <h3>Notifications</h3>
         <ul>
           <li><input type="checkbox" name="newsletter" value="sub-newsletter" checked> Subscribe to our newsletter.</li>
@@ -174,10 +129,10 @@
           <li><p class="updateMessage">Your notification preferences have been updated!</p></li>
           <li><button onclick="updatePrefs(2)">Update</button></li>
         </ul>
-		</section> -->
+		</section>
 
 		<!-- billing information -->
-		<!-- <div class="content-item profile-billing">
+		<div class="content-item profile-billing">
       <h3>Billing info</h3>
       <section class="address-radio">
         <div>
@@ -208,15 +163,14 @@
     </section>
 		</div>
 	</div>
-</div> -->
+</div>
 </main>
-<footer>
-  <nav>
-    <a href="https://github.com/iat352-fall-2020/video-game-store">GitHub</a>
-    <!-- <a href="citations.html">Citations</a> -->
-  </nav>
-</footer>
 
-
+  <footer>
+    <nav>
+      <a href="https://github.com/iat352-fall-2020/video-game-store">GitHub</a>
+      <!-- <a href="citations.html">Citations</a> -->
+    </nav>
+  </footer>
   </body>
 </html>

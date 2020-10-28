@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Inspiration and code implemented with help from w3schools and stack overflow. -->
     <meta charset="utf-8" />
-    <script src="js/linkTo.js"></script>
     <script src="js/headerScroll.js"></script>
+    <script src="js/linkTo.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <title>Home</title>
+    <title>About</title>
 
-    <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
+
   </head>
   <body>
 
-    <header id="header">
+  <header id="header">
         <!-- logo? -->
         <div class="header-menu ">
 
@@ -69,24 +68,49 @@
 
     </header>
 	<!-- content -->
-	<main class="main-content container container-home">
-    <!-- <img src="img/banner.png" class="index-banner" alt="banner"> -->
-		<!-- club -->
-    <h3>New Releases</h3>
-		<section class="content-item section-club">
-      <!-- placeholder image from: https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png -->
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>PS5</p></a></div>
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series S</p></a></div>
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series X</p></a></div>
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Demon's Souls</p></a></div>
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png"alt="game"/><p>Gran Turismo 7</p></a></div>
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Marvel's Spider-man: Miles Morales</p></a></div>
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>FIFA 21</p></a></div>
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Cyberpunk 2077</p></a></div>
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>NBA 2K21</p></a></div>
-      <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div>
+	<main class="main-content container about">
 
-		</section>
+    <article class="about-content">
+
+      <section class="about-contact">
+        <!-- contact us -->
+        <h4 id="contact">Contact Us</h4>
+        <ul>
+          <li>E-mail: contact-mail@footyfans.com</li>
+          <li>Phone1: (626)243-7837</li>
+
+        </ul>
+      </section>
+      <!-- store addresses -->
+      <section class="about-addresses">
+        <h4 id="addresses">Store Address: </h4>
+        <address>
+          <span>303 Browning Lane</span>
+          <span>Horseheads New York NY</span>
+          <span>14845</span>
+        </address>
+      </section>
+
+      <!-- FAQ -->
+      <section class="about-faq">
+
+          <h4 id="faq">FAQ</h4>
+          <details>
+            <summary>What if the item I purchased is in back-order?</summary>
+            <p class="answer">Don't worry, we have your order in our list! When we are ready to ship your order, we will only charge you then and ship as soon as possible.</p>
+          </details>
+          <details>
+            <summary>What if the item I want to purchase is out of stock?</summary>
+            <p class="answer">If the item you want is still being produced, stay patient. We will stock items within 2 weeks of it going out of stock. If you wish, you can subscribe to our mailing list and get a notification when our items have been restocked.</p>
+          </details>
+          <details>
+            <summary>I purchased the wrong item, how do I return it?</summary>
+            <p class="answer">Let us know via e-mail about your item and we will send you a paid shipping label. Once you receive the shipping label, just repackage your order and ship it back to us. We will refund you within 2 business days of us receving the package.</p>
+          </details>
+        </section>
+    </article>
+
+    <!-- end of main content -->
 	</main>
 
   <footer>
@@ -95,5 +119,7 @@
       <!-- <a href="citations.html">Citations</a> -->
     </nav>
   </footer>
+
+
   </body>
 </html>

@@ -374,7 +374,7 @@ ul{
   padding-left: 1em;
   padding-bottom: 2em;
   align-items: center;
-  margin-top: 1em;
+  margin-top: 5em;
   text-align: center;
 
 
@@ -657,6 +657,63 @@ address span{
 summary{
   margin-bottom: 1em;
 }
+
+
+.dropdown {
+  display:block;
+  transition-duration:0.5s;
+}
+
+.dropdown:hover{
+  cursor:pointer;
+}
+
+.dropdownmain{
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  /* margin-top: 1rem; */
+  right: 6em;
+  display: none;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+ul li ul li {
+  clear: both;
+  width: 100%;
+}
+
+.dropdownitem{
+  color: #fff;
+  background: darkred;
+  display: block;
+  float: left;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+transition-duration: 0.5s;
+}
+
+.cart-nav
+{
+  margin:1em;
+}
+
+.cart-footer
+{
+  display:flex;
+  flex-direction:column;
+}
+
+
+
 
 @media only screen and (max-width: 100em){
 

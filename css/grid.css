@@ -274,13 +274,6 @@ div#MU9800{
   flex:100%;
   margin-top: 3em;
   margin-bottom: 5em;
-
-
-
-
-
-
-
 }
 
 .cart-box{
@@ -380,9 +373,12 @@ div#MU9800{
 
 .add-to-cart-button{
   margin-top: 0.5em;
+  flex:1 1 100%;
+  /* flex-direction: row-reverse; */
 }
 
 .cart-item {
+  /* margin:1em; */
 
 }
 
