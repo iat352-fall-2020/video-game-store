@@ -27,28 +27,41 @@
 
   </head>
   <body>
+
+
     <?php
+    $dbhost = "localhost";
+    $dbuser = "root";
+    $dbpass = "";
+    $dbname = "Benedict_Wong";
+    $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    if($connect){
+    }
+    else{
+      die("exit");
+    }
+
     // checks if submit button is pressed and parses inputs
     if(isset($_POST['submit_btn'])) {
      $username = $_POST['username'];
      $password = $_POST['password'];
      $confirmpassword = $_POST['confirmPassword'];
 
-     $checkUsername = "SELECT email FROM database WHERE email="$username"";
-    if(!empty($checkUsername)){
+     $checkUsername = "SELECT email FROM customer WHERE email="$username"";
+     $checkUsernameResult = mysqli_query($connect, $checkUsername);
+    if(!empty($checkUsernameResult)){
       $error = "<p>Error: E-mail is already registered in the system!</p>";
     }
 
      if($password == $confirmpassword){
       $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
-      $text = $username . "\n" . $encryptedPassword . "\n";
-      $fp = fopen('details.txt', 'w');
-
-        if(fwrite($fp, $text))  {
-           // if the write to text is sucessful, save registersuccess with following string for output
-           fclose ($fp);
+      $insertUsernamePassword = "INSERT INTO customer(email, password) values ('$username','$password')";
+      if(mysqli_query($connect,$insertUser)){
            header("Location: indexMembers.php");
         }
+      else{
+        die("insertion failed");
+      }
 
     }
 
