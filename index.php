@@ -39,9 +39,9 @@
                         <li class="dropdownitem"><a href="profile.php">Profile</a></li>
                         <li class="dropdownitem"><a href="profile.php">Settings</a></li>
                       </ul>
-                      
+
                     </li>
-                    
+
                   </ul>
                   <a href="checkout.php" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
 
@@ -66,6 +66,8 @@
             </nav>
           </div>
         </div>
+
+
 
     </header>
 	<!-- content -->
