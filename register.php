@@ -33,7 +33,7 @@
     $dbhost = "localhost";
     $dbuser = "root";
     $dbpass = "";
-    $dbname = "Benedict_Wong";
+    $dbname = "benedict_wong";
     $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
     if($connect){
     }
@@ -52,13 +52,15 @@
       if(!empty($checkUsernameResult)){
         $error = "<p>Error: E-mail is already registered in the system!</p>";
       }
-      else{
-        $encryptUsername = hash('md5',$username);
-      }
 
-     if($password == $confirmpassword && $encryptUsername){
-      $encryptedPassword = hash('md5', $password)
-      $insertUsernamePassword = "INSERT INTO customer(email, password) values ('.$encryptUsername.','.$password.')";
+     if($password == $confirmpassword ){
+      $encryptedPassword = hash('md5', $password);
+      $encryptedUsername = hash('md5',$username);
+      // $insertUsernamePassword = "INSERT INTO customer(email, password) values ()";
+
+      $insertUsernamePassword = "INSERT INTO customer(email, password) VALUES ('.$encryptedUsername.', '.$encryptedPassword.')";
+
+
       if(mysqli_query($connect,$insertUsernamePassword)){
            header("Location: indexMembers.php");
            mysqli_close($connect);

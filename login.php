@@ -25,7 +25,7 @@
     $dbhost = "localhost";
     $dbuser = "root";
     $dbpass = "";
-    $dbname = "Benedict_Wong";
+    $dbname = "benedict_wong";
     $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
     if($connect){
     }
