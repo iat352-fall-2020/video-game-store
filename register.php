@@ -47,17 +47,21 @@
      $password = $_POST['password'];
      $confirmpassword = $_POST['confirmPassword'];
 
-     $checkUsername = "SELECT email FROM customer WHERE email="$username"";
+     $checkUsername = "SELECT email FROM customer WHERE email='.md5($username).'";
      $checkUsernameResult = mysqli_query($connect, $checkUsername);
-    if(!empty($checkUsernameResult)){
-      $error = "<p>Error: E-mail is already registered in the system!</p>";
-    }
+      if(!empty($checkUsernameResult)){
+        $error = "<p>Error: E-mail is already registered in the system!</p>";
+      }
+      else{
+        $encryptUsername = hash('md5',$username);
+      }
 
-     if($password == $confirmpassword){
-      $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
-      $insertUsernamePassword = "INSERT INTO customer(email, password) values ('$username','$password')";
-      if(mysqli_query($connect,$insertUser)){
+     if($password == $confirmpassword && $encryptUsername){
+      $encryptedPassword = hash('md5', $password)
+      $insertUsernamePassword = "INSERT INTO customer(email, password) values ('.$encryptUsername.','.$password.')";
+      if(mysqli_query($connect,$insertUsernamePassword)){
            header("Location: indexMembers.php");
+           mysqli_close($connect);
         }
       else{
         die("insertion failed");
@@ -69,6 +73,7 @@
       $error =  '<p>Your Password does not match!</p>';
 
     }
+
 
      // INSERT INTO userData(username, password) VALUES ($username, $encryptedPassword)
 

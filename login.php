@@ -21,31 +21,44 @@
   </head>
   <body>
     <?php
+
+    $dbhost = "localhost";
+    $dbuser = "root";
+    $dbpass = "";
+    $dbname = "Benedict_Wong";
+    $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    if($connect){
+    }
+    else{
+      die("exit");
+    }
     // checks if submit button is pressed and parses inputs
 
 
 
 
     // check if text file exists before allowing login
-    if(file_exists("details.txt")){
     // checks if submit button is pressed and parses inputs
-      if(isset($_POST['submit_btn2'])) {
-       $username = $_POST['username'];
-       $password = $_POST['passcode'];
+    if(isset($_POST['submit_btn2'])) {
+     $username = $_POST['username'];
+     $password = $_POST['passcode'];
 
-       $openTextFile = file_get_contents("details.txt");
 
-       $accountArray = explode("\n", $openTextFile);
+     // $openTextFile = file_get_contents("details.txt");
+     //
+     // $accountArray = explode("\n", $openTextFile);
 
-       // check if username and password match the ones in the textfile (hashed password)
-       if($username == $accountArray[0] && password_verify($password, $accountArray[1] )){
-         header("Location: indexMembers.php");
-       }
-       else{
-         $loginfailure =  '<p>Login Failed!</p>';
-       }
-    }
-    }
+     $matchCustomer = "SELECT email, password FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."'";
+     $queryMatchCustomer = mysqli_query($connect, $matchCustomer);
+
+     // check if username and password match the ones in the textfile (hashed password)
+     if($queryMatchCustomer)){
+       header("Location: indexMembers.php");
+     }
+     else{
+       $loginfailure =  '<p>Login Failed!</p>';
+     }
+   }
 
 
     ?>
@@ -72,9 +85,9 @@
                         <li class="dropdownitem"><a href="profile.php">Profile</a></li>
                         <li class="dropdownitem"><a href="profile.php">Settings</a></li>
                       </ul>
-                      
+
                     </li>
-                    
+
                   </ul>
                   <a href="checkout.php" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
 
