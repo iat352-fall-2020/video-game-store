@@ -48,16 +48,32 @@
      //
      // $accountArray = explode("\n", $openTextFile);
 
-     $matchCustomer = "SELECT email, password FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."'";
-     $queryMatchCustomer = mysqli_query($connect, $matchCustomer);
+     // $matchCustomer = "SELECT customerID FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."'";
+     // $queryMatchCustomer = mysqli_query($connect, $matchCustomer);
+     //
+     // // check if username and password match the ones in the textfile (hashed password)
+     // if(mysqli_num_rows($queryMatchCustomer) > 0){
+     //   header("Location: register.php");
+     // }
+     // else{
+     //   // $loginfailure =  '<p>'.mysqli_num_rows($queryMatchCustomer).'</p>';
+     //   $loginfailure =  '<p>'.$matchCustomer.'</p>';
+     //   // $loginfailure =  '<p>Login Failed!</p>';
+     // }
+     $checkLogin = "SELECT email, password FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."' ";
+     $checkResult = mysqli_query($connect, $checkLogin);
 
-     // check if username and password match the ones in the textfile (hashed password)
-     if($queryMatchCustomer)){
+     if(mysqli_num_rows($checkResult) > 0){
        header("Location: indexMembers.php");
      }
      else{
        $loginfailure =  '<p>Login Failed!</p>';
      }
+
+
+
+
+
    }
 
 

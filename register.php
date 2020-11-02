@@ -58,7 +58,7 @@
       $encryptedUsername = hash('md5',$username);
       // $insertUsernamePassword = "INSERT INTO customer(email, password) values ()";
 
-      $insertUsernamePassword = "INSERT INTO customer(email, password) VALUES ('.$encryptedUsername.', '.$encryptedPassword.')";
+      $insertUsernamePassword = "INSERT INTO customer(email, password) VALUES ('$encryptedUsername', '$encryptedPassword')";
 
 
       if(mysqli_query($connect,$insertUsernamePassword)){
