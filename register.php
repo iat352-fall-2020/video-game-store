@@ -43,38 +43,58 @@
 
     // checks if submit button is pressed and parses inputs
     if(isset($_POST['submit_btn'])) {
-     $username = $_POST['username'];
-     $password = $_POST['password'];
-     $confirmpassword = $_POST['confirmPassword'];
-
-     $checkUsername = "SELECT email FROM customer WHERE email='.md5($username).'";
-     $checkUsernameResult = mysqli_query($connect, $checkUsername);
-      if(!empty($checkUsernameResult)){
-        $error = "<p>Error: E-mail is already registered in the system!</p>";
-      }
-
-     if($password == $confirmpassword ){
-      $encryptedPassword = hash('md5', $password);
-      $encryptedUsername = hash('md5',$username);
-      // $insertUsernamePassword = "INSERT INTO customer(email, password) values ()";
-
-      $insertUsernamePassword = "INSERT INTO customer(email, password) VALUES ('$encryptedUsername', '$encryptedPassword')";
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+      $confirmpassword = $_POST['confirmPassword'];
 
 
-      if(mysqli_query($connect,$insertUsernamePassword)){
-           header("Location: indexMembers.php");
-           mysqli_close($connect);
+      // first check if username is filled in
+      if(isset($username )&& $username != ""){
+        // Next, check if password is filled in
+        if(isset($password)&& $password != ""){
+          // Next, check if password and confirm password is an exact match
+          if($password === $confirmpassword){
+
+            // After all preliminary checks have validated, check if the username exists in the database.
+            // For this, we will need to check the md5 value of the entered username against the encrypted usernames in the database.
+            $encryptUsernameCheck = md5($username);
+            $checkUsername = "SELECT email FROM customer WHERE email='$encryptUsernameCheck'";
+            $checkUsernameResult = mysqli_query($connect, $checkUsername);
+
+            // Next, check the number of rows that have been outputted by the query using mysqli_num_rows()
+            if(mysqli_num_rows($checkUsernameResult) != null){
+              $error = "E-mail is already registered in the system!";
+            }
+            // If there are no rows returned from the query, proceed with the sign up.
+            else{
+              $encryptedPassword = hash('md5', $password);
+              $encryptedUsername = hash('md5',$username);
+              // $insertUsernamePassword = "INSERT INTO customer(email, password) values ()";
+
+              $insertUsernamePassword = "INSERT INTO customer(email, password) VALUES ('$encryptedUsername', '$encryptedPassword')";
+
+
+              if(mysqli_query($connect,$insertUsernamePassword)){
+                   header("Location: indexMembers.php");
+                   mysqli_close($connect);
+                }
+              else{
+                die("insertion failed");
+              }
+            }
+          }
+          else{
+            $error =  'The passwords entered does not match!';
+          }
         }
-      else{
-        die("insertion failed");
+        else{
+          $error="Password field is blank";
+        }
       }
-
-    }
-
-    else{
-      $error =  '<p>Your Password does not match!</p>';
-
-    }
+      else{
+        $error="E-mail field is blank";
+      }
+  }
 
 
      // INSERT INTO userData(username, password) VALUES ($username, $encryptedPassword)
@@ -83,8 +103,6 @@
 
 
        //$text = $username . ":" . $password;
-
-     }
      ?>
 
 
@@ -106,7 +124,7 @@
               <div class="nav-main-item">
                 <section class="profile-cart">
                   <a href="profile.php"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                  <a href="" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                  <a href=""><img src="img/cart_icon.png" alt="cart-icon"></a>
                 </section>
               </div>
 
@@ -180,16 +198,11 @@
         </div>
       </form>
 
-
-
       <?php
-      // if register is sucessful and if registersuccess var is not empty print username and password saved.
-      // this code here bypasses the issue where echo is hidden in header of page
 
         if(!empty($error)){
-          echo($error);
+          echo '<p>'.$error.'</p>';
         }
-        // if login is unsucessful and if loginfailure var is not empty print login failure
 
       ?>
 
@@ -203,8 +216,11 @@
 
 
 
+
       </section>
+
       <section>
+
         <p>If you already have an account, <a href="login.php">Login Now! </a></p>
       </section>
 
