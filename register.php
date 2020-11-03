@@ -46,6 +46,8 @@
       $username = $_POST['username'];
       $password = $_POST['password'];
       $confirmpassword = $_POST['confirmPassword'];
+      $DOB = $_POST['birthDate'];
+      $gender= $_POST['gender'];
 
 
       // first check if username is filled in
@@ -71,7 +73,7 @@
               $encryptedUsername = hash('md5',$username);
               // $insertUsernamePassword = "INSERT INTO customer(email, password) values ()";
 
-              $insertUsernamePassword = "INSERT INTO customer(email, password) VALUES ('$encryptedUsername', '$encryptedPassword')";
+              $insertUsernamePassword = "INSERT INTO customer(gender, email, password, birthDate) VALUES ('$gender','$encryptedUsername', '$encryptedPassword', '$DOB')";
 
 
               if(mysqli_query($connect,$insertUsernamePassword)){
@@ -184,12 +186,22 @@
                 <input type="password" id="register-password" name = "confirmPassword">
               </fieldset>
             </li>
-            <!-- <li>
+            <li>
               <fieldset>
-                <legend>Set your date of birth: </legend>
-              <input type = 'date' id='startDate' name = 'startDate' min='1920-01-01' max='2003-01-01'>
+                <legend>Enter your date of birth: </legend>
+              <input type = 'date' id='startDate' name = 'birthDate' min='1920-01-01' max='2003-01-01'>
             </fieldset>
-            </li> -->
+            </li>
+            <li>
+              <fieldset>
+                <legend>Enter your Gender</legend>
+                <select name="gender" id="gender">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+            </fieldset>
+            </li>
 
           </ul>
 
