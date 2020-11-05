@@ -17,6 +17,36 @@
   </head>
   <body>
 
+  <?php //checks authentication and directs user to appropriate index page
+  session_start();
+   $dbhost = "localhost";
+   $dbuser = "root";
+   $dbpass = "";
+   $dbname = "benedict_wong";
+   $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+   if($connect){
+   }
+   else{
+     die("exit");
+   }
+
+   
+  //  $_SESSION['valid_user']=NULL;
+
+  //  $checkLogin = "SELECT email, password FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."' "; 
+  //  $checkResult = mysqli_query($connect, $checkLogin);
+
+  //  $count = mysqli_num_rows($result);
+
+  //  if($count>0)
+  //  {
+      // $_SESSION['valid_user'] = "Bert"; //this is purely for debugging - comment out if you want to test the login feature
+  //  }
+
+  // echo 'valid_user: '.$_SESSION['valid_user']; //debug and grab the valid_user variable
+
+  ?>
+
     <header id="header">
         <!-- logo? -->
         <div class="header-menu ">
@@ -33,16 +63,31 @@
             <nav class="nav-row-1">
               <div class="nav-main-item">
                 <section class="profile-cart">
-                  <ul class="button-menu">
-                    <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                      <ul class="dropdownmain">
-                        <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                        <li class="dropdownitem"><a href="profile.php">Settings</a></li>
-                      </ul>
+                <?php
+                  if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
+                  {
+                    echo '<p>Hello  ' .$_SESSION['valid_user'] .'</p>';
+                    echo '<ul class="button-menu">
+                      <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                        <ul class="dropdownmain">
+                          <li class="dropdownitem"><a href="profile.php">Profile</a></li>
+                          <li class="dropdownitem"><a href="logout.php">Logout</a></li>
+                        </ul>
 
-                    </li>
+                      </li>
 
-                  </ul>
+                    </ul>';
+                  }
+                  else
+                  {
+                    echo '<ul>
+                    <li><p>You are not logged in.</p></li>
+                    <li><p><a href="login.php">Log In </a></p></li>
+                    <li><p><a href="register.php">Register</a></p></li>
+                    </ul>';
+                    echo '';
+                  }
+                ?>
                   <a href="checkout.php" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
 
                 </section>
@@ -58,11 +103,7 @@
           <div class="header-row-3">
             <nav class="nav-row-3">
               <a href="catalog.php" class="nav-main-item">Browse Store</a>
-              <!-- <a href="locations.php#" class="nav-main-item">Locations</a>  -->
               <a href="about.php" class="nav-main-item">About Us</a>
-              <!-- <a href="catalog.php" class="nav-main-item">Xbox</a>
-              <a href="catalog.php" class="nav-main-item">Nintendo</a>
-              <a href="catalog.php" class="nav-main-item">Deals</a> -->
             </nav>
           </div>
         </div>
@@ -74,8 +115,30 @@
 	<main class="main-content container container-home">
     <!-- <img src="img/banner.png" class="index-banner" alt="banner"> -->
 		<!-- club -->
-    <h3>New Releases</h3>
+
+    <!-- <h3 class="header-row-1">New Releases</h3> -->
+
+    
+      <?php
+        if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in
+        {
+          echo'<section class="content-item section-club">';
+          echo '<h3 class="main-content-header">Your Recommendations</h3>
+          <div class="header-row-1">';
+          echo '<div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Demon\'s Souls</p></a></div>';
+          echo '</div>';
+          echo'</section>';
+        }
+        else
+        {
+          // echo '<p>You are not logged in.</p>';
+        }
+      ?>
+    
+
 		<section class="content-item section-club">
+    <h3 class="main-content-header">New Releases</h3>
+    <div class="header-row-1">
       <!-- placeholder image from: https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png -->
       <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>PS5</p></a></div>
       <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="console"/><p>Xbox One Series S</p></a></div>
@@ -87,7 +150,7 @@
       <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Cyberpunk 2077</p></a></div>
       <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>NBA 2K21</p></a></div>
       <div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Assassin's Creed Valhalla</p></a></div>
-
+    </div>
 		</section>
 	</main>
 

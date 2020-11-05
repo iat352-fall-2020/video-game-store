@@ -712,6 +712,12 @@ transition-duration: 0.5s;
   flex-direction:column;
 }
 
+.profile-cart a
+{
+  text-decoration:underline;
+  color:blue;
+}
+
 
 
 

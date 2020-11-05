@@ -524,3 +524,10 @@ footer a:first-child{
 footer a:last-child{
   border-left: 0.1em solid white;
 }
+
+.main-content-header
+{
+  display:flex;
+  flex:100%;
+  flex-wrap:nowrap;
+}

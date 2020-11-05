@@ -16,7 +16,9 @@
     <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
   </head>
   <body>
-
+  <?php
+  session_start();
+  ?>
   <header id="header">
         <!-- logo? -->
         <div class="header-menu ">
@@ -33,18 +35,29 @@
             <nav class="nav-row-1">
               <div class="nav-main-item">
                 <section class="profile-cart">
-                  <ul class="button-menu">
-                    <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                      <ul class="dropdownmain">
-                        <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                        <li class="dropdownitem"><a href="profile.php">Settings</a></li>
-                      </ul>
-                      
-                    </li>
-                    
-                  </ul>
-                  <a href="checkout.php" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                <?php
+                  if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
+                  {
+                    echo '<p>Hello  ' .$_SESSION['valid_user'] .'</p>';
+                    echo '<ul class="button-menu">
+                      <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                        <ul class="dropdownmain">
+                          <li class="dropdownitem"><a href="profile.php">Profile</a></li>
+                          <li class="dropdownitem"><a href="profile.php">Settings</a></li>
+                          <li class="dropdownitem"><a href="logout.php">Logout</a></li>
+                        </ul>
 
+                      </li>
+
+                    </ul>';
+                  }
+                  else
+                  {
+                    echo '<p>You are not logged in.</p><p><a href="login.php">Log In </a></p><br><p><a href="register.php">Register</a></p>';
+                    echo '';
+                  }
+                ?>
+                  <a href="checkout.php" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
                 </section>
               </div>
 
