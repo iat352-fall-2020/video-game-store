@@ -1,5 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+        $dbhost = "localhost";
+        $dbuser = "root";
+        $dbpass = "";
+        $dbname = "benedict_wong";
+        $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+        if(isset($_GET['productID']))
+        $productID = $_GET['productID'];
+        else
+        {
+          header('Location: index.php');
+        }
+        $productName="";
+        $productDesc="";
+        $productPrice="";
+
+        $query = "SELECT * from product WHERE productID = $productID";
+
+        $addCartQuery = "";
+
+        $result = mysqli_query($connect, $query);
+
+        if(!$result){
+          echo "Failure: " . mysqli_error($connect);        
+          die("Database query failed.");  
+        }
+        else
+        {   
+          while($row = mysqli_fetch_assoc($result))
+            {
+              $productName = $row['productName'];
+              $productDesc = $row['productDesc'];
+              $productPrice = $row['price'];
+              $productFinalPrice = $row['finalPrice'];
+              $productConsole = $row['console'];
+              $productGenre = $row['genre'];
+              $productFeatures = $row['features'];
+              $productDiscount = $row['discount'];
+            }
+        }
+?>
+
+
+
+
   <head>
     <script src="js/linkTo.js"></script>
     <script src="js/headerScroll.js"></script>
@@ -11,12 +57,15 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/normalize.css">
 
-    <title>Manchester United 2019/2020 Home Kit</title>
+    <title><?php echo $productName;?></title>
     <script src="js/functions.js"></script>
 
   </head>
   <body>
-
+  
+  <?php
+  session_start();
+  ?>
   <header id="header">
         <!-- logo? -->
         <div class="header-menu ">
@@ -87,7 +136,7 @@
 
         <div class="product-img">
           <div class="image-file image-1">
-            <img class="image-preview" src="img/item_1_0.png" alt="image 1">
+            <img class="image-preview" src="img/item_1_0.png" alt="<?php echo $productName?>">
           </div>
 
 
@@ -99,20 +148,20 @@
         </div>
 
         <article class="product-info">
-          <h3>Cyberpunk 2077</h3>
-          <p class="price">$79.99</p>
-          <p>Cyberpunk 2077 is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality.</p>
+          <h3><?php echo $productName?></h3>
+          <?php echo $productGenre; echo ", " . $productFeatures;?>
+          <p class="price"><s><p>$<?php echo $productPrice?></s> $<?php echo $productFinalPrice?></p>
+          <p><?php echo $productDesc ?></p>
         <div>
-        <p>Console:</p>
-        <select>
-          <option value="PC">PC</option>
-          <option value="XBOX">Xbox</option>
-          <option value="PS4">PS4</option>
-        </select>
+        <p>Console: <?php echo $productConsole ?></p>
+        
         <p>Quantity:</p>
         <input type="number" name="quantity" min="1" max="99" value="1">
         <div class="add-to-cart-button">
-          <button type="button" onclick="pointTo('cart.html')">Add to Cart</button>
+          <button type="button" onclick="<?php 
+          //add cart item to shopping cart
+
+          ?>">Add to Cart</button>
         </div>
         </div>
         
@@ -124,40 +173,54 @@
 
         <fieldset class="product-review">
           <legend>Product Reviews</legend>
-          <div class="review-item">
-            <div class="review-top-info">
-              <p class="review-username">Ronaldinho1980</p>
-              <p class="review-date">June 16, 2019</p>
-            </div>
-            <div class="review-description">
-              <p>Great product, great design and build quality is top-notch. Highly recommend this product to all fans out there!</p>
-            </div>
-          </div>
 
-          <div class="review-item">
-            <div class="review-top-info">
-              <p class="review-username">Beckham1975</p>
-              <p class="review-date">June 10, 2019</p>
-            </div>
-            <div class="review-description">
-              <p>Great product, great design and build quality is top-notch. Highly recommend this product to all fans out there!</p>
-            </div>
-          </div>
-          <div class="review-item">
-            <div class="review-top-info">
-              <p class="review-username">CR7</p>
-              <p class="review-date">June 10, 2019</p>
-            </div>
-            <div class="review-description">
-              <p>Great product, great design and build quality is top-notch. Highly recommend this product to all fans out there!</p>
-            </div>
-          </div>
-          <div class="review-write">
+          <?php 
+
+            $reviewQuery = "SELECT customer.firstName, customer.lastName, review.comment, review.rating, review.reviewDate from review INNER JOIN customer ON customer.customerID = review.customerID WHERE productID = '$productID'";
+            $result = mysqli_query($connect, $reviewQuery);
+    
+            if(!$result){
+              echo "Failure: " . mysqli_error($connect);        
+              die("Database query failed.");  
+            }
+            else
+            {   
+              while($row = mysqli_fetch_assoc($result))
+                {
+                  echo '<div class="review-item">';
+                  echo '<div class="review-top-info">';
+                  echo '<p class="review-username">'. $row['firstName'] . ' ' .$row['lastName'].'</p>';
+                  echo '<p class="review-date">'. $row['reviewDate'] . '</p>';
+                  echo '</div>';
+                  echo '<div class="review-description">';
+                  echo '<p>'. $row['comment'] . '</p>';
+                  echo '</div>';
+                  echo '</div>';
+                }
+            }
+          
+          ?>
+
+
+
+          <?php
+
+          if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
+          {
+          echo'<div class="review-write">
             <textarea placeholder="Write a review..."></textarea>
               <form>
-                <button>Submit Review</button>
+                <button type="button" onclick="#">Submit Review</button>
               </form>
-          </div>
+          </div>';
+          }
+          else
+          {
+            echo'<div class="review-write">
+            <p>Please log-in in order to review and comment.</p>
+          </div>';
+          }
+          ?>
 
 
         </fieldset>

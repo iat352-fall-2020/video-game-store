@@ -40,7 +40,7 @@
 
   //  if($count>0)
   //  {
-      // $_SESSION['valid_user'] = "Bert"; //this is purely for debugging - comment out if you want to test the login feature
+       $_SESSION['valid_user'] = "Bert"; //this is purely for debugging - comment out if you want to test the login feature
   //  }
 
   // echo 'valid_user: '.$_SESSION['valid_user']; //debug and grab the valid_user variable

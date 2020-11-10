@@ -110,28 +110,28 @@
 
           <p>Features</p>
           <ul>
-            <li><input type="checkbox" name="feature" value="online" onclick="">Online Multiplayer</li>
-            <li><input type="checkbox" name="feature" value="splitscreen" onclick="">Split-screen</li>
-            <li><input type="checkbox" name="feature" value="story" onclick="">Story-based</li>
-            <li><input type="checkbox" name="feature" value="controller" onclick="">Controller Support</li>
-            <li><input type="checkbox" name="feature" value="crossplatform" onclick="">Cross-Platform</li>
+            <li><input type="checkbox" name="feature[]" value="Online Multiplayer" onclick="">Online Multiplayer</li>
+            <li><input type="checkbox" name="feature[]" value="Split-screen" onclick="">Split-screen</li>
+            <li><input type="checkbox" name="feature[]" value="Story-based" onclick="">Story-based</li>
+            <li><input type="checkbox" name="feature[]" value="Controller Support" onclick="">Controller Support</li>
+            <li><input type="checkbox" name="feature[]" value="Cross-Platform" onclick="">Cross-Platform</li>
           </li>
           </ul>
 
           <p>Genre</p>
           <ul>
-          <li><input type="checkbox" name="genre" value="sp" onclick="">Singleplayer</li>
-            <li><input type="checkbox" name="genre" value="mp" onclick="">Multiplayer</li>
-            <li><input type="checkbox" name="genre" value="Action" onclick="">Action</li>
-            <li><input type="checkbox" name="genre" value="Adventure" onclick="">Adventure</li>
-            <li><input type="checkbox" name="genre" value="Fighting" onclick="">Fighting</li>
-            <li><input type="checkbox" name="genre" value="Rhythm" onclick="">Rhythm</li>
-            <li><input type="checkbox" name="genre" value="Strategy" onclick="">Strategy</li>
-            <li><input type="checkbox" name="genre" value="Puzzle" onclick="">Puzzle</li>
-            <li><input type="checkbox" name="genre" value="Casual" onclick="">Casual</li>
-            <li><input type="checkbox" name="genre" value="RPG" onclick="">RPG</li>
-            <li><input type="checkbox" name="genre" value="Shooting" onclick="">Shooting</li>
-            <li><input type="checkbox" name="genre" value="Sports" onclick="">Sports</li>
+          <li><input type="checkbox" name="genre[]" value="Singleplayer" onclick="">Singleplayer</li>
+            <li><input type="checkbox" name="genre[]" value="Multiplayer" onclick="">Multiplayer</li>
+            <li><input type="checkbox" name="genre[]" value="Action" onclick="">Action</li>
+            <li><input type="checkbox" name="genre[]" value="Adventure" onclick="">Adventure</li>
+            <li><input type="checkbox" name="genre[]" value="Fighting" onclick="">Fighting</li>
+            <li><input type="checkbox" name="genre[]" value="Rhythm" onclick="">Rhythm</li>
+            <li><input type="checkbox" name="genre[]" value="Strategy" onclick="">Strategy</li>
+            <li><input type="checkbox" name="genre[]" value="Puzzle" onclick="">Puzzle</li>
+            <li><input type="checkbox" name="genre[]" value="Casual" onclick="">Casual</li>
+            <li><input type="checkbox" name="genre[]" value="RPG" onclick="">RPG</li>
+            <li><input type="checkbox" name="genre[]" value="Shooting" onclick="">Shooting</li>
+            <li><input type="checkbox" name="genre[]" value="Sports" onclick="">Sports</li>
           </ul>
 
           <p>Release Date</p>
@@ -141,11 +141,11 @@
 
           <p>Platform</p>
           <ul>
-          <li><input type="checkbox" name="platform" value="PC">PC</li>
-          <li><input type="checkbox" name="platform" value="PS4">PS4</li>
-          <li><input type="checkbox" name="platform" value="Xbox">Xbox</li>
-          <li><input type="checkbox" name="platform" value="Switch">Nintendo Switch</li>
-          <li><input type="checkbox" name="platform" value="PS5">PS5</li>
+          <li><input type="checkbox" name="platform[]" value="PC">PC</li>
+          <li><input type="checkbox" name="platform[]" value="PS4">PS4</li>
+          <li><input type="checkbox" name="platform[]" value="Xbox">Xbox</li>
+          <li><input type="checkbox" name="platform[]" value="Nintendo Switch">Nintendo Switch</li>
+          <li><input type="checkbox" name="platform[]" value="PS5">PS5</li>
           </ul>
 
           <p>Special Deals</p>
@@ -155,9 +155,9 @@
 
           <p>Price</p>
           <ul>
-          <li><input type="checkbox" name="sort" value="5" onclick="">Less than $5</li>
-          <li><input type="checkbox" name="sort" value="10" onclick="">Less than $10</li>
-          <li><input type="checkbox" name="sort" value="20" onclick="">Less than $20</li>
+          <li><input type="radio" name="price" value="5" onclick="">Less than $5</li>
+          <li><input type="radio" name="price" value="10" onclick="">Less than $10</li>
+          <li><input type="radio" name="price" value="20" onclick="">Less than $20</li>
           </ul>
 
           <input type="submit" name="search" value="Search">
@@ -182,7 +182,29 @@
         $dbname = "benedict_wong";
         $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
+
+        //pagination settings
+        if(isset($_GET['pageno']))
+        {
+          $pageno = $_GET['pageno'];
+        }
+        else
+        {
+          $pageno = 1;
+        }
+        $recordsPerPage = 10; //results per page
+        $offset = ($pageno-1) * $recordsPerPage;
+
         $itemsPerRow = 5;
+
+        unset($genreQuery);
+        $titleQuery ="";
+        $featureQuery ="";
+        $platformQuery ="";
+        $dateQuery ="";
+        $saleQuery ="";
+        $priceQuery ="";
+        unset($filters);
 
         if($connect){
         }
@@ -190,19 +212,68 @@
           die("exit");
         }
 
-        $query = "SELECT productName, price, discount,genre,rating,finalPrice FROM product ";
-        
-        if(isset($_POST['title']) && $_POST['title'] != "")
-        {
-        $query .= "WHERE ";
-        }
+        $query = "SELECT productID,productName, price, discount,genre,rating,finalPrice,genre,console,releaseDate,features FROM product ";
 
         //query building
         if(isset($_POST['title']) && $_POST['title'] != "") //game title check
         {
-          echo 'Title: ' .$_POST['title'];
-          $query .= "productName LIKE '%" .$_POST['title'] . "%'";
+          // echo 'Title: ' .$_POST['title'];
+          $titleQuery .= "productName LIKE '%" .$_POST['title'] . "%' ";
+          // $query .= "productName LIKE '%" .$_POST['title'] . "%' ";
+          $filters[] = $titleQuery;
         }
+
+        if(!empty($_POST['feature']))
+        {
+          foreach($_POST['feature'] as $check)
+          {
+            echo $check;
+            $featureQuery = "features IN (" . "'". implode("','",$_POST['feature']) . "'". ")";
+          }
+          $filters[] = $featureQuery;
+        }
+
+        if(!empty($_POST['genre']))
+        {
+          foreach($_POST['genre'] as $check)
+          {
+            $genreQuery = "genre IN (" . "'". implode("','",$_POST['genre']) . "'". ")";
+          }
+          $filters[] = $genreQuery;
+        }
+
+        if(!empty($_POST['releaseDate']))
+        {
+          $filters[] = "releaseDate = '". $_POST['releaseDate']."'";
+        }
+
+        if(!empty($_POST['platform']))
+        {
+          foreach($_POST['platform'] as $check)
+          {
+            $platformQuery = "console IN (" . "'". implode("','",$_POST['platform']) . "'". ")";
+          }
+          $filters[] = $platformQuery;
+        }
+
+        if(!empty($_POST['special']))
+        {
+          $saleQuery = " discount > 0 ";
+          $filters[] = $saleQuery;
+        }
+
+        if(!empty($_POST['price']))
+        {
+          $priceQuery = " finalPrice <= '" . $_POST['price'] . "'";
+          $filters[] = $priceQuery;
+        }
+
+        if(!empty($filters))
+        {
+        $query .= " WHERE " . implode(' AND ',$filters);
+        }
+
+
 
         // orders it in newest release date order by default
         $query .= " ORDER BY ";
@@ -219,6 +290,7 @@
         //debugging for the entire finished query
         echo '<p>Query: '.$query.'</p>';
 
+
         $result = mysqli_query($connect, $query);
 
 
@@ -230,15 +302,31 @@
         {   
           $num = mysqli_num_rows($result); //total count of results
           $resultindex = 1; //current index of results
+
+
           echo'<tr>';
             while($row = mysqli_fetch_assoc($result))
             {
               echo'<td>';
-              echo '<div class="item " id= "MU1920"><a href="detailedproduct.php"><img src="" alt="';
+              echo '<div class="item " id= "MU1920"><a href="detailedproduct.php?productID=';
+              echo $row['productID'];
+              echo '"><img src="img/default-placeholder-image.png" alt="';
               echo $row['productName'];
               echo'"/><p class="item_name">';
               echo $row['productName'];
-              echo '</p><p>';
+              echo '</p>';
+              echo '<p>';
+              echo $row['console'];
+              echo '</p>';
+              echo '<p>';
+              echo $row['genre'];
+              echo ' ';
+              echo $row['features'];
+              echo '</p>';
+              echo '<p> Released on: ';
+              echo $row['releaseDate'];
+              echo '</p>';
+              echo '<p>';
               if($row['discount']>0)
               {
                 echo'<strike>$'. $row['price'] . '</strike>';
@@ -247,17 +335,22 @@
               echo '<p class="price">$';
               echo $row['finalPrice'];
               echo'</p></a>';
-              echo'<noscript><a href="detailedproduct.php" class="noscript-a">More info</a></noscript>
-              </div>';
+              // echo'<noscript><a href="detailedproduct.php';
+              // echo '" class="noscript-a">More info</a></noscript></div>';
               echo'</td>';  
               if($resultindex % $itemsPerRow == 0)
               {
                 echo'</tr>';
               }
               $resultindex++;
-            }              
+            }  
         }
+
+        
+
+
       ?>
+
       </table>
 
 
