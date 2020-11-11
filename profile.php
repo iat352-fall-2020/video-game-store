@@ -98,29 +98,72 @@
 
       <div class="change-password">
         <h4>Change Password:</h4>
+        <form action="" method="POST">
         <ul>
           <li>
             <fieldset>
               <legend>Current Password: </legend>
-              <input type="password" id="curr-pass">
+              <input type="password" id="curr-pass" name="oldPassword">
               <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
             </fieldset>
           </li>
           <li>
             <fieldset>
               <legend>New Password: </legend>
-              <input type="password" id="new-pass" >
+              <input type="password" id="new-pass" name="newPassword" >
               <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
             </fieldset>
           </li><li>
             <fieldset>
               <legend>Retype Password: </legend>
-              <input type="password" id="retype-pass">
+              <input type="password" id="retype-pass" name="retypePassword">
               <img src="img/eye-icon.png" onclick="eye(3)" alt="show/hide retype-password"/>
             </fieldset>
           </li>
 
       </ul>
+      <input type = "submit" name="submit_btn3" id = "submit" value = "Submit"/>
+    </form>
+
+      <?php
+      if(isset($_POST['submit_btn3'])){
+        $oldPassword = $_POST['currentPassword'];
+        $newPassword = $_POST['newPassword'];
+        $newPasswordRetype = $_POST['retypePassword'];
+
+        // check the email from session
+        $checkOldPasswordQuery = "SELECT * FROM customer where email= '".md5()."' AND password = '".md5($oldPassword)."'";
+        $checkOldPasswordQueryResult = mysqli_query($connect, $checkOldPasswordQuery);
+        // if there is a match for email and password pair, continue
+        if(mysqli_num_rows($checkOldPasswordQueryResult) > 0){
+          // check if new password matches the retyped new password
+          if($newPassword === $newPasswordRetype){
+            $newPasswordReplaceQuery = "UPDATE customer SET password ='".md5($newpassword)."' WHERE email='".md5($sessionValue)."'";
+            $NewPasswordReplaceResult = mysqli_query($connect,$newPasswordReplaceQuery);
+            if($NewPasswordReplaceResult){
+              echo "<p>Your password has been successfully changed</p>"
+            }
+            else{
+              echo "<p>Internal Server Error</p>";
+            }
+          }
+          else{
+            echo '<p>Your passwords (new and retyped) do not match!</p>';
+          }
+        }
+        // otherwise exit
+        else{
+          echo '<p>Your current password is incorrect!</p>';
+        }
+      }
+
+
+
+
+      ?>
+
+
+
       <div class="clear-float">
         <p class="passwordUpdate">Your password has been changed!</p>
         <button onclick="updatePrefs(1)">Save Changes</button>
