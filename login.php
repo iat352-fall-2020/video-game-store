@@ -193,7 +193,7 @@
   ?>
   </section>
 
-  <section>
+  <section class="registerOrLoginLink">
 
     <p>Don't have an account yet? <a href="register.php">Sign up now!</a></p>
 

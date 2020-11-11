@@ -36,7 +36,7 @@
 }
 
 .nav-row-1 {
-  flex:20%;
+  flex:30%;
   margin-left: auto;
   margin-right: 1.5em;
 
@@ -48,7 +48,7 @@
   padding-right: 0.5em;
   width: 100%;
   height: auto;
-  text-align: right;
+
 }
 
 .profile-cart{
@@ -56,6 +56,20 @@
   flex-flow: row nowrap;
   justify-content: flex-end;
 }
+.profile-cart p{
+  text-align: left;
+  padding-right: 1em;
+  padding-top: 1em;
+}
+.profile-cart p a{
+  color:white;
+}
+
+.profile-cart p a:hover, a:active {
+  color:teal;
+  text-decoration: underline;
+}
+
 
 
 .header-row-2{
@@ -156,6 +170,14 @@
   align-self: center;
   height: 20rem;
 
+}
+.registerOrLoginLink a{
+  text-decoration: underline;
+}
+
+.registerOrLoginLink a:hover, a:active{
+  text-decoration: underline;
+  color:teal;
 }
 
 .container-home {

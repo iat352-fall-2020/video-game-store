@@ -22,7 +22,7 @@
   <?php
   session_start();
   ?>
-  
+
 
 <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
 
@@ -90,11 +90,11 @@
 	<main class="main-content container">
 		<!-- search and filter -->
 
-    
+
     <div class="content-item catalog-filter">
       <div class="sort-style">
         <!-- <p>Search</p> -->
-      
+
         <form action="catalog.php" method="POST">
           <ul>
           <input type="text" name="title" placeholder="Game Title" value="<?php echo isset($_POST["title"]) ? $_POST["title"] : ''; ?>">
@@ -212,7 +212,7 @@
           die("exit");
         }
 
-        $query = "SELECT productID,productName, price, discount,genre,rating,finalPrice,genre,console,releaseDate,features FROM product ";
+        $query = "SELECT productID,productName, price, deals,genre,rating,finalPrice,genre,console,releaseDate,features FROM product ";
 
         //query building
         if(isset($_POST['title']) && $_POST['title'] != "") //game title check
@@ -295,11 +295,11 @@
 
 
         if(!$result){
-          echo "Failure: " . mysqli_error($connect);        
-          die("Database query failed.");  
+          echo "Failure: " . mysqli_error($connect);
+          die("Database query failed.");
         }
         else
-        {   
+        {
           $num = mysqli_num_rows($result); //total count of results
           $resultindex = 1; //current index of results
 
@@ -337,16 +337,16 @@
               echo'</p></a>';
               // echo'<noscript><a href="detailedproduct.php';
               // echo '" class="noscript-a">More info</a></noscript></div>';
-              echo'</td>';  
+              echo'</td>';
               if($resultindex % $itemsPerRow == 0)
               {
                 echo'</tr>';
               }
               $resultindex++;
-            }  
+            }
         }
 
-        
+
 
 
       ?>

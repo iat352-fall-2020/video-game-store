@@ -252,7 +252,7 @@
 
       </section>
 
-      <section>
+      <section class="registerOrLoginLink">
 
         <p>If you already have an account, <a href="login.php">Login Now! </a></p>
       </section>

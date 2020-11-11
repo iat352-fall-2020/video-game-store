@@ -88,21 +88,11 @@
 
       <section class="about-contact">
         <!-- contact us -->
-        <h4 id="contact">Contact Us</h4>
-        <ul>
-          <li>E-mail: contact-mail@footyfans.com</li>
-          <li>Phone1: (626)243-7837</li>
 
-        </ul>
       </section>
       <!-- store addresses -->
       <section class="about-addresses">
-        <h4 id="addresses">Store Address: </h4>
-        <address>
-          <span>303 Browning Lane</span>
-          <span>Horseheads New York NY</span>
-          <span>14845</span>
-        </address>
+
       </section>
 
       <!-- FAQ -->
