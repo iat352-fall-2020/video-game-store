@@ -18,6 +18,17 @@
   <body>
     <?php
     session_start();
+
+    $dbhost = "localhost";
+    $dbuser = "root";
+    $dbpass = "";
+    $dbname = "benedict_wong";
+    $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    if($connect){
+    }
+    else{
+      die("exit");
+    }
     ?>
 
   <header id="header">
