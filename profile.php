@@ -50,12 +50,11 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user'] .'</p>';
+                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
                     echo '<ul class="button-menu">
                       <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
                         <ul class="dropdownmain">
                           <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          <li class="dropdownitem"><a href="profile.php">Settings</a></li>
                           <li class="dropdownitem"><a href="logout.php">Logout</a></li>
                         </ul>
 
@@ -114,20 +113,20 @@
           <li>
             <fieldset>
               <legend>Current Password: </legend>
-              <input type="password" id="curr-pass" name="oldPassword">
+              <input type="password" id="oldPassword" name="oldPassword">
               <img src="img/eye-icon.png" onclick="eye(1)" alt="show/hide curr-password"/>
             </fieldset>
           </li>
           <li>
             <fieldset>
               <legend>New Password: </legend>
-              <input type="password" id="new-pass" name="newPassword" >
+              <input type="password" id="newPassword" name="newPassword" >
               <img src="img/eye-icon.png" onclick="eye(2)" alt="show/hide new-password"/>
             </fieldset>
           </li><li>
             <fieldset>
               <legend>Retype Password: </legend>
-              <input type="password" id="retype-pass" name="retypePassword">
+              <input type="password" id="retypePassword" name="retypePassword">
               <img src="img/eye-icon.png" onclick="eye(3)" alt="show/hide retype-password"/>
             </fieldset>
           </li>
@@ -138,21 +137,22 @@
 
       <?php
       if(isset($_POST['submit_btn3'])){
-        $oldPassword = $_POST['currentPassword'];
+        $oldPassword = $_POST['oldPassword'];
         $newPassword = $_POST['newPassword'];
         $newPasswordRetype = $_POST['retypePassword'];
+        $currentEmail = $_SESSION['valid_user'];
 
         // check the email from session
-        $checkOldPasswordQuery = "SELECT * FROM customer where email= '".md5()."' AND password = '".md5($oldPassword)."'";
+        $checkOldPasswordQuery = "SELECT * FROM customer where email= '$currentEmail' AND password = '".md5($oldPassword)."'";
         $checkOldPasswordQueryResult = mysqli_query($connect, $checkOldPasswordQuery);
         // if there is a match for email and password pair, continue
         if(mysqli_num_rows($checkOldPasswordQueryResult) > 0){
           // check if new password matches the retyped new password
           if($newPassword === $newPasswordRetype){
-            $newPasswordReplaceQuery = "UPDATE customer SET password ='".md5($newpassword)."' WHERE email='".md5($sessionValue)."'";
+            $newPasswordReplaceQuery = "UPDATE customer SET password ='".md5($newPassword)."' WHERE email='$currentEmail'";
             $NewPasswordReplaceResult = mysqli_query($connect,$newPasswordReplaceQuery);
             if($NewPasswordReplaceResult){
-              echo "<p>Your password has been successfully changed</p>"
+              echo "<p>Your password has been successfully changed</p>";
             }
             else{
               echo "<p>Internal Server Error</p>";
@@ -175,10 +175,10 @@
 
 
 
-      <div class="clear-float">
+      <!-- <div class="clear-float">
         <p class="passwordUpdate">Your password has been changed!</p>
         <button onclick="updatePrefs(1)">Save Changes</button>
-      </div>
+      </div> -->
 
       </div>
 
@@ -186,19 +186,19 @@
 
 		<!-- notification -->
 		<section class="content-item profile-notification">
-      <h3>Notifications</h3>
+      <!-- <h3>Notifications</h3>
         <ul>
           <li><input type="checkbox" name="newsletter" value="sub-newsletter" checked> Subscribe to our newsletter.</li>
           <li><input type="checkbox" name="admin-email" value="admin-email" checked> Receive e-mails from admins.</li>
           <li><input type="checkbox" name="profile-pub" value="profile-public"> Allow other users to see my profile.</li>
           <li><p class="updateMessage">Your notification preferences have been updated!</p></li>
           <li><button onclick="updatePrefs(2)">Update</button></li>
-        </ul>
+        </ul> -->
 		</section>
 
 		<!-- billing information -->
 		<div class="content-item profile-billing">
-      <h3>Billing info</h3>
+      <!-- <h3>Billing info</h3>
       <section class="address-radio">
         <div>
           <input type="radio" name="address" checked>
@@ -223,9 +223,9 @@
           <span>Stretford Manchester</span>
           <span>M16 0RA United Kingdom</span>
         </address>
-      </div>
+      </div> -->
 
-    </section>
+    <!-- </section> -->
 		</div>
 	</div>
 </div>

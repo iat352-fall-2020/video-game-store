@@ -30,18 +30,29 @@
      die("exit");
    }
 
-   
-  //  $_SESSION['valid_user']=NULL;
-
-  //  $checkLogin = "SELECT email, password FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."' "; 
+  //  $checkLogin = "SELECT email, password, firstName FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."' "; 
   //  $checkResult = mysqli_query($connect, $checkLogin);
 
   //  $count = mysqli_num_rows($result);
 
-  //  if($count>0)
+  //  if($row = mysqli_fetch_assoc($result))
+  //  if(isset($_SESSION['valid_user'])  && $_SESSION['valid_user'] !== "")
   //  {
-       $_SESSION['valid_user'] = "Bert"; //this is purely for debugging - comment out if you want to test the login feature
+  //   // $_SESSION['valid_user'] = $row['firstName'];
+  //   // echo "Hello " . $_SESSION['valid_user'];
   //  }
+
+  //  if(isset($_SESSION['valid_user_name']))
+  //  {
+  //   //  echo "Hello " . $_SESSION['valid_user_name'];
+  //  }
+  //  else
+  //  {
+  //    echo "Nada";
+  //  }
+     
+    //  $_SESSION['valid_user'] = $count['firstName'];
+      //  $_SESSION['valid_user'] = "Bert"; //this is purely for debugging - comment out if you want to test the login feature
 
   // echo 'valid_user: '.$_SESSION['valid_user']; //debug and grab the valid_user variable
 
@@ -66,7 +77,7 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user'] .'</p>';
+                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
                     echo '<ul class="button-menu">
                       <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
                         <ul class="dropdownmain">
@@ -80,11 +91,7 @@
                   }
                   else
                   {
-                    echo '<ul>
-                    <li><p>You are not logged in.</p></li>
-                    <li><p><a href="login.php">Log In </a></p></li>
-                    <li><p><a href="register.php">Register</a></p></li>
-                    </ul>';
+                    echo '<p>You are not logged in.</p><p><a href="login.php">Log In </a></p><br><p><a href="register.php">Register</a></p>';
                     echo '';
                   }
                 ?>

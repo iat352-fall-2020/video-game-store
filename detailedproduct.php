@@ -16,10 +16,13 @@
         $productName="";
         $productDesc="";
         $productPrice="";
+        $productAvgRating;
 
         $query = "SELECT * from product WHERE productID = $productID";
+        $queryAvgReviews = "SELECT product.productID, format(AVG(review.rating),1) as AverageRating FROM product  INNER JOIN review ON review.productID = product.productID WHERE product.productID = $productID   GROUP BY review.productID";
 
         $addCartQuery = "";
+        $addReviewQuery = "";
 
         $result = mysqli_query($connect, $query);
 
@@ -39,6 +42,20 @@
               $productGenre = $row['genre'];
               $productFeatures = $row['features'];
               $productDiscount = $row['discount'];
+            }
+        }
+
+        $result = mysqli_query($connect, $queryAvgReviews);
+
+        if(!$result){
+          echo "Failure: " . mysqli_error($connect);        
+          die("Database query failed.");  
+        }
+        else
+        {   
+          while($row = mysqli_fetch_assoc($result))
+            {
+              $productAvgRating=$row['AverageRating'];
             }
         }
 ?>
@@ -85,12 +102,11 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user'] .'</p>';
+                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
                     echo '<ul class="button-menu">
                       <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
                         <ul class="dropdownmain">
                           <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          <li class="dropdownitem"><a href="profile.php">Settings</a></li>
                           <li class="dropdownitem"><a href="logout.php">Logout</a></li>
                         </ul>
 
@@ -150,19 +166,62 @@
         <article class="product-info">
           <h3><?php echo $productName?></h3>
           <?php echo $productGenre; echo ", " . $productFeatures;?>
+          <p>Average Rating: <?php 
+          if(!isset($productAvgRating))
+          {
+            echo'N/A';
+          }
+          else
+          {
+          echo $productAvgRating;
+          }
+          ?></p>
           <p class="price"><s><p>$<?php echo $productPrice?></s> $<?php echo $productFinalPrice?></p>
           <p><?php echo $productDesc ?></p>
         <div>
         <p>Console: <?php echo $productConsole ?></p>
         
+        <form method="POST">
         <p>Quantity:</p>
         <input type="number" name="quantity" min="1" max="99" value="1">
         <div class="add-to-cart-button">
-          <button type="button" onclick="<?php 
-          //add cart item to shopping cart
-
-          ?>">Add to Cart</button>
+        <?php
+          if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "")
+          {
+            echo '<input type="submit" name ="cartSubmit" value="Add to Cart">';
+          }
+          else
+          {
+            echo 'You must be logged in to add items to the cart.';
+          }
+        ?>
         </div>
+        </form>
+
+
+        <?php
+          if(isset($_POST['cartSubmit']))
+          {
+            $quantity = $_POST['quantity'];
+            $customerID = $_SESSION['valid_user_id'];
+            $addCartQuery = "REPLACE into cart (productID,customerID,quantity,status) VALUES ('$productID','$customerID','$quantity','unpaid')";
+
+            $result = mysqli_query($connect, $addCartQuery);
+
+            if(!$result){
+              echo "Failure: " . mysqli_error($connect);        
+              die("Database query failed.");  
+            }
+            else
+            {   
+              echo "Cart added" . $addCartQuery;
+              // while($row = mysqli_fetch_assoc($result))
+              //   {
+              //   }
+            }
+            }
+        ?>
+
         </div>
         
         </article>
@@ -189,11 +248,12 @@
                 {
                   echo '<div class="review-item">';
                   echo '<div class="review-top-info">';
-                  echo '<p class="review-username">'. $row['firstName'] . ' ' .$row['lastName'].'</p>';
+                  echo '<p class="review-username">'. $row['firstName'] . " " .$row['lastName'].'</p>';
                   echo '<p class="review-date">'. $row['reviewDate'] . '</p>';
                   echo '</div>';
                   echo '<div class="review-description">';
                   echo '<p>'. $row['comment'] . '</p>';
+                  echo '<p>'. $row['rating'] . ' Stars </p>';
                   echo '</div>';
                   echo '</div>';
                 }
@@ -205,21 +265,54 @@
 
           <?php
 
-          if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
-          {
-          echo'<div class="review-write">
-            <textarea placeholder="Write a review..."></textarea>
-              <form>
-                <button type="button" onclick="#">Submit Review</button>
-              </form>
-          </div>';
-          }
-          else
-          {
+            if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
+            {
             echo'<div class="review-write">
-            <p>Please log-in in order to review and comment.</p>
-          </div>';
-          }
+            <form action="" method="POST">
+              <textarea name="comment" placeholder="Write a review..."></textarea>
+                
+              <p>
+              <label for="stars"> Rating (1-5): </label>
+              <select id="stars" name="stars">
+                <option value ="1">1</option>
+                <option value ="2">2</option>
+                <option value ="3">3</option>
+                <option value ="4">4</option>
+                <option value ="5">5</option>
+              </select>
+              <input type="submit" name="submitReview" value="Submit Review">
+              </p>
+            </form>
+            </div>';
+            }
+            else
+            {
+              echo'<div class="review-write">
+              <p>Please log-in in order to review and comment.</p>
+            </div>';
+            }
+          ?>
+
+          <?php
+            if(isset($_POST['submitReview']))
+            {
+              $selectStars = $_POST['stars'];
+              $comment = $_POST['comment'];
+              $currentDate = date("yy-m-d");
+              $customerID = $_SESSION['valid_user_id'];
+
+              $addReviewQuery = "INSERT INTO review (productID,customerID,rating,comment,reviewDate) VALUES ($productID, $customerID,$selectStars,'$comment','$currentDate')";
+
+              $result = mysqli_query($connect, $addReviewQuery);
+              
+              echo $addReviewQuery;
+
+              if(!$result)
+              {
+                echo "Failure: " . mysqli_error($connect);        
+                die("Database query failed.");  
+              }
+            }
           ?>
 
 
