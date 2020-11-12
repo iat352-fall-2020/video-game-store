@@ -44,58 +44,85 @@
 
     // checks if submit button is pressed and parses inputs
     if(isset($_POST['submit_btn'])) {
+      $firstName = $_POST['firstName'];
+      $lastName = $_POST['lastName'];
       $username = $_POST['username'];
       $password = $_POST['password'];
       $confirmpassword = $_POST['confirmPassword'];
       $DOB = $_POST['birthDate'];
       $gender= $_POST['gender'];
 
+      if(isset($firstName) && $firstName != "")
+      {
+        $error = "Please enter a first name";
+      }
+      // else
+      // {
+      //   die;
+      // }
+
+      if(isset($lastName) && $lastName != "")
+      {
+        $error = "Please enter a last name";
+      }
+      // else
+      // {
+      //   die;
+      // }
+
 
       // first check if username is filled in
-      if(isset($username )&& $username != ""){
-        // Next, check if password is filled in
-        if(isset($password)&& $password != ""){
-          // Next, check if password and confirm password is an exact match
-          if($password === $confirmpassword){
+      if(isset($firstName) && $firstName != "" && isset($lastName) && $lastName != "")
+      {        
+        if(isset($username )&& $username != ""){
+          // Next, check if password is filled in
+          if(isset($password)&& $password != ""){
+            // Next, check if password and confirm password is an exact match
+            if($password === $confirmpassword){
 
-            // After all preliminary checks have validated, check if the username exists in the database.
-            // For this, we will need to check the md5 value of the entered username against the encrypted usernames in the database.
-            $encryptUsernameCheck = md5($username);
-            $checkUsername = "SELECT email FROM customer WHERE email='$encryptUsernameCheck'";
-            $checkUsernameResult = mysqli_query($connect, $checkUsername);
+              // After all preliminary checks have validated, check if the username exists in the database.
+              // For this, we will need to check the md5 value of the entered username against the encrypted usernames in the database.
+              $encryptUsernameCheck = md5($username);
+              $checkUsername = "SELECT email FROM customer WHERE email='$encryptUsernameCheck'";
+              $checkUsernameResult = mysqli_query($connect, $checkUsername);
 
-            // Next, check the number of rows that have been outputted by the query using mysqli_num_rows()
-            if(mysqli_num_rows($checkUsernameResult) != null){
-              $error = "E-mail is already registered in the system!";
-            }
-            // If there are no rows returned from the query, proceed with the sign up.
-            else{
-              $encryptedPassword = hash('md5', $password);
-              $encryptedUsername = hash('md5',$username);
-              // $insertUsernamePassword = "INSERT INTO customer(email, password) values ()";
-
-              $insertUsernamePassword = "INSERT INTO customer(gender, email, password, birthDate) VALUES ('$gender','$encryptedUsername', '$encryptedPassword', '$DOB')";
-
-
-              if(mysqli_query($connect,$insertUsernamePassword)){
-                   header("Location: indexMembers.php");
-                   mysqli_close($connect);
-                }
-              else{
-                die("insertion failed");
+              // Next, check the number of rows that have been outputted by the query using mysqli_num_rows()
+              if(mysqli_num_rows($checkUsernameResult) != null){
+                $error = "E-mail is already registered in the system!";
               }
+              // If there are no rows returned from the query, proceed with the sign up.
+              else{
+                $encryptedPassword = hash('md5', $password);
+                $encryptedUsername = hash('md5',$username);
+                // $insertUsernamePassword = "INSERT INTO customer(email, password) values ()";
+
+                $insertUsernamePassword = "INSERT INTO customer(firstName,lastName,gender, email,password, birthDate) VALUES ('$firstName','$lastName','$gender','$encryptedUsername', '$encryptedPassword', '$DOB')";
+
+
+                if(mysqli_query($connect,$insertUsernamePassword)){
+                    header("Location: indexMembers.php");
+                    mysqli_close($connect);
+                  }
+                else{
+                  die("insertion failed");
+                }
+              }
+            }
+            else{
+              $error =  'The passwords entered does not match!';
             }
           }
           else{
-            $error =  'The passwords entered does not match!';
+            $error="Password field is blank";
           }
         }
         else{
-          $error="Password field is blank";
+          $error="E-mail field is blank";
         }
       }
-      else{
-        $error="E-mail field is blank";
+      else
+      {
+        $error = "Please enter a first and last name!";
       }
   }
 
@@ -189,6 +216,18 @@
 
 
           <ul>
+          <li>
+              <fieldset>
+                <legend>First Name:</legend>
+                <input type="text" id="firstName" name = "firstName" >
+              </fieldset>
+            </li>
+            <li>
+              <fieldset>
+                <legend>Last Name:</legend>
+                <input type="text" id="lastName" name = "lastName" >
+              </fieldset>
+            </li>
             <li>
               <fieldset>
                 <legend>E-mail:</legend>

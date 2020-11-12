@@ -46,12 +46,11 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user'] .'</p>';
+                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
                     echo '<ul class="button-menu">
                       <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
                         <ul class="dropdownmain">
                           <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          <li class="dropdownitem"><a href="profile.php">Settings</a></li>
                           <li class="dropdownitem"><a href="logout.php">Logout</a></li>
                         </ul>
 
@@ -212,7 +211,11 @@
           die("exit");
         }
 
-        $query = "SELECT productID,productName, price, deals,genre,rating,finalPrice,genre,console,releaseDate,features FROM product ";
+        $query = "SELECT product.productID,productName, price, discount,genre,finalPrice,genre,console,releaseDate,features, format(AVG(review.rating),1) as AverageRating 
+        FROM product  
+        LEFT JOIN review 
+        ON review.productID = product.productID 
+        GROUP BY product.productID";
 
         //query building
         if(isset($_POST['title']) && $_POST['title'] != "") //game title check
@@ -307,6 +310,7 @@
           echo'<tr>';
             while($row = mysqli_fetch_assoc($result))
             {
+              
               echo'<td>';
               echo '<div class="item " id= "MU1920"><a href="detailedproduct.php?productID=';
               echo $row['productID'];
@@ -315,6 +319,13 @@
               echo'"/><p class="item_name">';
               echo $row['productName'];
               echo '</p>';
+              echo 'Average Rating: ';
+              if(!isset($row['AverageRating']))
+              {
+                $row['AverageRating'] = 'N/A';
+              }
+              echo $row['AverageRating'];
+
               echo '<p>';
               echo $row['console'];
               echo '</p>';

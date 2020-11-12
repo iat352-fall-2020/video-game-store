@@ -17,7 +17,24 @@
   </head>
   <body>
   <?php
-  session_start();
+    session_start();
+
+    $dbhost = "localhost";
+    $dbuser = "root";
+    $dbpass = "";
+    $dbname = "benedict_wong";
+    $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+
+    $customerID = $_SESSION['valid_user_id'];
+    $totalPrice = 0;
+
+    if($connect){
+    }
+    else{
+      die("exit");
+    }
+
   ?>
   <header id="header">
         <!-- logo? -->
@@ -38,12 +55,11 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user'] .'</p>';
+                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
                     echo '<ul class="button-menu">
                       <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
                         <ul class="dropdownmain">
                           <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          <li class="dropdownitem"><a href="profile.php">Settings</a></li>
                           <li class="dropdownitem"><a href="logout.php">Logout</a></li>
                         </ul>
 
@@ -86,28 +102,77 @@
         <!-- profile information -->
     <div class="cart cart-container">
         <div class="cart-info-box">
-            <h3>Store Cart</h3> 
-            <div> 
-            <p>Lorem Ipsum</p>
-            </div>
+            <h3>Store Cart</h3>
+            
 
-            <div> 
-            <p>Lorem Ipsum</p>
-            </div>
+            
+            <?php 
+            if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "")
+            {
+                $query = "SELECT * from cart INNER JOIN product ON cart.productID = product.productID INNER JOIN customer ON cart.customerID = customer.customerID WHERE cart.customerID = $customerID AND status ='unpaid'";
 
-            <div> 
-            <p>Lorem Ipsum</p>
-            </div>
+                $addCartQuery = "";
+                
+        
+                $result = mysqli_query($connect, $query);
+        
+                if(!$result)
+                {
+                  echo "Failure: " . mysqli_error($connect);        
+                  die("Database query failed.");  
+                }
+                else
+                {  
+                  echo '<div class=" cart-box">';
+                  while($row = mysqli_fetch_assoc($result))
+                  {
+                    echo '<form method="POST">';
+                    echo '<div class="cart-item">';
+                      echo '<img src="img/item_1_0.png" alt="'. $row['productName'].'"/>';
+                      echo '<p>'. $row['productName']. '</p>';
+                      echo '<p>Unit Price: $'. $row['finalPrice']. '</p>';
+                      echo '<p class="price">Subtotal: $'. ($row['finalPrice'] * $row['quantity']). '</p>';
+                      echo '<input type="number" name="quantity" min="1" max="99" value="'.$row['quantity'].'">';
+                      echo '<input type = "submit" name="updateQuantity" id = "update" value = "Update Quantity">';
+                    echo '</div>';
+                    echo '</form>';
 
+                    $totalPrice += $row['finalPrice'] * $row['quantity'];
+                  }
+                  echo '</div>';
+                }
+                
+            }
+              else
+              {
+                echo 'You must be logged in to check your cart.';
+              }
+            ?>
+
+            <?php
+              if(isset($_POST['update']))
+              { 
+                // $oldQuantity = $row['quantity'];
+                // $newQuantity = $_POST['quantity'];
+                // echo 'Quantity was: ' . $row['quantity'] . ' Now: ' . $_POST['quantity'];
+                // $updateQuery = "UPDATE cart SET ";
+              }
+            ?>
+            
+              
+
+              
+            
 
             <div class="cart-footer"> <!--Cart Footer-->
-              <p>Total: $79.99 </p> 
+              <p>Total: $ <?php echo $totalPrice;?> </p> 
 
               <div class="add-to-cart-button">
               <button type="button" onclick="pointTo('#')">Checkout</button>
               </div>
             </div>
         </div>
+              
             
 
     </div> 

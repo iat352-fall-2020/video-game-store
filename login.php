@@ -21,6 +21,7 @@
   </head>
   <body>
     <?php
+    session_start();
 
     $dbhost = "localhost";
     $dbuser = "root";
@@ -60,11 +61,13 @@
      //   $loginfailure =  '<p>'.$matchCustomer.'</p>';
      //   // $loginfailure =  '<p>Login Failed!</p>';
      // }
-     $checkLogin = "SELECT email, password FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."' ";
+     $checkLogin = "SELECT firstName, email, customerID, password FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."' ";
      $checkResult = mysqli_query($connect, $checkLogin);
 
-     if(mysqli_num_rows($checkResult) > 0){
-       $_SESSION['valid_user'] = md5($username);
+     if($row = mysqli_fetch_assoc($checkResult)){
+       $_SESSION['valid_user'] = $row['email'];
+       $_SESSION['valid_user_name'] = $row['firstName'];
+       $_SESSION['valid_user_id'] = $row['customerID'];
        header("Location: index.php");
      }
      else{
@@ -99,12 +102,11 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user'] .'</p>';
+                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
                     echo '<ul class="button-menu">
                       <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
                         <ul class="dropdownmain">
                           <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          <li class="dropdownitem"><a href="profile.php">Settings</a></li>
                           <li class="dropdownitem"><a href="logout.php">Logout</a></li>
                         </ul>
 
