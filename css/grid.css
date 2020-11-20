@@ -555,4 +555,5 @@ footer a:last-child{
   display:flex;
   flex:100%;
   flex-wrap:nowrap;
+  justify-content: center;
 }
