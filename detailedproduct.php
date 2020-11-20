@@ -42,6 +42,7 @@
               $productGenre = $row['genre'];
               $productFeatures = $row['features'];
               $productDiscount = $row['discount'];
+              $productDate = $row['releaseDate'];
             }
         }
 
@@ -102,17 +103,23 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
-                    echo '<ul class="button-menu">
-                      <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                        <ul class="dropdownmain">
-                          <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          <li class="dropdownitem"><a href="logout.php">Logout</a></li>
-                        </ul>
+                    echo '<div class="profile-box"><p>Hello  ' .$_SESSION['valid_user_name']. '</p>';
+                    echo '<a href="profile.php">Profile</a>';
+                    echo ' | ';
+                    echo '<a href="logout.php">Logout</a>';
+                    
+                    echo '</div>';
+                    // echo '<ul class="button-menu">
+                    //   <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                    //     <ul class="dropdownmain">
+                    //       <li class="dropdownitem"><a href="profile.php">Profile</a></li>
+                          
+                    //       <li class="dropdownitem"><a href="logout.php">Logout</a></li>
+                    //     </ul>
 
-                      </li>
+                    //   </li>
 
-                    </ul>';
+                    // </ul>';
                   }
                   else
                   {
@@ -133,13 +140,10 @@
 
 
           <div class="header-row-3">
-            <nav class="nav-row-3">
+          <nav class="nav-row-3">
+              <a href="index.php" class="nav-main-item">Home</a>
               <a href="catalog.php" class="nav-main-item">Browse Store</a>
-              <!-- <a href="locations.php#" class="nav-main-item">Locations</a>  -->
               <a href="about.php" class="nav-main-item">About Us</a>
-              <!-- <a href="catalog.php" class="nav-main-item">Xbox</a>
-              <a href="catalog.php" class="nav-main-item">Nintendo</a>
-              <a href="catalog.php" class="nav-main-item">Deals</a> -->
             </nav>
           </div>
         </div>
@@ -151,9 +155,9 @@
       <section class="product-left">
 
         <div class="product-img">
-          <div class="image-file image-1">
-            <img class="image-preview" src="img/item_1_0.png" alt="<?php echo $productName?>">
-          </div>
+          <!-- <div class="image-file image-1"> -->
+            <img class="image-preview" src="img/default-placeholder-image.png" alt="<?php echo $productName?>">
+          <!-- </div> -->
 
 
           <div class="dot-row">
@@ -162,39 +166,106 @@
             <span class="image-dot dot-3" onClick="showImageMU(3)"></span>
           </div>
         </div>
-
-        <article class="product-info">
+                
+        <article class="product-info">  <!--Show the price, details, rating and information of the product-->
           <h3><?php echo $productName?></h3>
-          <?php echo $productGenre; echo ", " . $productFeatures;?>
-          <p>Average Rating: <?php 
+          <?php switch($productConsole)
+              {
+                case 'PC':
+                  echo '<img src="img/consoles/pc.png" class="detailedproduct-console" alt="1 star rating">';
+                break;
+                case 'Xbox':
+                  echo '<img src="img/consoles/xbox.png" class="detailedproduct-console" alt="2 star rating">';
+                break;
+                case 'PS4':
+                  echo '<img src="img/consoles/ps4.png" class="detailedproduct-console-ps4-ps5" alt="3 star rating">';
+                break;
+                case 'PS5':
+                  echo '<img src="img/consoles/ps5.png" class="detailedproduct-console-ps4-ps5" alt="4 star rating">';
+                break;
+                case 'Nintendo Switch':
+                  echo '<img src="img/consoles/switch.png" class="detailedproduct-console" alt="Nintendo Switch">';
+                break;
+              }
+              ?>
+              <p>
+          <?php echo $productGenre; echo ", " . $productFeatures;?></p>
+          <p><?php 
           if(!isset($productAvgRating))
           {
-            echo'N/A';
+            // echo'N/A';
+            echo '<img src="img/stars/0.png" class="detailedproduct-rating-img" alt="1 star rating">';
           }
           else
           {
-          echo $productAvgRating;
+          // echo $productAvgRating;
+            switch($productAvgRating)
+            {
+              case 1:
+                echo '<img src="img/stars/1.png" class="detailedproduct-rating-img" alt="1 star rating">';
+              break;
+              case 2:
+                echo '<img src="img/stars/2.png" class="detailedproduct-rating-img" alt="2 star rating">';
+              break;
+              case 3:
+                echo '<img src="img/stars/3.png" class="detailedproduct-rating-img" alt="3 star rating">';
+              break;
+              case 4:
+                echo '<img src="img/stars/4.png" class="detailedproduct-rating-img" alt="4 star rating">';
+              break;
+              case 5:
+                echo '<img src="img/stars/5.png" class="detailedproduct-rating-img" alt="5 star rating">';
+              break;
+            }
           }
+          
           ?></p>
-          <p class="price"><s><p>$<?php echo $productPrice?></s> $<?php echo $productFinalPrice?></p>
+          
           <p><?php echo $productDesc ?></p>
+          <p>
+          
+          <?php echo 'Released on '. $productDate?>
+          </p>
+          
+
+          
+          <?php
+          echo '<div class="detailed-product-pricebox">';
+            if($productDiscount > 0)
+            {
+              echo '<s>$';
+              echo $productPrice;
+              echo '</s>'; 
+              echo ' <p class="detailed-product-price">$';
+              echo $productFinalPrice;
+              echo '</p>';
+            }
+            else
+            {
+              echo '<p class="detailed-product-price">';
+              echo '$' . $productPrice;
+              echo '</p>';
+            }
+            echo '</div>';
+          ?>
+          
         <div>
-        <p>Console: <?php echo $productConsole ?></p>
+        <!-- <p>Console: <?php echo $productConsole ?></p> -->
         
         <form method="POST">
-        <p>Quantity:</p>
+        <p>Quantity:
         <input type="number" name="quantity" min="1" max="99" value="1">
         <div class="add-to-cart-button">
         <?php
-          if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "")
+          if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //check if user is logged in
           {
-            echo '<input type="submit" name ="cartSubmit" value="Add to Cart">';
+            echo '<input type="submit" class="cartButton" name ="cartSubmit" value="Add to Cart">';
           }
           else
           {
             echo 'You must be logged in to add items to the cart.';
           }
-        ?>
+        ?></p>
         </div>
         </form>
 
@@ -204,7 +275,7 @@
           {
             $quantity = $_POST['quantity'];
             $customerID = $_SESSION['valid_user_id'];
-            $addCartQuery = "REPLACE into cart (productID,customerID,quantity,status) VALUES ('$productID','$customerID','$quantity','unpaid')";
+            $addCartQuery = "REPLACE into cart (productID,customerID,quantity,status) VALUES ('$productID','$customerID','$quantity','unpaid')"; //updates the cart quantities if it already exists in the cart
 
             $result = mysqli_query($connect, $addCartQuery);
 
@@ -249,11 +320,30 @@
                   echo '<div class="review-item">';
                   echo '<div class="review-top-info">';
                   echo '<p class="review-username">'. $row['firstName'] . " " .$row['lastName'].'</p>';
-                  echo '<p class="review-date">'. $row['reviewDate'] . '</p>';
+                  echo ' <p class="review-date"> '. $row['reviewDate'] . ' </p>';
+                  // echo $row['reviewDate'];
                   echo '</div>';
                   echo '<div class="review-description">';
                   echo '<p>'. $row['comment'] . '</p>';
-                  echo '<p>'. $row['rating'] . ' Stars </p>';
+                  switch(round($row['rating']))
+                  {
+                    case 1:
+                      echo '<img src="img/stars/1.png" class="detailedproduct-rating-img" alt="1 star rating">';
+                    break;
+                    case 2:
+                      echo '<img src="img/stars/2.png" class="detailedproduct-rating-img" alt="2 star rating">';
+                    break;
+                    case 3:
+                      echo '<img src="img/stars/3.png" class="detailedproduct-rating-img" alt="3 star rating">';
+                    break;
+                    case 4:
+                      echo '<img src="img/stars/4.png" class="detailedproduct-rating-img" alt="4 star rating">';
+                    break;
+                    case 5:
+                      echo '<img src="img/stars/5.png" class="detailedproduct-rating-img" alt="5 star rating">';
+                    break;
+                  }
+                  // echo '<p>'. $row['rating'] . ' Stars </p>';
                   echo '</div>';
                   echo '</div>';
                 }
@@ -265,7 +355,7 @@
 
           <?php
 
-            if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
+            if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show adding review functionality
             {
             echo'<div class="review-write">
             <form action="" method="POST">

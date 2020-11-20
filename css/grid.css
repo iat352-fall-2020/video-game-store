@@ -59,7 +59,7 @@
 .profile-cart p{
   text-align: left;
   padding-right: 1em;
-  padding-top: 1em;
+  /* padding-top: 1em; */
 }
 .profile-cart p a{
   color:white;
@@ -299,6 +299,9 @@ div#MU9800{
 }
 
 .cart-box{
+  display:flex;
+  flex-wrap:nowrap;
+  flex-direction:column;
   margin-top:1em;
 }
 
@@ -351,7 +354,7 @@ div#MU9800{
 
 .product-img {
   flex: 1 1 20%;
-  height: 20rem;
+  height: auto;
   overflow:visible;
   padding: 1rem;
   text-align: center;
@@ -379,7 +382,7 @@ div#MU9800{
 
 .product-info {
   flex: 1 1 80%;
-  height: 20rem;
+  /* height: 20rem; */
   padding: 1rem;
 }
 .product-info > p{
@@ -531,7 +534,7 @@ footer{
   z-index: 999;
   bottom:0;
   width:100%;
-  background-color: rgb(37, 51, 65);
+  background-color: rgb(44, 44, 44);
   color:white;
   text-align: center;
 }

@@ -77,17 +77,23 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
-                    echo '<ul class="button-menu">
-                      <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                        <ul class="dropdownmain">
-                          <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          <li class="dropdownitem"><a href="logout.php">Logout</a></li>
-                        </ul>
+                    echo '<div class="profile-box"><p>Hello  ' .$_SESSION['valid_user_name']. '</p>';
+                    echo '<a href="profile.php">Profile</a>';
+                    echo ' | ';
+                    echo '<a href="logout.php">Logout</a>';
+                    
+                    echo '</div>';
+                    // echo '<ul class="button-menu">
+                    //   <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                    //     <ul class="dropdownmain">
+                    //       <li class="dropdownitem"><a href="profile.php">Profile</a></li>
+                          
+                    //       <li class="dropdownitem"><a href="logout.php">Logout</a></li>
+                    //     </ul>
 
-                      </li>
+                    //   </li>
 
-                    </ul>';
+                    // </ul>';
                   }
                   else
                   {
@@ -95,7 +101,12 @@
                     echo '';
                   }
                 ?>
-                  <a href="checkout.php" class="cart-nav"><img src="img/cart_icon.png" alt="cart-icon"></a>
+                <p>
+                  <a href="checkout.php" class="cart-nav">
+                  
+                  <img src="img/cart_icon.png" alt="cart-icon">
+                  </a>
+                  </p>
 
                 </section>
               </div>
@@ -109,6 +120,7 @@
 
           <div class="header-row-3">
             <nav class="nav-row-3">
+              <a href="index.php" class="nav-main-item">Home</a>
               <a href="catalog.php" class="nav-main-item">Browse Store</a>
               <a href="about.php" class="nav-main-item">About Us</a>
             </nav>

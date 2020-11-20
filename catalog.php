@@ -46,17 +46,23 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
-                    echo '<ul class="button-menu">
-                      <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                        <ul class="dropdownmain">
-                          <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          <li class="dropdownitem"><a href="logout.php">Logout</a></li>
-                        </ul>
+                    echo '<div class="profile-box"><p>Hello  ' .$_SESSION['valid_user_name']. '</p>';
+                    echo '<a href="profile.php">Profile</a>';
+                    echo ' | ';
+                    echo '<a href="logout.php">Logout</a>';
+                    
+                    echo '</div>';
+                    // echo '<ul class="button-menu">
+                    //   <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                    //     <ul class="dropdownmain">
+                    //       <li class="dropdownitem"><a href="profile.php">Profile</a></li>
+                          
+                    //       <li class="dropdownitem"><a href="logout.php">Logout</a></li>
+                    //     </ul>
 
-                      </li>
+                    //   </li>
 
-                    </ul>';
+                    // </ul>';
                   }
                   else
                   {
@@ -77,7 +83,8 @@
 
 
           <div class="header-row-3">
-            <nav class="nav-row-3">
+          <nav class="nav-row-3">
+              <a href="index.php" class="nav-main-item">Home</a>
               <a href="catalog.php" class="nav-main-item">Browse Store</a>
               <a href="about.php" class="nav-main-item">About Us</a>
             </nav>
@@ -174,7 +181,7 @@
 
 
       <table>
-      <?php
+      <?php //catalogue filtering and pagination
         $dbhost = "localhost";
         $dbuser = "root";
         $dbpass = "";
@@ -182,7 +189,7 @@
         $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 
-        //pagination settings
+        //pagination settings (WIP)
         if(isset($_GET['pageno']))
         {
           $pageno = $_GET['pageno'];
@@ -205,7 +212,7 @@
         $priceQuery ="";
         unset($filters);
 
-        if($connect){
+        if($connect){ //check connection
         }
         else{
           die("exit");
@@ -215,7 +222,7 @@
         FROM product  
         LEFT JOIN review 
         ON review.productID = product.productID 
-        GROUP BY product.productID";
+        GROUP BY product.productID"; //left join in order to show products that don't have reviews yet as well as products that do
 
         //query building
         if(isset($_POST['title']) && $_POST['title'] != "") //game title check
@@ -291,7 +298,7 @@
 
 
         //debugging for the entire finished query
-        echo '<p>Query: '.$query.'</p>';
+		// echo '<p>Query: '.$query.'</p>';
 
 
         $result = mysqli_query($connect, $query);
@@ -314,29 +321,71 @@
               echo'<td>';
               echo '<div class="item " id= "MU1920"><a href="detailedproduct.php?productID=';
               echo $row['productID'];
-              echo '"><img src="img/default-placeholder-image.png" alt="';
+              echo '"><img src="img/default-placeholder-image.png" class="placeholder-img" alt="';
               echo $row['productName'];
               echo'"/><p class="item_name">';
               echo $row['productName'];
               echo '</p>';
-              echo 'Average Rating: ';
-              if(!isset($row['AverageRating']))
-              {
-                $row['AverageRating'] = 'N/A';
-              }
-              echo $row['AverageRating'];
+
+             
 
               echo '<p>';
-              echo $row['console'];
+              // echo $row['console'];
+              switch($row['console'])
+              {
+                case 'PC':
+                  echo '<img src="img/consoles/pc.png" class="console" alt="1 star rating">';
+                break;
+                case 'Xbox':
+                  echo '<img src="img/consoles/xbox.png" class="console" alt="2 star rating">';
+                break;
+                case 'PS4':
+                  echo '<img src="img/consoles/ps4.png" class="console-ps4-ps5" alt="3 star rating">';
+                break;
+                case 'PS5':
+                  echo '<img src="img/consoles/ps5.png" class="console-ps4-ps5" alt="4 star rating">';
+                break;
+                case 'Nintendo Switch':
+                  echo '<img src="img/consoles/switch.png" class="console" alt="Nintendo Switch">';
+                break;
+              }
               echo '</p>';
               echo '<p>';
               echo $row['genre'];
               echo ' ';
               echo $row['features'];
               echo '</p>';
-              echo '<p> Released on: ';
-              echo $row['releaseDate'];
-              echo '</p>';
+               // echo 'Average Rating: ';
+               if(!isset($row['AverageRating']))
+               {
+                 // $row['AverageRating'] = 'N/A';
+                 echo '<img src="img/stars/0.png" class="rating-img" alt="1 star rating">';
+               }
+               else
+               {
+                 switch(round($row['AverageRating']))
+                 {
+                   case 1:
+                     echo '<img src="img/stars/1.png" class="rating-img" alt="1 star rating">';
+                   break;
+                   case 2:
+                     echo '<img src="img/stars/2.png" class="rating-img" alt="2 star rating">';
+                   break;
+                   case 3:
+                     echo '<img src="img/stars/3.png" class="rating-img" alt="3 star rating">';
+                   break;
+                   case 4:
+                     echo '<img src="img/stars/4.png" class="rating-img" alt="4 star rating">';
+                   break;
+                   case 5:
+                     echo '<img src="img/stars/5.png" class="rating-img" alt="5 star rating">';
+                   break;
+                 }
+               }
+               // echo $row['AverageRating'];
+              // echo '<p> Released on: ';
+              // echo $row['releaseDate'];
+              // echo '</p>';
               echo '<p>';
               if($row['discount']>0)
               {
@@ -364,30 +413,6 @@
 
       </table>
 
-
-      <!-- <div onclick="pointTo('')" class="item " id= "MU1920"><a href="detailedproduct.php"><img src="img/Games/Cyberpunk_2077_box_art.jpg" alt="Cyberpunk 2077"/><p class="item_name">Cyberpunk 2077</p><p>Standard Edition</p><p class="price">$79.99</p></a>
-      <noscript><a href="detailedproduct.php" class="noscript-a">More info</a></noscript>
-
-      </div>
-      <div onclick="pointTo('')" class="item " id= "TH1819"><img src="img/Games/phasmaphobia.jpg" alt="Phasmophobia"/><p class="item_name">Phasmophobia</p><p></p>
-      <p class="price">$14.99</p>
-      <noscript><a href="" class="noscript-a">More info</a></noscript>
-      </div>
-      <div onclick="pointTo('')" class="item" id= "MC1819"><img src="img/Games/bg3.jpg" alt="Baldur's Gate 3"/><p class="item_name">Baldur's Gate 3</p><p></p>
-      <p class="price">$79.99</p>
-      <noscript><a href="" class="noscript-a">More info</a></noscript>
-      </div>
-      <div onclick="pointTo('')" class="item " id= "A1718"><img src="img/Games/squadron.jpg" alt="STAR WARS™: Squadrons"/><p class="item_name">STAR WARS™: Squadrons</p><p></p>
-      <p class="price">$79.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
-      <div onclick="pointTo('')" class="item " id= "MU1819"><img src="img/Games/spelunky2.jpg" alt="Spelunky 2"/><p class="item_name">Spelunky 2</p><p></p>
-      <p class="price">$19.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
-      <div onclick="pointTo('')" class="item " id= "C1819"><img src="img/Games/hades.jpg" alt="Hades"/><p class="item_name">Hades</p><p></p>
-      <p class="price">$19.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
-      <div onclick="pointTo('')" class="item " id= "E1819"><img src="img/Games/iceborne.jpeg" alt="Monster Hunter World: Iceborne"/><p class="item_name">Monster Hunter World: Iceborne</p><p></p>
-      <p class="price">$79.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
-      <div onclick="pointTo('')" class="item " id= "MU9800"><img src="img/Games/ror2.jpg" alt="Risk of Rain 2"/><p class="item_name">Risk of Rain 2</p><p></p>
-      <p class="price">$19.99</p><noscript><a href="" class="noscript-a">More info</a></noscript></div>
-    </div> -->
 
 	</main>
   <footer>

@@ -55,17 +55,23 @@
                 <?php
                   if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
                   {
-                    echo '<p>Hello  ' .$_SESSION['valid_user_name'] .'</p>';
-                    echo '<ul class="button-menu">
-                      <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
-                        <ul class="dropdownmain">
-                          <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          <li class="dropdownitem"><a href="logout.php">Logout</a></li>
-                        </ul>
+                    echo '<div class="profile-box"><p>Hello  ' .$_SESSION['valid_user_name']. '</p>';
+                    echo '<a href="profile.php">Profile</a>';
+                    echo ' | ';
+                    echo '<a href="logout.php">Logout</a>';
+                    
+                    echo '</div>';
+                    // echo '<ul class="button-menu">
+                    //   <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
+                    //     <ul class="dropdownmain">
+                    //       <li class="dropdownitem"><a href="profile.php">Profile</a></li>
+                          
+                    //       <li class="dropdownitem"><a href="logout.php">Logout</a></li>
+                    //     </ul>
 
-                      </li>
+                    //   </li>
 
-                    </ul>';
+                    // </ul>';
                   }
                   else
                   {
@@ -85,13 +91,10 @@
 
 
           <div class="header-row-3">
-            <nav class="nav-row-3">
+          <nav class="nav-row-3">
+              <a href="index.php" class="nav-main-item">Home</a>
               <a href="catalog.php" class="nav-main-item">Browse Store</a>
-              <!-- <a href="locations.php#" class="nav-main-item">Locations</a>  -->
               <a href="about.php" class="nav-main-item">About Us</a>
-              <!-- <a href="catalog.php" class="nav-main-item">Xbox</a>
-              <a href="catalog.php" class="nav-main-item">Nintendo</a>
-              <a href="catalog.php" class="nav-main-item">Deals</a> -->
             </nav>
           </div>
         </div>
@@ -128,15 +131,17 @@
                   {
                     echo '<form method="POST">';
                     echo '<div class="cart-item">';
-                      echo '<img src="img/item_1_0.png" alt="'. $row['productName'].'"/>';
+                      echo '<img src="img/default-placeholder-image.png" alt="'. $row['productName'].'"/>';
+
+                      echo '<div class="cart-item-description">';
                       echo '<p>'. $row['productName']. '</p>';
                       echo '<p>Unit Price: $'. $row['finalPrice']. '</p>';
                       echo '<p class="price">Subtotal: $'. ($row['finalPrice'] * $row['quantity']). '</p>';
                       echo '<input type="number" name="quantity" min="1" max="99" value="'.$row['quantity'].'">';
                       echo '<input type = "submit" name="updateQuantity" id = "update" value = "Update Quantity">';
+                      echo '</div>';
                     echo '</div>';
                     echo '</form>';
-
                     $totalPrice += $row['finalPrice'] * $row['quantity'];
                   }
                   echo '</div>';
@@ -150,7 +155,7 @@
             ?>
 
             <?php
-              if(isset($_POST['update']))
+              if(isset($_POST['update'])) //updating or removing the quantity of items in a cart (WIP)
               { 
                 // $oldQuantity = $row['quantity'];
                 // $newQuantity = $_POST['quantity'];
@@ -165,10 +170,10 @@
             
 
             <div class="cart-footer"> <!--Cart Footer-->
-              <p>Total: $ <?php echo $totalPrice;?> </p> 
+              <p class="price">Total: $ <?php echo $totalPrice;?> </p> 
 
               <div class="add-to-cart-button">
-              <button type="button" onclick="pointTo('#')">Checkout</button>
+              <button type="button" class="checkout-button" onclick="pointTo('#')">Checkout</button>
               </div>
             </div>
         </div>
