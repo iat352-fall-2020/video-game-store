@@ -221,8 +221,59 @@
         $query = "SELECT product.productID,productName, price, discount,genre,finalPrice,genre,console,releaseDate,features, format(AVG(review.rating),1) as AverageRating 
         FROM product  
         LEFT JOIN review 
-        ON review.productID = product.productID 
-        GROUP BY product.productID"; //left join in order to show products that don't have reviews yet as well as products that do
+        ON review.productID = product.productID"; 
+
+if(!empty($_POST['feature']))
+{
+  foreach($_POST['feature'] as $check)
+  {
+    // echo $check;
+    $featureQuery = "features IN (" . "'". implode("','",$_POST['feature']) . "'". ")";
+  }
+  $filters[] = $featureQuery;
+}
+
+if(!empty($_POST['genre']))
+{
+  foreach($_POST['genre'] as $check)
+  {
+    $genreQuery = "genre IN (" . "'". implode("','",$_POST['genre']) . "'". ")";
+  }
+  $filters[] = $genreQuery;
+}
+
+if(!empty($_POST['releaseDate']))
+{
+  $filters[] = "releaseDate = '". $_POST['releaseDate']."'";
+}
+
+if(!empty($_POST['platform']))
+{
+  foreach($_POST['platform'] as $check)
+  {
+    $platformQuery = "console IN (" . "'". implode("','",$_POST['platform']) . "'". ")";
+  }
+  $filters[] = $platformQuery;
+}
+
+if(!empty($_POST['special']))
+{
+  $saleQuery = " discount > 0 ";
+  $filters[] = $saleQuery;
+}
+
+if(!empty($_POST['price']))
+{
+  $priceQuery = " finalPrice <= '" . $_POST['price'] . "'";
+  $filters[] = $priceQuery;
+}
+
+if(!empty($filters))
+{
+$query .= " WHERE " . implode(' AND ',$filters);
+}
+
+        $query .= " GROUP BY product.productID"; //left join in order to show products that don't have reviews yet as well as products that do
 
         //query building
         if(isset($_POST['title']) && $_POST['title'] != "") //game title check
@@ -233,55 +284,7 @@
           $filters[] = $titleQuery;
         }
 
-        if(!empty($_POST['feature']))
-        {
-          foreach($_POST['feature'] as $check)
-          {
-            echo $check;
-            $featureQuery = "features IN (" . "'". implode("','",$_POST['feature']) . "'". ")";
-          }
-          $filters[] = $featureQuery;
-        }
 
-        if(!empty($_POST['genre']))
-        {
-          foreach($_POST['genre'] as $check)
-          {
-            $genreQuery = "genre IN (" . "'". implode("','",$_POST['genre']) . "'". ")";
-          }
-          $filters[] = $genreQuery;
-        }
-
-        if(!empty($_POST['releaseDate']))
-        {
-          $filters[] = "releaseDate = '". $_POST['releaseDate']."'";
-        }
-
-        if(!empty($_POST['platform']))
-        {
-          foreach($_POST['platform'] as $check)
-          {
-            $platformQuery = "console IN (" . "'". implode("','",$_POST['platform']) . "'". ")";
-          }
-          $filters[] = $platformQuery;
-        }
-
-        if(!empty($_POST['special']))
-        {
-          $saleQuery = " discount > 0 ";
-          $filters[] = $saleQuery;
-        }
-
-        if(!empty($_POST['price']))
-        {
-          $priceQuery = " finalPrice <= '" . $_POST['price'] . "'";
-          $filters[] = $priceQuery;
-        }
-
-        if(!empty($filters))
-        {
-        $query .= " WHERE " . implode(' AND ',$filters);
-        }
 
 
 
