@@ -97,6 +97,7 @@
                   // $insertUsernamePassword = "INSERT INTO customer(email, password) values ()";
 
                   $insertUsernamePassword = "INSERT INTO customer(firstName,lastName,gender, email,password, birthDate) VALUES ('$firstName','$lastName','$gender','$encryptedUsername', '$encryptedPassword', '$DOB')";
+                  $createFavorites = "INSERT INTO favorites(email) VALUES ('$encryptedUsername')";
 
 
                   if(mysqli_query($connect,$insertUsernamePassword)){

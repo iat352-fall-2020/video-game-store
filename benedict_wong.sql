@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2020 at 04:34 AM
+-- Generation Time: Dec 02, 2020 at 12:56 AM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,13 +30,18 @@ USE `benedict_wong`;
 --
 
 DROP TABLE IF EXISTS `cart`;
-CREATE TABLE `cart` (
-  `cartID` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `cart` (
+  `cartID` int(10) NOT NULL AUTO_INCREMENT,
   `productID` int(10) NOT NULL,
   `customerID` int(10) NOT NULL,
   `quantity` int(3) NOT NULL,
-  `status` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` varchar(30) NOT NULL,
+  PRIMARY KEY (`cartID`),
+  UNIQUE KEY `cartID` (`cartID`) USING BTREE,
+  UNIQUE KEY `uniqueProductCustomerID` (`productID`,`customerID`) USING BTREE,
+  KEY `productID` (`productID`),
+  KEY `customerID` (`customerID`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `cart`
@@ -54,15 +59,16 @@ INSERT INTO `cart` (`cartID`, `productID`, `customerID`, `quantity`, `status`) V
 --
 
 DROP TABLE IF EXISTS `customer`;
-CREATE TABLE `customer` (
-  `customerID` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `customer` (
+  `customerID` int(10) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `gender` varchar(6) NOT NULL,
   `email` text NOT NULL,
   `password` text NOT NULL,
-  `birthDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `birthDate` date NOT NULL,
+  PRIMARY KEY (`customerID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `customer`
@@ -75,14 +81,48 @@ INSERT INTO `customer` (`customerID`, `firstName`, `lastName`, `gender`, `email`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `favorites`
+--
+
+DROP TABLE IF EXISTS `favorites`;
+CREATE TABLE IF NOT EXISTS `favorites` (
+  `email` varchar(255) NOT NULL,
+  `Singleplayer` tinyint(1) NOT NULL DEFAULT 0,
+  `Multiplayer` tinyint(1) NOT NULL DEFAULT 0,
+  `Action` tinyint(1) NOT NULL DEFAULT 0,
+  `Adventure` tinyint(1) NOT NULL DEFAULT 0,
+  `Fighting` tinyint(1) NOT NULL DEFAULT 0,
+  `Rhythm` tinyint(1) NOT NULL DEFAULT 0,
+  `Strategy` tinyint(1) NOT NULL DEFAULT 0,
+  `Puzzle` tinyint(1) NOT NULL DEFAULT 0,
+  `Casual` tinyint(1) NOT NULL DEFAULT 0,
+  `RPG` tinyint(1) NOT NULL DEFAULT 0,
+  `Shooting` tinyint(1) NOT NULL DEFAULT 0,
+  `Sports` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`email`, `Singleplayer`, `Multiplayer`, `Action`, `Adventure`, `Fighting`, `Rhythm`, `Strategy`, `Puzzle`, `Casual`, `RPG`, `Shooting`, `Sports`) VALUES
+('65d81a4c961d11bb6d1cd06ef441c3b6', 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+('b642b4217b34b1e8d3bd915fc65c4452', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orderhistory`
 --
 
 DROP TABLE IF EXISTS `orderhistory`;
-CREATE TABLE `orderhistory` (
-  `orderID` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `orderhistory` (
+  `orderID` int(10) NOT NULL AUTO_INCREMENT,
   `customerID` int(10) NOT NULL,
-  `orderDate` date NOT NULL
+  `orderDate` date NOT NULL,
+  PRIMARY KEY (`orderID`),
+  KEY `customerID` (`customerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -92,8 +132,8 @@ CREATE TABLE `orderhistory` (
 --
 
 DROP TABLE IF EXISTS `product`;
-CREATE TABLE `product` (
-  `productID` int(6) NOT NULL,
+CREATE TABLE IF NOT EXISTS `product` (
+  `productID` int(6) NOT NULL AUTO_INCREMENT,
   `productName` text NOT NULL,
   `price` int(7) NOT NULL,
   `features` text DEFAULT NULL,
@@ -102,8 +142,9 @@ CREATE TABLE `product` (
   `console` varchar(100) NOT NULL,
   `releaseDate` date NOT NULL,
   `finalPrice` double GENERATED ALWAYS AS (`price` * (100.0 - `discount`) / 100.0) STORED,
-  `productDesc` varchar(10000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `productDesc` varchar(10000) NOT NULL,
+  PRIMARY KEY (`productID`)
+) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product`
@@ -352,14 +393,18 @@ INSERT INTO `product` (`productID`, `productName`, `price`, `features`, `discoun
 --
 
 DROP TABLE IF EXISTS `review`;
-CREATE TABLE `review` (
-  `reviewID` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `review` (
+  `reviewID` int(10) NOT NULL AUTO_INCREMENT,
   `productID` int(10) NOT NULL,
   `customerID` int(10) NOT NULL,
   `rating` decimal(5,0) NOT NULL,
   `comment` text NOT NULL,
-  `reviewDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `reviewDate` date NOT NULL,
+  PRIMARY KEY (`reviewID`),
+  KEY `productID` (`productID`),
+  KEY `customerID` (`customerID`),
+  KEY `rating` (`rating`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `review`
@@ -370,82 +415,6 @@ INSERT INTO `review` (`reviewID`, `productID`, `customerID`, `rating`, `comment`
 (10, 51, 2, '5', 'this game rocks', '2020-11-12'),
 (11, 51, 2, '3', 'this game is okay', '2020-11-12'),
 (12, 161, 2, '5', 'cool game', '2020-11-12');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `cart`
---
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cartID`),
-  ADD UNIQUE KEY `cartID` (`cartID`) USING BTREE,
-  ADD UNIQUE KEY `uniqueProductCustomerID` (`productID`,`customerID`) USING BTREE,
-  ADD KEY `productID` (`productID`),
-  ADD KEY `customerID` (`customerID`);
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`customerID`);
-
---
--- Indexes for table `orderhistory`
---
-ALTER TABLE `orderhistory`
-  ADD PRIMARY KEY (`orderID`),
-  ADD KEY `customerID` (`customerID`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`productID`);
-
---
--- Indexes for table `review`
---
-ALTER TABLE `review`
-  ADD PRIMARY KEY (`reviewID`),
-  ADD KEY `productID` (`productID`),
-  ADD KEY `customerID` (`customerID`),
-  ADD KEY `rating` (`rating`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `cart`
---
-ALTER TABLE `cart`
-  MODIFY `cartID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-  MODIFY `customerID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `orderhistory`
---
-ALTER TABLE `orderhistory`
-  MODIFY `orderID` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `productID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
-
---
--- AUTO_INCREMENT for table `review`
---
-ALTER TABLE `review`
-  MODIFY `reviewID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
