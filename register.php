@@ -107,8 +107,9 @@
                         $_SESSION['valid_user'] = $row['email'];
                         $_SESSION['valid_user_name'] = $row['firstName'];
                         $_SESSION['valid_user_id'] = $row['customerID'];
+                        mysqli_close($connect);
                         header("Location: index.php");
-                      mysqli_close($connect);
+
                     }
                   else{
                     die("insertion failed");
