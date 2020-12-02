@@ -98,10 +98,16 @@
 
                   $insertUsernamePassword = "INSERT INTO customer(firstName,lastName,gender, email,password, birthDate) VALUES ('$firstName','$lastName','$gender','$encryptedUsername', '$encryptedPassword', '$DOB')";
                   $createFavorites = "INSERT INTO favorites(email) VALUES ('$encryptedUsername')";
+                  mysqli_query($connect, $createFavorites);
 
 
                   if(mysqli_query($connect,$insertUsernamePassword)){
-                      header("Location: indexMembers.php");
+
+                      if($row = mysqli_fetch_assoc($checkResult)){
+                        $_SESSION['valid_user'] = $row['email'];
+                        $_SESSION['valid_user_name'] = $row['firstName'];
+                        $_SESSION['valid_user_id'] = $row['customerID'];
+                        header("Location: index.php");
                       mysqli_close($connect);
                     }
                   else{

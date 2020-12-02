@@ -48,6 +48,7 @@
               $personaize_queryResult = mysqli_query($connect, $personalize_query);
 
             }
+            $message = 'You have successfully updated your preferences';
 
           }
 
@@ -55,8 +56,7 @@
         }
       }
       else{
-        echo '<p>You are not logged in.</p><p><a href="login.php">Log In </a></p><br><p><a href="register.php">Register</a></p>';
-        echo '';
+        $message = 'You are not logged in.';
       }
 
 
@@ -135,10 +135,6 @@
 
 		<!-- security -->
 		<section class="content-item profile-security">
-      <?php
-        if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in show the profile icon
-        {
-          echo '
 
           <form action="" method="POST">
           <ul>
@@ -159,14 +155,11 @@
         </ul>
         <input type = "submit" name="submit_btn_personalize" id = "submit" value = "Submit"/>
       </form>
-          '
+      <?php
+        if(isset($message)){
+          echo($message);
         }
-        else
-        {
-          echo '<p>You are not logged in.</p><p><a href="login.php">Log in to personalize your preferences. </a></p><br><p><a href="register.php">Register</a></p>';
-          echo '';
-        }
-      ?>
+       ?>
 
 		</section>
 

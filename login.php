@@ -106,13 +106,13 @@
                     echo '<a href="profile.php">Profile</a>';
                     echo ' | ';
                     echo '<a href="logout.php">Logout</a>';
-                    
+
                     echo '</div>';
                     // echo '<ul class="button-menu">
                     //   <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
                     //     <ul class="dropdownmain">
                     //       <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          
+
                     //       <li class="dropdownitem"><a href="logout.php">Logout</a></li>
                     //     </ul>
 
