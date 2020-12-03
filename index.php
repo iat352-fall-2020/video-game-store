@@ -145,7 +145,7 @@
           echo '<h3 class="main-content-header">Your Recommendations</h3>
           <div class="header-row-1">';
           $genresTrue=[];
-          $getUserRow = "SELECT * FROM favorites WHERE email='65d81a4c961d11bb6d1cd06ef441c3b6'";
+          $getUserRow = "SELECT * FROM favorites WHERE email='$_SESSION["valid_user"]'";
           if($result=mysqli_query($connect, $getUserRow)){
             $userRow = mysqli_fetch_row($result);
 
@@ -195,7 +195,7 @@
             // Find a game that is associated with the genre from $stringGenreTrue
             for($g = 0 ; $g < count($genresTrue) ; $g++){
               $gameShownQuery = "SELECT productName, price, discount,finalPrice,console,releaseDate,features, format(AVG(review.rating),1) as AverageRating FROM product WHERE genre = '$genresTrue[$g]' LIMIT 1";
-              
+
             }
 
 
