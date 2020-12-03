@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2020 at 12:56 AM
+-- Generation Time: Dec 03, 2020 at 11:40 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `password` text NOT NULL,
   `birthDate` date NOT NULL,
   PRIMARY KEY (`customerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `customer`
@@ -76,7 +76,9 @@ CREATE TABLE IF NOT EXISTS `customer` (
 
 INSERT INTO `customer` (`customerID`, `firstName`, `lastName`, `gender`, `email`, `password`, `birthDate`) VALUES
 (2, 'Bert', 'Cheung', 'Male', '65d81a4c961d11bb6d1cd06ef441c3b6', '098f6bcd4621d373cade4e832627b4f6', '2002-12-29'),
-(3, 'bob', 'jones', 'Male', 'b642b4217b34b1e8d3bd915fc65c4452', '098f6bcd4621d373cade4e832627b4f6', '2002-12-29');
+(3, 'bob', 'jones', 'Male', 'b642b4217b34b1e8d3bd915fc65c4452', '098f6bcd4621d373cade4e832627b4f6', '2002-12-29'),
+(4, 'test', 'tset', 'Male', '0ac603900ad6f412f95a68a3c736399b', '10ae7c7ac7335ceb633761b90d515698', '1999-11-01'),
+(5, 'Brian', 'Django', 'Male', '67d7e8aec99c4b5757e6160d8dc2a344', '38f571ca091d2075584f6167e9ac1213', '1998-11-30');
 
 -- --------------------------------------------------------
 
@@ -107,7 +109,9 @@ CREATE TABLE IF NOT EXISTS `favorites` (
 --
 
 INSERT INTO `favorites` (`email`, `Singleplayer`, `Multiplayer`, `Action`, `Adventure`, `Fighting`, `Rhythm`, `Strategy`, `Puzzle`, `Casual`, `RPG`, `Shooting`, `Sports`) VALUES
+('0ac603900ad6f412f95a68a3c736399', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 ('65d81a4c961d11bb6d1cd06ef441c3b6', 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+('67d7e8aec99c4b5757e6160d8dc2a344', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 ('b642b4217b34b1e8d3bd915fc65c4452', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
