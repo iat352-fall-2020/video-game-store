@@ -4,6 +4,8 @@
     <script src="js/linkTo.js"></script>
     <script src="js/headerScroll.js"></script>
     <script src="js/functions.js"></script>
+    <!-- <script src="js/filtering.js"></script> -->
+    <script src="js/jquery-3.5.1.min.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
@@ -26,11 +28,9 @@
 
 <!-- Framework reused from a previous project, approved for use by Professor Serban: http://www.sfu.ca/~bwa44/IAT339-D101-P02/ -->
 
-
   <header id="header">
         <!-- logo? -->
         <div class="header-menu ">
-
 
           <div class="header-row-1">
             <img class="nav-main-logo-img" src="img/Logo.png" alt="Logo" onclick="pointTo('index.php')"/>
@@ -96,22 +96,35 @@
 	<main class="main-content container">
 		<!-- search and filter -->
 
+    <?php
+      // unset($genreQuery);
+      $titleQuery ="";
+      $featureQuery ="";
+      $platformQuery ="";
+      $dateQuery ="";
+      $saleQuery ="";
+      $priceQuery ="";
+      $query="";
+      // unset($filters);
+    ?>
+
 
     <div class="content-item catalog-filter">
       <div class="sort-style">
         <!-- <p>Search</p> -->
-
-        <form action="catalog.php" method="POST">
+        
+        <!-- <form id = "filters" action="catalog.php" method="POST"> -->
           <ul>
-          <input type="text" name="title" placeholder="Game Title" value="<?php echo isset($_POST["title"]) ? $_POST["title"] : ''; ?>">
+
+          <input id="gameTitle" type="text" name="title" placeholder="Game Title">
           </ul>
 
           <p>Sort by: </p>
           <ul>
-            <li><input type="radio" name="sort" value="releaseDate DESC"> Arrival: Newest to Oldest</li>
-            <li><input type="radio" name="sort" value="releaseDate ASC"> Arrival: Oldest to Newest</li>
-            <li><input type="radio" name="sort" value="finalPrice ASC"> Price: Low to High</li>
-            <li><input type="radio" name="sort" value="finalPrice DESC"> Price: High to Low</li>
+            <li><input type="radio" name="sort" class="sort" value="releaseDate DESC" checked> Arrival: Newest to Oldest</li>
+            <li><input type="radio" name="sort" class="sort" value="releaseDate ASC"> Arrival: Oldest to Newest</li>
+            <li><input type="radio" name="sort" class="sort" value="finalPrice ASC"> Price: Low to High</li>
+            <li><input type="radio" name="sort" class="sort" value="finalPrice DESC"> Price: High to Low</li>
           </ul>
 
           <p>Features</p>
@@ -165,13 +178,63 @@
           <li><input type="radio" name="price" value="10" onclick="">Less than $10</li>
           <li><input type="radio" name="price" value="20" onclick="">Less than $20</li>
           </ul>
+        <!-- </form> -->
 
-          <input type="submit" name="search" value="Search">
-        </form>
-        <?php
+        <script>
+        var features;
 
+        $(document).ready(function()
+        {
+            getQuery();
+        })
 
-        ?>
+          $('input[type=radio][name=sort]').change(function()
+          {
+            // alert("Sort: " + $('input[name="sort"]:checked').val());
+            getQuery();
+          });
+
+          $('input[type=radio][name=price]').change(function()
+          {
+            // alert("Price: " + $('input[name="price"]:checked').val());
+            getQuery();
+          });
+
+          $('[name="feature[]"]:checkbox').change(function()
+          {
+            getQuery();
+          });
+
+          $('[name="genre[]"]:checkbox').change(function()
+          {
+            // alert("Genre: " + $('input[name="genre[]"]:checked').val());
+            getQuery();
+          });
+
+          $('[name="platform[]"]:checkbox').change(function()
+          {
+            // alert("Platform: " + $('input[name="platform[]"]:checked').val());
+            getQuery();
+          });
+
+          $('[name="special"]:checkbox').change(function()
+          {
+            // alert("Specials: " + $('input[name="special"]:checked').val());
+            getQuery();
+          });
+
+          $('[name="releaseDate"]').change(function()
+          {
+            // alert("Specials: " + $('input[name="special"]:checked').val());
+            getQuery();
+          });
+
+          $('[name="title"]:text').keyup(function()
+          {
+            // alert("Game Title: " + $('input[name="title"]').val());
+            getQuery();
+          });
+        </script>
       </div>
 
 
@@ -180,239 +243,8 @@
     <div class="content-item catalog-list">
 
 
-      <table>
-      <?php //catalogue filtering and pagination
-        $dbhost = "localhost";
-        $dbuser = "root";
-        $dbpass = "";
-        $dbname = "benedict_wong";
-        $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+      <table id="results">
 
-
-        //pagination settings (WIP)
-        if(isset($_GET['pageno']))
-        {
-          $pageno = $_GET['pageno'];
-        }
-        else
-        {
-          $pageno = 1;
-        }
-        $recordsPerPage = 10; //results per page
-        $offset = ($pageno-1) * $recordsPerPage;
-
-        $itemsPerRow = 5;
-
-        unset($genreQuery);
-        $titleQuery ="";
-        $featureQuery ="";
-        $platformQuery ="";
-        $dateQuery ="";
-        $saleQuery ="";
-        $priceQuery ="";
-        unset($filters);
-
-        if($connect){ //check connection
-        }
-        else{
-          die("exit");
-        }
-
-        $query = "SELECT product.productID,productName, price, discount,genre,finalPrice,genre,console,releaseDate,features, format(AVG(review.rating),1) as AverageRating 
-        FROM product  
-        LEFT JOIN review 
-        ON review.productID = product.productID"; 
-
-if(!empty($_POST['feature']))
-{
-  foreach($_POST['feature'] as $check)
-  {
-    // echo $check;
-    $featureQuery = "features IN (" . "'". implode("','",$_POST['feature']) . "'". ")";
-  }
-  $filters[] = $featureQuery;
-}
-
-if(!empty($_POST['genre']))
-{
-  foreach($_POST['genre'] as $check)
-  {
-    $genreQuery = "genre IN (" . "'". implode("','",$_POST['genre']) . "'". ")";
-  }
-  $filters[] = $genreQuery;
-}
-
-if(!empty($_POST['releaseDate']))
-{
-  $filters[] = "releaseDate = '". $_POST['releaseDate']."'";
-}
-
-if(!empty($_POST['platform']))
-{
-  foreach($_POST['platform'] as $check)
-  {
-    $platformQuery = "console IN (" . "'". implode("','",$_POST['platform']) . "'". ")";
-  }
-  $filters[] = $platformQuery;
-}
-
-if(!empty($_POST['special']))
-{
-  $saleQuery = " discount > 0 ";
-  $filters[] = $saleQuery;
-}
-
-if(!empty($_POST['price']))
-{
-  $priceQuery = " finalPrice <= '" . $_POST['price'] . "'";
-  $filters[] = $priceQuery;
-}
-
-if(!empty($filters))
-{
-$query .= " WHERE " . implode(' AND ',$filters);
-}
-
-        $query .= " GROUP BY product.productID"; //left join in order to show products that don't have reviews yet as well as products that do
-
-        //query building
-        if(isset($_POST['title']) && $_POST['title'] != "") //game title check
-        {
-          // echo 'Title: ' .$_POST['title'];
-          $titleQuery .= "productName LIKE '%" .$_POST['title'] . "%' ";
-          // $query .= "productName LIKE '%" .$_POST['title'] . "%' ";
-          $filters[] = $titleQuery;
-        }
-
-
-
-
-
-        // orders it in newest release date order by default
-        $query .= " ORDER BY ";
-        if(isset($_POST['sort']) && $_POST['sort'] != "")
-        {
-          $query.= $_POST['sort'];
-        }
-        else
-        {
-          $query .= "releaseDate DESC";
-        }
-
-
-        //debugging for the entire finished query
-		// echo '<p>Query: '.$query.'</p>';
-
-
-        $result = mysqli_query($connect, $query);
-
-
-        if(!$result){
-          echo "Failure: " . mysqli_error($connect);
-          die("Database query failed.");
-        }
-        else
-        {
-          $num = mysqli_num_rows($result); //total count of results
-          $resultindex = 1; //current index of results
-
-
-          echo'<tr>';
-            while($row = mysqli_fetch_assoc($result))
-            {
-              
-              echo'<td>';
-              echo '<div class="item " id= "MU1920"><a href="detailedproduct.php?productID=';
-              echo $row['productID'];
-              echo '"><img src="img/default-placeholder-image.png" class="placeholder-img" alt="';
-              echo $row['productName'];
-              echo'"/><p class="item_name">';
-              echo $row['productName'];
-              echo '</p>';
-
-             
-
-              echo '<p>';
-              // echo $row['console'];
-              switch($row['console'])
-              {
-                case 'PC':
-                  echo '<img src="img/consoles/pc.png" class="console" alt="1 star rating">';
-                break;
-                case 'Xbox':
-                  echo '<img src="img/consoles/xbox.png" class="console" alt="2 star rating">';
-                break;
-                case 'PS4':
-                  echo '<img src="img/consoles/ps4.png" class="console-ps4-ps5" alt="3 star rating">';
-                break;
-                case 'PS5':
-                  echo '<img src="img/consoles/ps5.png" class="console-ps4-ps5" alt="4 star rating">';
-                break;
-                case 'Nintendo Switch':
-                  echo '<img src="img/consoles/switch.png" class="console" alt="Nintendo Switch">';
-                break;
-              }
-              echo '</p>';
-              echo '<p>';
-              echo $row['genre'];
-              echo ' ';
-              echo $row['features'];
-              echo '</p>';
-               // echo 'Average Rating: ';
-               if(!isset($row['AverageRating']))
-               {
-                 // $row['AverageRating'] = 'N/A';
-                 echo '<img src="img/stars/0.png" class="rating-img" alt="1 star rating">';
-               }
-               else
-               {
-                 switch(round($row['AverageRating']))
-                 {
-                   case 1:
-                     echo '<img src="img/stars/1.png" class="rating-img" alt="1 star rating">';
-                   break;
-                   case 2:
-                     echo '<img src="img/stars/2.png" class="rating-img" alt="2 star rating">';
-                   break;
-                   case 3:
-                     echo '<img src="img/stars/3.png" class="rating-img" alt="3 star rating">';
-                   break;
-                   case 4:
-                     echo '<img src="img/stars/4.png" class="rating-img" alt="4 star rating">';
-                   break;
-                   case 5:
-                     echo '<img src="img/stars/5.png" class="rating-img" alt="5 star rating">';
-                   break;
-                 }
-               }
-               // echo $row['AverageRating'];
-              // echo '<p> Released on: ';
-              // echo $row['releaseDate'];
-              // echo '</p>';
-              echo '<p>';
-              if($row['discount']>0)
-              {
-                echo'<strike>$'. $row['price'] . '</strike>';
-                echo ' %'.$row['discount'] . ' off!';
-              }
-              echo '<p class="price">$';
-              echo $row['finalPrice'];
-              echo'</p></a>';
-              // echo'<noscript><a href="detailedproduct.php';
-              // echo '" class="noscript-a">More info</a></noscript></div>';
-              echo'</td>';
-              if($resultindex % $itemsPerRow == 0)
-              {
-                echo'</tr>';
-              }
-              $resultindex++;
-            }
-        }
-
-
-
-
-      ?>
 
       </table>
 
@@ -425,4 +257,87 @@ $query .= " WHERE " . implode(' AND ',$filters);
     </nav>
   </footer>
   </body>
+
+
+<script>
+  var myReq = getXMLHTTPRequest();
+
+
+
+  function getXMLHTTPRequest() {
+    var req =  false;
+    try {
+        /* for Firefox */
+        req = new XMLHttpRequest();
+    } catch (err) {
+        try {
+          /* for some versions of IE */
+          req = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (err) {
+          try {
+              /* for some other versions of IE */
+              req = new ActiveXObject("Microsoft.XMLHTTP");
+          } catch (err) {
+              req = false;
+          }
+      }
+    }
+    return req;
+  }
+
+  function getQuery()
+  {
+      var gametitle = $('#gameTitle').serialize();
+      var sortBy = $('input[name="sort"]:checked').serialize();
+      var onSale = $('input[name="special"]:checked').serialize();
+      var price = $('input[name="price"]:checked').serialize();
+      var genres = $('[name="genre[]"').serialize();
+      var features = $('[name="feature[]"').serialize();
+      var platforms = $('[name="platform[]"').serialize();
+      var date = $('input[name="releaseDate"]').serialize();
+      
+      console.log(features);
+
+      myReq = getXMLHTTPRequest();
+
+
+      var data = gametitle + "&" + features  + "&" + sortBy +"&" +onSale + "&" + price + "&" + genres + "&" + platforms + "&" + date;
+      console.log("Data: " + data);
+
+      myReq.open("POST","filtercatalog.php",true);
+
+      
+      myReq.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+
+
+      myReq.send(data);
+      myReq.onreadystatechange = displayQuery;
+
+
+
+      // alert(myReq.responseText);
+
+
+  }
+
+  function displayQuery()
+  {
+      if(myReq.readyState == 4)
+      {
+          if(myReq.status == 200) //if ready to respond
+          {
+              document.getElementById("results").innerHTML = myReq.responseText;
+              // alert(myReq.responseText);
+              // console.log()
+          }
+          else
+          {
+              alert("There was a problem with the script");
+          }
+      }
+  }
+</script>
+
+  
 </html>
