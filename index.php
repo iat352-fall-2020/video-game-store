@@ -30,7 +30,7 @@
      die("exit");
    }
 
-  //  $checkLogin = "SELECT email, password, firstName FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."' "; 
+  //  $checkLogin = "SELECT email, password, firstName FROM customer WHERE email='".md5($username)."' AND password='".md5($password)."' ";
   //  $checkResult = mysqli_query($connect, $checkLogin);
 
   //  $count = mysqli_num_rows($result);
@@ -50,7 +50,7 @@
   //  {
   //    echo "Nada";
   //  }
-     
+
     //  $_SESSION['valid_user'] = $count['firstName'];
       //  $_SESSION['valid_user'] = "Bert"; //this is purely for debugging - comment out if you want to test the login feature
 
@@ -81,13 +81,13 @@
                     echo '<a href="profile.php">Profile</a>';
                     echo ' | ';
                     echo '<a href="logout.php">Logout</a>';
-                    
+
                     echo '</div>';
                     // echo '<ul class="button-menu">
                     //   <li><a href="#"><img src="img/profile_icon.png" alt="profile-icon"></a>
                     //     <ul class="dropdownmain">
                     //       <li class="dropdownitem"><a href="profile.php">Profile</a></li>
-                          
+
                     //       <li class="dropdownitem"><a href="logout.php">Logout</a></li>
                     //     </ul>
 
@@ -103,7 +103,7 @@
                 ?>
                 <p>
                   <a href="checkout.php" class="cart-nav">
-                  
+
                   <img src="img/cart_icon.png" alt="cart-icon">
                   </a>
                   </p>
@@ -137,13 +137,65 @@
 
     <!-- <h3 class="header-row-1">New Releases</h3> -->
 
-    
+
       <?php
         if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in
         {
           echo'<section class="content-item section-club">';
           echo '<h3 class="main-content-header">Your Recommendations</h3>
           <div class="header-row-1">';
+          $stringGenreTrue="";
+          $getUserRow = "SELECT * FROM favorites WHERE email='65d81a4c961d11bb6d1cd06ef441c3b6'";
+          if($result=mysqli_query($connect, $getUserRow)){
+            $userRow = mysqli_fetch_row($result);
+
+
+            if($userRow[1] == "TRUE"){
+              $stringGenreTrue .= "Singleplayer ";
+            }
+            if($userRow[2] == "TRUE"){
+              $stringGenreTrue .= "Multiplayer ";
+            }
+            if($userRow[3] == "TRUE"){
+              $stringGenreTrue .= "Action ";
+            }
+            if($userRow[4] == "TRUE"){
+              $stringGenreTrue .= "Adventure ";
+            }
+            if($userRow[5] == "TRUE"){
+              $stringGenreTrue .= "Fighting ";
+            }
+            if($userRow[6] == "TRUE"){
+              $stringGenreTrue .= "Rhythm ";
+            }
+            if($userRow[7] == "TRUE"){
+              $stringGenreTrue .= "Strategy ";
+            }
+            if($userRow[8] == "TRUE"){
+              $stringGenreTrue .= "Puzzle ";
+            }
+            if($userRow[9] == "TRUE"){
+              $stringGenreTrue .= "Casual ";
+            }
+            if($userRow[10] == "TRUE"){
+              $stringGenreTrue .= "RPG ";
+            }
+            if($userRow[11] == "TRUE"){
+              $stringGenreTrue .= "Shooting ";
+            }
+            if($userRow[12] == "TRUE"){
+              $stringGenreTrue .= "Sports ";
+            }
+
+
+
+            }
+
+            // Find a game that is associated with the genre from $stringGenreTrue
+
+          }
+
+
           echo '<div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Demon\'s Souls</p></a></div>';
           echo '</div>';
           echo'</section>';
@@ -153,7 +205,7 @@
           // echo '<p>You are not logged in.</p>';
         }
       ?>
-    
+
 
 		<section class="content-item section-club">
     <h3 class="main-content-header">New Releases</h3>

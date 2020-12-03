@@ -186,14 +186,8 @@
 
 		<!-- notification -->
 		<section class="content-item profile-notification">
-      <!-- <h3>Notifications</h3>
-        <ul>
-          <li><input type="checkbox" name="newsletter" value="sub-newsletter" checked> Subscribe to our newsletter.</li>
-          <li><input type="checkbox" name="admin-email" value="admin-email" checked> Receive e-mails from admins.</li>
-          <li><input type="checkbox" name="profile-pub" value="profile-public"> Allow other users to see my profile.</li>
-          <li><p class="updateMessage">Your notification preferences have been updated!</p></li>
-          <li><button onclick="updatePrefs(2)">Update</button></li>
-        </ul> -->
+
+      <a href="personalization.php">Click here to go to personalization </a>
 		</section>
 
 		<!-- billing information -->
