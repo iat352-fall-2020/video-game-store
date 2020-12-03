@@ -144,47 +144,48 @@
           echo'<section class="content-item section-club">';
           echo '<h3 class="main-content-header">Your Recommendations</h3>
           <div class="header-row-1">';
-          $stringGenreTrue="";
+          $genresTrue=[];
           $getUserRow = "SELECT * FROM favorites WHERE email='65d81a4c961d11bb6d1cd06ef441c3b6'";
           if($result=mysqli_query($connect, $getUserRow)){
             $userRow = mysqli_fetch_row($result);
 
 
+
             if($userRow[1] == "TRUE"){
-              $stringGenreTrue .= "Singleplayer ";
+              array_push($genresTrue, "Singleplayer");
             }
             if($userRow[2] == "TRUE"){
-              $stringGenreTrue .= "Multiplayer ";
+              array_push($genresTrue, "Multiplayer");
             }
             if($userRow[3] == "TRUE"){
-              $stringGenreTrue .= "Action ";
+              array_push($genresTrue, "Action");
             }
             if($userRow[4] == "TRUE"){
-              $stringGenreTrue .= "Adventure ";
+              array_push($genresTrue, "Adventure");
             }
             if($userRow[5] == "TRUE"){
-              $stringGenreTrue .= "Fighting ";
+              array_push($genresTrue, "Fighting");
             }
             if($userRow[6] == "TRUE"){
-              $stringGenreTrue .= "Rhythm ";
+              array_push($genresTrue, "Rhythm");
             }
             if($userRow[7] == "TRUE"){
-              $stringGenreTrue .= "Strategy ";
+              array_push($genresTrue, "Strategy");
             }
             if($userRow[8] == "TRUE"){
-              $stringGenreTrue .= "Puzzle ";
+              array_push($genresTrue, "Puzzle");
             }
             if($userRow[9] == "TRUE"){
-              $stringGenreTrue .= "Casual ";
+              array_push($genresTrue, "Casual");
             }
             if($userRow[10] == "TRUE"){
-              $stringGenreTrue .= "RPG ";
+              array_push($genresTrue, "RPG");
             }
             if($userRow[11] == "TRUE"){
-              $stringGenreTrue .= "Shooting ";
+              array_push($genresTrue, "Shooting");
             }
             if($userRow[12] == "TRUE"){
-              $stringGenreTrue .= "Sports ";
+              array_push($genresTrue, "Sports");
             }
 
 
@@ -192,6 +193,11 @@
             }
 
             // Find a game that is associated with the genre from $stringGenreTrue
+            for($g = 0 ; $g < count($genresTrue) ; $g++){
+              $gameShownQuery = "SELECT productName, price, discount,finalPrice,console,releaseDate,features, format(AVG(review.rating),1) as AverageRating FROM product WHERE genre = '$genresTrue[$g]' LIMIT 1";
+              
+            }
+
 
           }
 
