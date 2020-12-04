@@ -114,7 +114,7 @@
           // {
           //   $genreFlags[i];
           // }
-          
+
 
 
           // $personalize_check = $_POST['genre'];
@@ -141,7 +141,7 @@
             // echo $personalize_check[$i];
             $genreQuery = $personalize_check;
             $genreQuery = implode("','",$_POST['genre']);
-            
+
             echo $genreQuery;
           }
           else
@@ -262,7 +262,7 @@
               <li><input type="checkbox" name="Sports" value="Sports" onclick="">Sports</li>
               </li>
             </ul>
-            <input type = "submit" name="submit_btn_personalize" id = "submit" value = "Submit"/>
+            <input type = "submit" name="submit_btn_personalize" id = "submit" value = "Save"/>
           </form>
       <?php
         if(isset($message)){
