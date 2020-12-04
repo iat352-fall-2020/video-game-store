@@ -173,8 +173,8 @@
 
       ?>
 
-      <h3>Personalization</h3>
-      
+      <h3>Recommendation Personalization</h3>
+
 
 
 

@@ -52,19 +52,6 @@
       $DOB = $_POST['birthDate'];
       $gender= $_POST['gender'];
 
-      if(isset($firstName) && $firstName != "")
-      {
-        $error = "Please enter a first name";
-      }
-      // else
-      // {
-      //   die;
-      // }
-
-      if(isset($lastName) && $lastName != "")
-      {
-        $error = "Please enter a last name";
-      }
       // else
       // {
       //   die;
@@ -104,19 +91,14 @@
                   if(mysqli_query($connect,$insertUsernamePassword))
                   {
 
-                      if($row = mysqli_fetch_assoc($checkResult))
-                      {
-                        $_SESSION['valid_user'] = $row['email'];
-                        $_SESSION['valid_user_name'] = $row['firstName'];
-                        $_SESSION['valid_user_id'] = $row['customerID'];
-                        mysqli_close($connect);
+                        $_SESSION['valid_user'] = $encryptedUsername;
+                        $_SESSION['valid_user_name'] = $firstName;
+
+
                         header("Location: index.php");
                       }
-                  }
-                  else
-                  {
-                    die("insertion failed");
-                  }
+
+
                 }
               }
               else{
@@ -139,7 +121,7 @@
       {
         $error = "Please enter a first and last name!";
       }
-  }
+    }
 
 
      // INSERT INTO userData(username, password) VALUES ($username, $encryptedPassword)

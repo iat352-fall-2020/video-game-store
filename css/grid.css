@@ -289,11 +289,11 @@ div#MU9800{
 }
 
 .recommendations-item {
-  min-height:18em;
+  min-height:12em;
   flex: 25%;
-  max-height:18em;
+  max-height:12em;
   text-align:center;
-  background-color:rgb(245,245,245);
+  /**/
   text-decoration:none;
   padding:1em;
 }
@@ -303,6 +303,9 @@ div#MU9800{
   text-align:left;
 }
 
+.recommendations-table tr>tr{
+   background-color:rgb(245,245,245);
+}
 
 .cart-container{
 
