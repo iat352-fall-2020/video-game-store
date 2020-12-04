@@ -155,7 +155,7 @@
 
       <?php
         $recommendationsQuery;
-      
+
         if(isset($_SESSION['valid_user']) && $_SESSION['valid_user'] !== "") //if they are logged in
         {
           echo'<section class="content-item section-club">';
@@ -174,7 +174,7 @@
           {
 
 
-            
+
             $num = mysqli_num_rows($result); //total count of results
             $resultindex = 1; //current index of results
             $genresCount = 0;
@@ -185,7 +185,7 @@
               if($row['Singleplayer'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Singleplayer" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Singleplayer</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Singleplayer</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -215,7 +215,7 @@
               if($row['Multiplayer'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Multiplayer" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Multiplayer</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Multiplayer</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -246,7 +246,7 @@
               if($row['Action'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Action" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Action</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Action</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -278,7 +278,7 @@
               if($row['Adventure'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Adventure" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Adventure</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Adventure</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -308,7 +308,7 @@
               if($row['Rhythm'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Rhythm" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Rhythm</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Rhythm</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -338,7 +338,7 @@
               if($row['Strategy'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Strategy" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Strategy</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Strategy</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -368,7 +368,7 @@
               if($row['Puzzle'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Puzzle" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Puzzle</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Puzzle</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -398,7 +398,7 @@
               if($row['Casual'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Casual" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Casual</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Casual</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -428,7 +428,7 @@
               if($row['RPG'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "RPG" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">RPG</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">RPG</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -458,7 +458,7 @@
               if($row['Shooting'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Shooting" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Shooting</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Shooting</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -488,7 +488,7 @@
               if($row['Sports'] == 1)
               {
                 $recommendationsQuery = 'SELECT * FROM `product` WHERE genre = "Sports" ORDER BY RAND() LIMIT 5';
-                echo '<tr><th class="recommendations-th">Sports</th></tr>';
+                echo '<tr class="recommendations-tr"><th class="recommendations-th">Sports</th></tr>';
                 $result2 = mysqli_query($connect,$recommendationsQuery);
                 if(!$result)
                 {
@@ -521,7 +521,7 @@
               }
               echo '</table>';
             }
-            
+
 
           }
 
@@ -579,7 +579,7 @@
             }
 
 
-        
+
 
 
           // echo '<div class="club" onclick="pointTo(catalog.php)"><a href="catalog.php"><img src="img/default-placeholder-image.png" alt="game"/><p>Demon\'s Souls</p></a></div>';

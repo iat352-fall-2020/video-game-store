@@ -133,10 +133,10 @@
             //   }
 
             echo 'You have successfully updated your preferences ';
-            for($i = 0; $i < count($personalize_check); $i++)
-            {
-
-            }
+            // for($i = 0; $i < count($personalize_check); $i++)
+            // {
+            //
+            // }
 
             // echo $personalize_check[$i];
             $genreQuery = $personalize_check;
