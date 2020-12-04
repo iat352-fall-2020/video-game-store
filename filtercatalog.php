@@ -179,7 +179,7 @@
 
 
 
-        echo'<td>';
+        echo'<td class="catalog-td">';
         echo '<div class="item " id= "MU1920"><a href="detailedproduct.php?productID=';
         echo $row['productID'];
         echo '"><img src="img/default-placeholder-image.png" class="placeholder-img" alt="';

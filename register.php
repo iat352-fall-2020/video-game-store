@@ -101,17 +101,20 @@
                   mysqli_query($connect, $createFavorites);
 
 
-                  if(mysqli_query($connect,$insertUsernamePassword)){
+                  if(mysqli_query($connect,$insertUsernamePassword))
+                  {
 
-                      if($row = mysqli_fetch_assoc($checkResult)){
+                      if($row = mysqli_fetch_assoc($checkResult))
+                      {
                         $_SESSION['valid_user'] = $row['email'];
                         $_SESSION['valid_user_name'] = $row['firstName'];
                         $_SESSION['valid_user_id'] = $row['customerID'];
                         mysqli_close($connect);
                         header("Location: index.php");
-
-                    }
-                  else{
+                      }
+                  }
+                  else
+                  {
                     die("insertion failed");
                   }
                 }

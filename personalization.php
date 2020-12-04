@@ -31,36 +31,133 @@
     }
     ?>
 
-    <?php
-      if(isset($_SESSION['valid_user'])){
+<?php
+        $genreCount = 12;
+        $genreFlags = array_fill(0,$genreCount,0);
+      // if(isset($_SESSION['valid_user'])){
         if(isset($_POST['submit_btn_personalize'])){
-          $personalize_check = $_POST['genre'];
-          if(empty($personalize_check)){
-            echo ('There are no options selected.');
-          }
-          else{
 
-            $counted = count($personalize_check);
-            for($i = 0 ; $i < $counted ; $i++){
-              $currentUser = $_SESSION['valid_user'];
-              $currentIndex = $personalize_check[$i];
-              $personalize_query = "UPDATE favorites SET '$currentIndex' = 'TRUE' WHERE email='$currentUser'";
-              $personaize_queryResult = mysqli_query($connect, $personalize_query);
+          if(isset($_POST['Singleplayer']))
+          {
+            $genreFlags[0] = 1;
+          }
+          if(isset($_POST['Multiplayer']))
+          {
+            $genreFlags[1] = 1;
+          }
+          if(isset($_POST['Action']))
+          {
+            $genreFlags[2] = 1;
+          }
+          if(isset($_POST['Adventure']))
+          {
+            $genreFlags[3] = 1;
+          }
+          if(isset($_POST['Fighting']))
+          {
+            $genreFlags[4] = 1;
+          }
+          if(isset($_POST['Rhythm']))
+          {
+            $genreFlags[5] = 1;
+          }
+          if(isset($_POST['Strategy']))
+          {
+            $genreFlags[6] = 1;
+          }
+          if(isset($_POST['Puzzle']))
+          {
+            $genreFlags[7] = 1;
+          }
+          if(isset($_POST['Casual']))
+          {
+            $genreFlags[8] = 1;
+          }
+          if(isset($_POST['RPG']))
+          {
+            $genreFlags[9] = 1;
+          }
+          if(isset($_POST['Shooting']))
+          {
+            $genreFlags[10] = 1;
+          }
+          if(isset($_POST['Sports']))
+          {
+            $genreFlags[11] = 1;
+          }
+
+          print_r($genreFlags);
+
+          $genreQuery = "REPLACE INTO favorites VALUES ('";
+          $genreQuery.= $_SESSION['valid_user'];
+          $genreQuery.= "','";
+          $genreQuery .= implode("','", $genreFlags);
+          $genreQuery .= "')";
+
+          print_r($genreQuery);
+          $result = mysqli_query($connect, $genreQuery);
+          if(!$result)
+          {
+            echo "Failure: " . mysqli_error($connect);
+            die("Database query failed.");
+          }
+          else
+          {
+            $personalize_queryResult = mysqli_query($connect, $genreQuery);
+            echo $personalize_queryResult;
+            echo ' You have successfully updated your preferences ';
+          }
+
+          // $genreFlags[$genreCount];
+
+          // for($i = 0; $i < $genreCount;$i++)
+          // {
+          //   $genreFlags[i];
+          // }
+          
+
+
+          // $personalize_check = $_POST['genre'];
+          // $personalize_check ="";
+          if(isset($personalize_check) && $personalize_check != "")
+          {
+            // $personalize_check = $_POST['genre'];
+            // $counted = count($personalize_check);
+
+            //   for($i = 0 ; $i < $counted; $i++)
+            //   {
+            //     $currentUser = $_SESSION['valid_user'];
+            //     $currentIndex = $personalize_check[$i];
+            //     $personalize_query = "REPLACE INTO favorites SET '$currentIndex' = 'TRUE' WHERE email='$currentUser'";
+            //     $personaize_queryResult = mysqli_query($connect, $personalize_query);
+            //   }
+
+            echo 'You have successfully updated your preferences ';
+            for($i = 0; $i < count($personalize_check); $i++)
+            {
 
             }
-            $message = 'You have successfully updated your preferences';
 
+            // echo $personalize_check[$i];
+            $genreQuery = $personalize_check;
+            $genreQuery = implode("','",$_POST['genre']);
+            
+            echo $genreQuery;
+          }
+          else
+          {
+            echo ('There are no options selected.');
+            // echo $personalize_check;
           }
 
 
         }
-      }
-      else{
-        $message = 'You are not logged in.';
-      }
+      // }
+      // else{
+      //   $message = 'You are not logged in.';
+      // }
+?>
 
-
-    ?>
 
   <header id="header">
         <!-- logo? -->
@@ -137,29 +234,43 @@
 		<section class="content-item profile-security">
 
           <form action="" method="POST">
-          <ul>
-            <li><input type="checkbox" name="genre[]" value="Singleplayer" onclick="">Singleplayer</li>
-            <li><input type="checkbox" name="genre[]" value="Multiplayer" onclick="">Multiplayer</li>
-            <li><input type="checkbox" name="genre[]" value="Action" onclick="">Action</li>
-            <li><input type="checkbox" name="genre[]" value="Adventure" onclick="">Adventure</li>
-            <li><input type="checkbox" name="genre[]" value="Fighting" onclick="">Fighting</li>
-            <li><input type="checkbox" name="genre[]" value="Rhythm" onclick="">Rhythm</li>
-            <li><input type="checkbox" name="genre[]" value="Strategy" onclick="">Strategy</li>
-            <li><input type="checkbox" name="genre[]" value="Puzzle" onclick="">Puzzle</li>
-            <li><input type="checkbox" name="genre[]" value="Casual" onclick="">Casual</li>
-            <li><input type="checkbox" name="genre[]" value="RPG" onclick="">RPG</li>
-            <li><input type="checkbox" name="genre[]" value="Shooting" onclick="">Shooting</li>
-            <li><input type="checkbox" name="genre[]" value="Sports" onclick="">Sports</li>
-            </li>
+            <ul>
+              <!-- <li><input type="checkbox" name="genre[]" value="Singleplayer" onclick="">Singleplayer</li>
+              <li><input type="checkbox" name="genre[]" value="Multiplayer" onclick="">Multiplayer</li>
+              <li><input type="checkbox" name="genre[]" value="Action" onclick="">Action</li>
+              <li><input type="checkbox" name="genre[]" value="Adventure" onclick="">Adventure</li>
+              <li><input type="checkbox" name="genre[]" value="Fighting" onclick="">Fighting</li>
+              <li><input type="checkbox" name="genre[]" value="Rhythm" onclick="">Rhythm</li>
+              <li><input type="checkbox" name="genre[]" value="Strategy" onclick="">Strategy</li>
+              <li><input type="checkbox" name="genre[]" value="Puzzle" onclick="">Puzzle</li>
+              <li><input type="checkbox" name="genre[]" value="Casual" onclick="">Casual</li>
+              <li><input type="checkbox" name="genre[]" value="RPG" onclick="">RPG</li>
+              <li><input type="checkbox" name="genre[]" value="Shooting" onclick="">Shooting</li>
+              <li><input type="checkbox" name="genre[]" value="Sports" onclick="">Sports</li> -->
 
-        </ul>
-        <input type = "submit" name="submit_btn_personalize" id = "submit" value = "Submit"/>
-      </form>
+              <li><input type="checkbox" name="Singleplayer" value="Singleplayer" onclick="">Singleplayer</li>
+              <li><input type="checkbox" name="Multiplayer" value="Multiplayer" onclick="">Multiplayer</li>
+              <li><input type="checkbox" name="Action" value="Action" onclick="">Action</li>
+              <li><input type="checkbox" name="Adventure" value="Adventure" onclick="">Adventure</li>
+              <li><input type="checkbox" name="Fighting" value="Fighting" onclick="">Fighting</li>
+              <li><input type="checkbox" name="Rhythm" value="Rhythm" onclick="">Rhythm</li>
+              <li><input type="checkbox" name="Strategy" value="Strategy" onclick="">Strategy</li>
+              <li><input type="checkbox" name="Puzzle" value="Puzzle" onclick="">Puzzle</li>
+              <li><input type="checkbox" name="Casual" value="Casual" onclick="">Casual</li>
+              <li><input type="checkbox" name="RPG" value="RPG" onclick="">RPG</li>
+              <li><input type="checkbox" name="Shooting" value="Shooting" onclick="">Shooting</li>
+              <li><input type="checkbox" name="Sports" value="Sports" onclick="">Sports</li>
+              </li>
+            </ul>
+            <input type = "submit" name="submit_btn_personalize" id = "submit" value = "Submit"/>
+          </form>
       <?php
         if(isset($message)){
           echo($message);
         }
        ?>
+
+
 
 		</section>
 

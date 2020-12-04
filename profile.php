@@ -173,6 +173,9 @@
 
       ?>
 
+      <h3>Personalization</h3>
+      
+
 
 
       <!-- <div class="clear-float">
@@ -187,7 +190,7 @@
 		<!-- notification -->
 		<section class="content-item profile-notification">
 
-      <a href="personalization.php">Click here to go to personalization </a>
+      <a class="recommendations-setup" href="personalization.php">Click here to go to personalization </a>
 		</section>
 
 		<!-- billing information -->
