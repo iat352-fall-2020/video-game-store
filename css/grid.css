@@ -298,14 +298,15 @@ div#MU9800{
   padding:1em;
 }
 
+.recommendations-table h3{
+  text-align: center;
+}
+
 .recommendations-th
 {
   text-align:left;
 }
 
-.recommendations-table tr>tr{
-   background-color:rgb(245,245,245);
-}
 
 .cart-container{
 
